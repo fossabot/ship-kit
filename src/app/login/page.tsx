@@ -1,9 +1,10 @@
-import { LoginForm } from "@/components/login-form"
+import { GoogleLoginButton } from "@/components/google-login-button";
 
-export default function Page() {
-  return (
-    <div className="flex h-screen w-full items-center justify-center px-4">
-      <LoginForm />
-    </div>
-  )
-}
+// Page component for the login screen
+const Page = () => (
+  <div className="flex h-screen w-full items-center justify-center px-4">
+    <GoogleLoginButton />
+  </div>
+);
+
+export default Page;

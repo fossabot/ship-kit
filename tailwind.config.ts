@@ -20,7 +20,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       container: {
-        center: "true",
+        center: true,
         padding: "2rem",
         screens: {
           "2xl": "1400px",
@@ -121,7 +121,7 @@ const config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
 
 export default config;
