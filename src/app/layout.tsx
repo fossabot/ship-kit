@@ -1,7 +1,9 @@
 import "@/styles/globals.css";
 
+import { StackProvider, StackTheme } from "@stackframe/stack";
 import { GeistSans as FontSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { stackServerApp } from "../stack";
 
 import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/react";
@@ -25,7 +27,11 @@ export default function RootLayout({
       )}
     >
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <StackProvider app={stackServerApp}>
+          <StackTheme>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </StackTheme>
+        </StackProvider>
       </body>
     </html>
   );

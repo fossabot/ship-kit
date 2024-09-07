@@ -1,10 +1,16 @@
 import Link from "next/link";
 
 import { LatestPost } from "@/app/_components/post";
+import { UserGreeting } from "@/app/_components/UserGreeting";
 import { getServerAuthSession } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
+// Remove the useUser import
+// import { useUser } from "@stackframe/stack";
 
-export default async function Home() {
+const Home = async () => {
+  // Remove the useUser hook
+  // const user = useUser();
+
   const hello = await api.post.hello({ text: "from tRPC" });
   const session = await getServerAuthSession();
 
@@ -16,6 +22,7 @@ export default async function Home() {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+            <UserGreeting />
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
@@ -64,4 +71,6 @@ export default async function Home() {
       </main>
     </HydrateClient>
   );
-}
+};
+
+export default Home;
