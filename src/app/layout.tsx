@@ -5,6 +5,7 @@ import { GeistSans as FontSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { stackServerApp } from "../stack";
 
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/react";
 
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body>
         <StackProvider app={stackServerApp}>
           <StackTheme>
-            <TRPCReactProvider>{children}</TRPCReactProvider>
+            <TooltipProvider>
+              <TRPCReactProvider>{children}</TRPCReactProvider>
+            </TooltipProvider>
           </StackTheme>
         </StackProvider>
       </body>
