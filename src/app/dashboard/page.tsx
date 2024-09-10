@@ -1,18 +1,41 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
+"use client";
 
-export default async function Page() {
-  const { cookies } = await import("next/headers");
+import { AppSidebar } from "@/components/app-sidebar";
+import TaskList from "@/components/task-list";
+import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
+import { UserButton, useUser } from "@stackframe/stack";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+const DashboardPage = () => {
+  const router = useRouter();
+  const user = useUser({ or: "redirect" });
+
+  useEffect(() => {
+    // Redirect to home page if user is not logged in
+    if (!user) {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  if (!user) return null; // Prevent rendering while redirecting
+
   return (
-    <SidebarLayout
-      defaultOpen={cookies().get("sidebar:state")?.value === "true"}
-    >
+    <SidebarLayout defaultOpen={true}>
       <AppSidebar />
-      <main className="flex flex-1 flex-col p-2 transition-all duration-300 ease-in-out">
-        <div className="h-full rounded-md border-2 border-dashed p-2">
-          <SidebarTrigger />
+      <main className="flex flex-1 flex-col p-4 transition-all duration-300 ease-in-out">
+        <div className="mb-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Your Dashboard</h1>
+          <UserButton />
         </div>
+        <p className="mb-4">Welcome, {user.displayName ?? "anonymous user"}</p>
+        <div className="rounded-md border-2 border-dashed p-4">
+          <TaskList />
+        </div>
+        <SidebarTrigger />
       </main>
     </SidebarLayout>
   );
-}
+};
+
+export default DashboardPage;
