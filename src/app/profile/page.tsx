@@ -1,10 +1,11 @@
 "use client";
 
-import { UserButton, useUser } from "@stackframe/stack";
+import { UserButton, useStackApp, useUser } from "@stackframe/stack";
 import Link from "next/link";
 
 const ProfilePage = () => {
   const user = useUser({ or: "redirect" });
+  const stackApp = useStackApp();
 
   if (!user) return null; // Prevent rendering while redirecting
 
@@ -13,9 +14,7 @@ const ProfilePage = () => {
       <UserButton />
       <p>Welcome, {user.displayName ?? "anonymous user"}</p>
       <p>Your e-mail: {user.primaryEmail}</p>
-      <p>
-        <Link href="/api/auth/signout">Sign Out</Link>
-      </p>
+      <Link href={stackApp.urls.signOut}>Sign Out</Link>
     </div>
   );
 };
