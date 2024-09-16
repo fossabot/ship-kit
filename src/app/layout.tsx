@@ -30,9 +30,9 @@ export default function RootLayout({
       <body>
         <StackProvider app={stackServerApp}>
           <StackTheme>
-            <TooltipProvider>
-              <TRPCReactProvider>{children}</TRPCReactProvider>
-            </TooltipProvider>
+            <TRPCReactProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+            </TRPCReactProvider>
           </StackTheme>
         </StackProvider>
       </body>

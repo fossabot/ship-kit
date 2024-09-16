@@ -32,10 +32,11 @@ CREATE TABLE `todo-today_session` (
 --> statement-breakpoint
 CREATE TABLE `todo-today_user` (
 	`id` text(255) PRIMARY KEY NOT NULL,
-	`name` text(255),
-	`email` text(255) NOT NULL,
-	`email_verified` integer DEFAULT (unixepoch()),
-	`image` text(255)
+	`display_name` text(255),
+	`primary_email` text(255) NOT NULL,
+	`primary_email_verified` integer DEFAULT (unixepoch()),
+	`profile_image_url` text(255),
+	`signed_up_at` integer DEFAULT (unixepoch())
 );
 --> statement-breakpoint
 CREATE TABLE `todo-today_verification_token` (

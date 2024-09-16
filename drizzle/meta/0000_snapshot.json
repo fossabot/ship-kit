@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ea239f71-d63c-4058-a039-e094410e7807",
+  "id": "e7278926-b562-4d94-93de-040a0956410e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "todo-today_account": {
@@ -256,34 +256,42 @@
           "notNull": true,
           "autoincrement": false
         },
-        "name": {
-          "name": "name",
+        "display_name": {
+          "name": "display_name",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "email": {
-          "name": "email",
+        "primary_email": {
+          "name": "primary_email",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "email_verified": {
-          "name": "email_verified",
+        "primary_email_verified": {
+          "name": "primary_email_verified",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
           "default": "(unixepoch())"
         },
-        "image": {
-          "name": "image",
+        "profile_image_url": {
+          "name": "profile_image_url",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "signed_up_at": {
+          "name": "signed_up_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "(unixepoch())"
         }
       },
       "indexes": {},

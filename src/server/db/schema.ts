@@ -16,6 +16,19 @@ import { type AdapterAccount } from "next-auth/adapters";
  */
 export const createTable = sqliteTableCreator((name) => `todo-today_${name}`);
 
+// {{ Move users table above posts table }}
+export const users = createTable("user", {
+  id: text("id", { length: 255 })
+    .notNull()
+    .primaryKey(),
+  displayName: text("display_name", { length: 255 }),
+  primaryEmail: text("primary_email", { length: 255 }).notNull(),
+  primaryEmailVerified: int("primary_email_verified", { mode: "timestamp" })
+    .default(sql`(unixepoch())`),
+  profileImageUrl: text("profile_image_url", { length: 255 }),
+  signedUpAt: int("signed_up_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+});
+
 export const posts = createTable(
   "post",
   {
@@ -28,7 +41,7 @@ export const posts = createTable(
       .default(sql`(unixepoch())`)
       .notNull(),
     updatedAt: int("updatedAt", { mode: "timestamp" }).$onUpdate(
-      () => new Date(),
+      () => sql`(unixepoch())`, // Updated to return timestamp
     ),
   },
   (example) => ({
@@ -37,21 +50,9 @@ export const posts = createTable(
   }),
 );
 
-export const users = createTable("user", {
-  id: text("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text("name", { length: 255 }),
-  email: text("email", { length: 255 }).notNull(),
-  emailVerified: int("email_verified", {
-    mode: "timestamp",
-  }).default(sql`(unixepoch())`),
-  image: text("image", { length: 255 }),
-});
-
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  posts: many(posts), // {{ Add relation to posts }}
 }));
 
 export const accounts = createTable(
