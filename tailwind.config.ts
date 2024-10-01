@@ -69,7 +69,12 @@ const config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: [
+          // "var(--font-sans)",
+          "var(--font-geist-sans)",
+          ...fontFamily.sans,
+        ],
+        serif: ["var(--font-serif)", ...fontFamily.serif],
       },
       keyframes: {
         "accordion-down": {

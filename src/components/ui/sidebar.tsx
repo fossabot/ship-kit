@@ -1,12 +1,12 @@
 "use client"
 
-import * as React from "react"
 import { PanelLeft } from "lucide-react"
+import * as React from "react"
 
-import { useIsMobile } from "@/hooks/use-mobile"
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
 
 export const SIDEBAR_STATE_COOKIE = "sidebar:state"
 
@@ -19,7 +19,7 @@ type SidebarContext = {
 const SidebarContext = React.createContext<SidebarContext>({
   state: "open",
   open: true,
-  onOpenChange: () => {},
+  onOpenChange: () => { },
 })
 
 function useSidebar() {
@@ -36,9 +36,8 @@ const SidebarLayout = React.forwardRef<
 
   const onOpenChange = React.useCallback((open: boolean) => {
     setOpen(open)
-    document.cookie = `${SIDEBAR_STATE_COOKIE}=${open}; path=/; max-age=${
-      60 * 60 * 24 * 7
-    }`
+    document.cookie = `${SIDEBAR_STATE_COOKIE}=${open}; path=/; max-age=${60 * 60 * 24 * 7
+      }`
   }, [])
 
   const state = open ? "open" : "closed"
@@ -200,5 +199,6 @@ export {
   SidebarLabel,
   SidebarLayout,
   SidebarTrigger,
-  useSidebar,
+  useSidebar
 }
+

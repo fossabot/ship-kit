@@ -12,21 +12,23 @@ const HomePage = () => {
   const stackApp = useStackApp();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="mb-4 text-3xl font-bold">Welcome to Task Manager</h1>
-      <UserGreeting />
-      <LatestPost />
-      <p className="mb-4">Please sign in to manage your tasks</p>
-      {user ? (
-        <Link href={routes.dashboard} className={buttonVariants()}>
-          Proceed to Dashboard
-        </Link>
-      ) : (
-        <Link href={stackApp.urls.signIn} className={buttonVariants()}>
-          Sign in with Google
-        </Link>
-      )}
-    </div>
+    <>
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <h1 className="mb-4 text-3xl font-bold">Welcome to Task Manager</h1>
+        <UserGreeting />
+        <LatestPost />
+        <p className="mb-4">Please sign in to manage your tasks</p>
+        {user ? (
+          <Link href={routes.dashboard} className={buttonVariants()}>
+            Proceed to Dashboard
+          </Link>
+        ) : (
+          <Link href={stackApp.urls.signIn} className={buttonVariants()}>
+            Sign in with Google
+          </Link>
+        )}
+      </div>
+    </>
   );
 };
 

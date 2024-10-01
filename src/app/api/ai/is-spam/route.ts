@@ -9,22 +9,34 @@
  * Utilizes OpenAI GPT-3.5 Turbo model for analysis.
  */
 
+import { logger } from "@/lib/logger";
+import { isSpam } from "@/server/api/services/is-spam";
 import { type NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Ensure your OpenAI API key is set in environment variables
-});
+/**
+ * Handles both GET and POST requests to determine if an email is spam or a phishing attempt.
+ * Accepts content either in the request body or search params.
+ */
+const handler = async (request: NextRequest) => {
+  let content: string | null = null;
+  let sender: string | null = null;
 
-export const POST = async (req: NextRequest) => {
-  const data = (await req.json()) as { content: string; sender?: string };
-  if (!data?.content) {
-    return NextResponse.json(
-      { error: "Invalid request data." },
-      { status: 400 },
-    );
+  if (request.method === "POST") {
+    try {
+      const data = await request.json();
+      content = data.content;
+      sender = data.sender;
+    } catch (error) {
+      logger.error("Error parsing request body:", error);
+    }
   }
-  const { content, sender } = data;
+
+  // If content is not in the body or it's a GET request, check search params
+  if (!content) {
+    const searchParams = request.nextUrl.searchParams;
+    content = searchParams.get("content");
+    sender = searchParams.get("sender");
+  }
 
   if (!content) {
     return NextResponse.json(
@@ -33,45 +45,12 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  const messages = [
-    {
-      role: "system",
-      content:
-        "You are an assistant that determines if an email is spam or a phishing attempt.",
-    },
-    {
-      role: "user",
-      content: `Please analyze the following email and determine if it is spam or a phishing attempt.
+  const result = await isSpam({ content, sender }).catch((error) => {
+    logger.error("Error checking spam:", error);
+    return NextResponse.json({ error: "Error checking spam" }, { status: 400 });
+  });
 
-Content:
-"${content}"
-
-${sender ? `Sender: "${sender}"\n` : ""}
-
-Respond only with a JSON object containing:
-- "isSpam": true or false indicating if the email is spam.
-- "threshold": A number between 0 and 1 indicating the confidence level.`,
-    },
-  ];
-
-  try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: messages,
-      temperature: 0,
-    });
-
-    const responseText = response.choices[0].message?.content.trim();
-
-    // Parse the response as JSON
-    const result = JSON.parse(responseText);
-
-    return NextResponse.json(result);
-  } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json(
-      { error: "An error occurred while processing your request." },
-      { status: 500 },
-    );
-  }
+  return NextResponse.json(result);
 };
+
+export { handler as GET, handler as POST };
