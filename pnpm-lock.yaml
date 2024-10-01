@@ -125,6 +125,9 @@ importers:
       next-auth:
         specifier: 4.24.7
         version: 4.24.7(next@14.2.6(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-safe-route:
+        specifier: ^0.0.20
+        version: 0.0.20
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -170,6 +173,12 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.23.8
+      zsa:
+        specifier: ^0.6.0
+        version: 0.6.0(zod@3.23.8)
+      zsa-react:
+        specifier: ^0.2.3
+        version: 0.2.3(react@18.3.1)(zod@3.23.8)
     devDependencies:
       '@types/eslint':
         specifier: ^8.56.10
@@ -3684,6 +3693,10 @@ packages:
       nodemailer:
         optional: true
 
+  next-safe-route@0.0.20:
+    resolution: {integrity: sha512-FMfjBOIIJMLronMzrd1UJPBhte6oqAhmjcGhlz/52wAV8fkj92VnJdOXPqnHTh0T3UvTgyzOP4psxgSNnLmPvQ==}
+    engines: {node: '>=18'}
+
   next-themes@0.3.0:
     resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
     peerDependencies:
@@ -4694,6 +4707,17 @@ packages:
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
+  zsa-react@0.2.3:
+    resolution: {integrity: sha512-THCoIIhtEU3jXTrNBM/PBc0PyHCekizSGEc+fg0LGo1NM1J02LFQN7ICR948X25IjtkZdvxUZmT0+M73GG8eEw==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      zod: ^3.23.5
+
+  zsa@0.6.0:
+    resolution: {integrity: sha512-Pq3X4T0dna5s4dIevYOJiRdM3DUHRvEHS2q1AH/bvkPSh640u+9veVj5zmzmbL0A6cpXMYagwKsR4keGOc0jPQ==}
+    peerDependencies:
+      zod: ^3.23.5
 
 snapshots:
 
@@ -8281,6 +8305,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       uuid: 8.3.2
 
+  next-safe-route@0.0.20: {}
+
   next-themes@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -9319,3 +9345,13 @@ snapshots:
       type-fest: 2.19.0
 
   zod@3.23.8: {}
+
+  zsa-react@0.2.3(react@18.3.1)(zod@3.23.8):
+    dependencies:
+      react: 18.3.1
+      zod: 3.23.8
+      zsa: 0.6.0(zod@3.23.8)
+
+  zsa@0.6.0(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8

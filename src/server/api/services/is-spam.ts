@@ -1,18 +1,21 @@
+"use server";
+
 import { env } from "@/env";
 import { logger } from "@/lib/logger";
+import { isSpamSchema } from "@/server/api/services/is-spam-schema";
 import OpenAI from "openai";
 import { type ChatCompletionMessageParam } from "openai/resources/index.mjs";
+import { type z } from "zod";
+import { createServerAction } from "zsa";
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY, // Ensure your OpenAI API key is set in environment variables
 });
 
-export type IsSpamProps = {
-  content: string;
-  sender?: string | null;
-};
-
-export const isSpam = async ({ content, sender }: IsSpamProps) => {
+export const isSpam = async ({
+  content,
+  sender,
+}: z.infer<typeof isSpamSchema>) => {
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
@@ -60,3 +63,9 @@ Respond only with an integer between -100 and 100 indicating the confidence leve
     throw error;
   }
 };
+
+export const isSpamAction = createServerAction()
+  .input(isSpamSchema)
+  .handler(async ({ input }) => {
+    return isSpam(input);
+  });
