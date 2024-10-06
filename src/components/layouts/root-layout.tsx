@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { stackServerApp } from "@/stack";
 import { TRPCReactProvider } from "@/trpc/react";
 import { StackProvider, StackTheme } from "@stackframe/stack";
+import HolyLoader from "holy-loader";
 import { Suspense } from "react";
 
 const fontSansOld = Noto_Sans({
@@ -41,9 +42,11 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
+
         <StackProvider app={stackServerApp}>
           <StackTheme>
             <TRPCReactProvider>
+            <HolyLoader showSpinner />
               <TooltipProvider>
                 {children}
 

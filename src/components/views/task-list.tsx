@@ -10,6 +10,7 @@ interface CalendarEvent {
   summary: string;
   start: { dateTime: string };
   end: { dateTime: string };
+  description?: string;
 }
 
 interface Task {
@@ -175,7 +176,7 @@ const TaskList = () => {
             {expandedEvent === event.id && (
               <div className="px-4 pb-4">
                 <p className="mb-2 text-sm text-gray-600">
-                  {event.description || "No additional details"}
+                  {event?.description || "No additional details"}
                 </p>
                 <div className="flex space-x-2">
                   <button

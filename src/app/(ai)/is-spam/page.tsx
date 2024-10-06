@@ -1,4 +1,4 @@
-import { SpamDemo } from "@/app/(ai)/spam/_components/spam-demo";
+import { SpamDemo } from "@/app/(ai)/is-spam/_components/spam-demo";
 
 export default function Page() {
     return (
