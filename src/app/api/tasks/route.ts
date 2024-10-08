@@ -1,11 +1,10 @@
-import { authOptions } from "@/server/auth";
 import { google } from "googleapis";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  if (!session?.accessToken) {
+  // Replace this with your new auth check
+  const isAuthenticated = true; // Implement your new auth check here
+  if (!isAuthenticated) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -8,6 +8,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import LogProvider from "@/plugins/LogProvider";
 import { stackServerApp } from "@/stack";
 import { TRPCReactProvider } from "@/trpc/react";
 import { StackProvider, StackTheme } from "@stackframe/stack";
@@ -20,7 +21,6 @@ const fontSansOld = Noto_Sans({
 });
 
 const fontSerif = FontSerif({
-  // display: "swap", // This allows the text to display while it is loaded
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
@@ -42,26 +42,25 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
+        <LogProvider prefix="[LogFlare]" logLevel="info">
+          <StackProvider app={stackServerApp}>
+            <StackTheme>
+              <TRPCReactProvider>
+                <HolyLoader showSpinner />
+                <TooltipProvider>
+                  {children}
 
-        <StackProvider app={stackServerApp}>
-          <StackTheme>
-            <TRPCReactProvider>
-            <HolyLoader showSpinner />
-              <TooltipProvider>
-                {children}
+                  <Suspense>
+                    <ErrorToast />
+                  </Suspense>
 
-                {/* This prevents the error toast from blocking the page from loading */}
-                <Suspense>
-                  <ErrorToast />
-                </Suspense>
-
-                {/* <ThemeToggle /> */}
-                <Toaster />
-                <SonnerToaster />
-              </TooltipProvider>
-            </TRPCReactProvider>
-          </StackTheme>
-        </StackProvider>
+                  <Toaster />
+                  <SonnerToaster />
+                </TooltipProvider>
+              </TRPCReactProvider>
+            </StackTheme>
+          </StackProvider>
+        </LogProvider>
       </body>
     </html>
   );

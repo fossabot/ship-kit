@@ -2,7 +2,9 @@ import { relations, sql } from "drizzle-orm";
 import {
   index,
   int,
+  integer,
   primaryKey,
+  sqliteTable,
   sqliteTableCreator,
   text,
 } from "drizzle-orm/sqlite-core";
@@ -115,3 +117,17 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const logs = sqliteTable('logs', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  timestamp: text('timestamp').notNull(),
+  level: text('level').notNull(),
+  message: text('message').notNull(),
+});
+
+export const apiKeys = sqliteTable('api_keys', {
+  id: text('id').primaryKey(),
+  key: text('key').notNull().unique(),
+  createdAt: text('created_at').notNull(),
+  userId: text('user_id').notNull().references(() => users.id),
+});

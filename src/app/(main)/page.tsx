@@ -4,12 +4,15 @@ import { LatestPost } from "@/app/_components/post";
 import { UserGreeting } from "@/app/_components/UserGreeting";
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/constants/routes";
+import logger from '@/utils/logger';
 import { useStackApp, useUser } from "@stackframe/stack";
 import Link from "next/link";
 
 const HomePage = () => {
   const user = useUser();
   const stackApp = useStackApp();
+
+  logger.info('Rendering HomePage');
 
   return (
     <>
@@ -24,7 +27,7 @@ const HomePage = () => {
           </Link>
         ) : (
           <Link href={stackApp.urls.signIn} className={buttonVariants()}>
-            Sign in with Google
+            Sign in
           </Link>
         )}
       </div>

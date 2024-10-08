@@ -1,0 +1,87 @@
+🔍 2024-10-08T07:03:35.583Z [DEBUG] [MyApp]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:03:35.585Z [DEBUG] [MyApp]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:03:35.586Z [DEBUG] [MyApp]  - Environments: .env
+🔍 2024-10-08T07:03:35.586Z [DEBUG] [MyApp]  - Experiments (use with caution):
+🔍 2024-10-08T07:03:35.586Z [DEBUG] [MyApp]    · instrumentationHook
+🔍 2024-10-08T07:03:35.586Z [DEBUG] [MyApp]
+🔍 2024-10-08T07:03:35.587Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:03:40.846Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled /instrumentation in 374ms (20 modules)
+🔍 2024-10-08T07:03:40.849Z [DEBUG] [MyApp]registering instrumentation
+🔍 2024-10-08T07:03:40.860Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Ready in 5.9s
+🔍 2024-10-08T07:03:41.423Z [DEBUG] [MyApp] [37m[1m○[22m[39m Compiling / ...
+🚨 2024-10-08T07:03:41.789Z [ERROR] [MyApp](node:94783) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🔍 2024-10-08T07:03:57.750Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled / in 16.8s (6273 modules)
+🔍 2024-10-08T07:03:59.593Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled in 1815ms (3052 modules)
+⚠️  2024-10-08T07:04:16.018Z [WARN] [MyApp] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...
+🔍 2024-10-08T07:04:16.903Z [DEBUG] [MyApp]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:04:16.905Z [DEBUG] [MyApp]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:04:16.905Z [DEBUG] [MyApp]  - Environments: .env
+🔍 2024-10-08T07:04:16.906Z [DEBUG] [MyApp]  - Experiments (use with caution):
+🔍 2024-10-08T07:04:16.906Z [DEBUG] [MyApp]    · instrumentationHook
+🔍 2024-10-08T07:04:16.906Z [DEBUG] [MyApp]
+🔍 2024-10-08T07:04:16.906Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:04:21.435Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled /instrumentation in 352ms (20 modules)
+🔍 2024-10-08T07:04:21.438Z [DEBUG] [MyApp]registering instrumentation
+🔍 2024-10-08T07:04:21.452Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Ready in 4.8s
+🔍 2024-10-08T07:04:26.247Z [DEBUG] [MyApp] [37m[1m○[22m[39m Compiling / ...
+🚨 2024-10-08T07:04:26.394Z [ERROR] [MyApp](node:94895) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🔍 2024-10-08T07:04:42.390Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled / in 16.6s (6300 modules)
+🔍 2024-10-08T07:04:43.888Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled in 1458ms (3052 modules)
+🔍 2024-10-08T07:04:52.411Z [DEBUG] [MyApp] [37m[1m○[22m[39m Compiling /api/trpc/[trpc] ...
+🔍 2024-10-08T07:04:53.140Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled /api/trpc/[trpc] in 1229ms (3346 modules)
+🔍 2024-10-08T07:04:54.752Z [DEBUG] [MyApp]getLatest - Retrieving latest post
+🔍 2024-10-08T07:04:54.754Z [DEBUG] [MyApp]getLatest - Retrieved post: {
+  id: [33m1[39m,
+  name: [32m'asd'[39m,
+  createdById: [32m'02348e3e-adb3-4062-a86a-2ecacf2d2804'[39m,
+  createdAt: [35m2024-09-16T21:31:08.000Z[39m,
+  updatedAt: [35m2024-09-16T21:31:08.000Z[39m
+}
+🔍 2024-10-08T07:04:54.757Z [DEBUG] [MyApp][TRPC] post.getLatest took 141ms to execute
+⚠️  2024-10-08T07:04:57.148Z [WARN] [MyApp] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...
+🔍 2024-10-08T07:04:57.883Z [DEBUG] [MyApp]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:04:57.886Z [DEBUG] [MyApp]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:04:57.886Z [DEBUG] [MyApp]  - Environments: .env
+🔍 2024-10-08T07:04:57.886Z [DEBUG] [MyApp]  - Experiments (use with caution):
+🔍 2024-10-08T07:04:57.886Z [DEBUG] [MyApp]    · instrumentationHook
+🔍 2024-10-08T07:04:57.887Z [DEBUG] [MyApp]
+🔍 2024-10-08T07:04:57.887Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:05:01.351Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled /instrumentation in 354ms (20 modules)
+🔍 2024-10-08T07:05:01.355Z [DEBUG] [MyApp]registering instrumentation
+🔍 2024-10-08T07:05:01.363Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Ready in 3.7s
+⚠️  2024-10-08T07:05:26.787Z [WARN] [MyApp] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...
+🔍 2024-10-08T07:05:27.486Z [DEBUG] [MyApp]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:05:27.489Z [DEBUG] [MyApp]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:05:27.489Z [DEBUG] [MyApp]  - Environments: .env
+🔍 2024-10-08T07:05:27.490Z [DEBUG] [MyApp]  - Experiments (use with caution):
+🔍 2024-10-08T07:05:27.490Z [DEBUG] [MyApp]    · instrumentationHook
+🔍 2024-10-08T07:05:27.490Z [DEBUG] [MyApp]
+🔍 2024-10-08T07:05:27.490Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:05:31.276Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Compiled /instrumentation in 353ms (20 modules)
+🔍 2024-10-08T07:05:31.281Z [DEBUG] [MyApp]registering instrumentation
+🔍 2024-10-08T07:05:31.287Z [DEBUG] [MyApp] [32m[1m✓[22m[39m Ready in 4s
+⚠️  2024-10-08T07:05:37.168Z [WARN] [MyApp] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...
+🔍 2024-10-08T07:05:37.842Z [DEBUG] [Log]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:05:37.845Z [DEBUG] [Log]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:05:37.845Z [DEBUG] [Log]  - Environments: .env
+🔍 2024-10-08T07:05:37.845Z [DEBUG] [Log]  - Experiments (use with caution):
+🔍 2024-10-08T07:05:37.846Z [DEBUG] [Log]    · instrumentationHook
+🔍 2024-10-08T07:05:37.846Z [DEBUG] [Log]
+🔍 2024-10-08T07:05:37.846Z [DEBUG] [Log] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:05:40.775Z [DEBUG] [Log] [32m[1m✓[22m[39m Compiled /instrumentation in 362ms (20 modules)
+🔍 2024-10-08T07:05:40.779Z [DEBUG] [Log]registering instrumentation
+🔍 2024-10-08T07:05:40.789Z [DEBUG] [Log] [32m[1m✓[22m[39m Ready in 3.2s
+⚠️  2024-10-08T07:12:08.704Z [WARN] [Log] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...
+🔍 2024-10-08T07:12:09.581Z [DEBUG] []  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:12:09.584Z [DEBUG] []  - Local:        http://localhost:3000
+🔍 2024-10-08T07:12:09.584Z [DEBUG] []  - Environments: .env
+🔍 2024-10-08T07:12:09.584Z [DEBUG] []  - Experiments (use with caution):
+🔍 2024-10-08T07:12:09.584Z [DEBUG] []    · instrumentationHook
+🔍 2024-10-08T07:12:09.585Z [DEBUG] []
+🔍 2024-10-08T07:12:09.585Z [DEBUG] [] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:12:12.949Z [DEBUG] [] [32m[1m✓[22m[39m Compiled /instrumentation in 419ms (20 modules)
+🔍 2024-10-08T07:12:12.953Z [DEBUG] []registering instrumentation
+🔍 2024-10-08T07:12:12.958Z [DEBUG] [] [32m[1m✓[22m[39m Ready in 3.7s
+⚠️  2024-10-08T07:13:44.340Z [WARN] [] [33m[1m⚠[22m[39m Found a change in next.config.js. Restarting the server to apply the changes...

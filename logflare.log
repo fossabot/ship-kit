@@ -1,0 +1,235 @@
+🔍 2024-10-08T07:19:41.106Z [DEBUG] [LogFlare]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:19:41.109Z [DEBUG] [LogFlare]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:19:41.109Z [DEBUG] [LogFlare]  - Environments: .env
+🔍 2024-10-08T07:19:41.109Z [DEBUG] [LogFlare]  - Experiments (use with caution):
+🔍 2024-10-08T07:19:41.109Z [DEBUG] [LogFlare]    · instrumentationHook
+🔍 2024-10-08T07:19:41.110Z [DEBUG] [LogFlare]
+🔍 2024-10-08T07:19:41.110Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:19:44.322Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /instrumentation in 339ms (20 modules)
+🔍 2024-10-08T07:19:44.325Z [DEBUG] [LogFlare]registering instrumentation
+🔍 2024-10-08T07:19:44.330Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Ready in 3.5s
+🔍 2024-10-08T07:20:17.045Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling / ...
+🔍 2024-10-08T07:20:26.450Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled / in 10.7s (6267 modules)
+🔍 2024-10-08T07:20:28.577Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 2.1s (3046 modules)
+🔍 2024-10-08T07:20:39.276Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /api/trpc/[trpc] ...
+🔍 2024-10-08T07:20:40.481Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /api/trpc/[trpc] in 1726ms (3346 modules)
+🔍 2024-10-08T07:20:42.248Z [DEBUG] [LogFlare]getLatest - Retrieving latest post
+🔍 2024-10-08T07:20:42.251Z [DEBUG] [LogFlare]getLatest - Retrieved post: {
+  id: [33m1[39m,
+  name: [32m'asd'[39m,
+  createdById: [32m'02348e3e-adb3-4062-a86a-2ecacf2d2804'[39m,
+  createdAt: [35m2024-09-16T21:31:08.000Z[39m,
+  updatedAt: [35m2024-09-16T21:31:08.000Z[39m
+}
+🔍 2024-10-08T07:20:42.253Z [DEBUG] [LogFlare][TRPC] post.getLatest took 335ms to execute
+🔍 2024-10-08T07:21:06.450Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /dashboard ...
+🔍 2024-10-08T07:21:10.561Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /dashboard in 4.6s (7097 modules)
+🔍 2024-10-08T07:21:22.730Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /log ...
+🔍 2024-10-08T07:21:24.511Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /log in 2.3s (7329 modules)
+🔍 2024-10-08T07:21:24.666Z [DEBUG] [LogFlare]Log
+🔍 2024-10-08T07:22:45.355Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 1853ms (3611 modules)
+🔍 2024-10-08T07:22:45.505Z [DEBUG] [LogFlare]Log
+🔍 2024-10-08T07:23:13.916Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 1430ms (3664 modules)
+🔍 2024-10-08T07:23:14.030Z [DEBUG] [LogFlare]Log
+🔍 2024-10-08T07:23:22.286Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 612ms (3611 modules)
+🔍 2024-10-08T07:23:22.323Z [DEBUG] [LogFlare]Log
+🚨 2024-10-08T07:23:34.993Z [ERROR] [LogFlare] [31m[1m⨯[22m[39m ./src/plugins/LogWrapper.tsx
+Error: Failed to read source code from /Users/lacy/repo/todo-today/src/plugins/LogWrapper.tsx
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./src/plugins/LogWrapper.tsx
+🚨 2024-10-08T07:23:35.059Z [ERROR] [LogFlare] [31m[1m⨯[22m[39m ./src/plugins/LogWrapper.tsx
+Error: Failed to read source code from /Users/lacy/repo/todo-today/src/plugins/LogWrapper.tsx
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./src/plugins/LogWrapper.tsx
+🔍 2024-10-08T07:23:41.627Z [DEBUG] [LogFlare]  [1m[38;2;173;127;168m▲ Next.js 14.2.6[39m[22m
+🔍 2024-10-08T07:23:41.629Z [DEBUG] [LogFlare]  - Local:        http://localhost:3000
+🔍 2024-10-08T07:23:41.630Z [DEBUG] [LogFlare]  - Environments: .env
+🔍 2024-10-08T07:23:41.630Z [DEBUG] [LogFlare]  - Experiments (use with caution):
+🔍 2024-10-08T07:23:41.630Z [DEBUG] [LogFlare]    · instrumentationHook
+🔍 2024-10-08T07:23:41.630Z [DEBUG] [LogFlare]
+🔍 2024-10-08T07:23:41.631Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Starting...
+🔍 2024-10-08T07:23:46.317Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /instrumentation ...
+🔍 2024-10-08T07:23:47.227Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /instrumentation in 1736ms (20 modules)
+🔍 2024-10-08T07:23:47.229Z [DEBUG] [LogFlare]registering instrumentation
+🔍 2024-10-08T07:23:47.237Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Ready in 5.9s
+🔍 2024-10-08T07:23:48.133Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /_not-found ...
+🚨 2024-10-08T07:23:53.738Z [ERROR] [LogFlare](node:96314) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🔍 2024-10-08T07:24:15.430Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /_not-found in 28.1s (6259 modules)
+🔍 2024-10-08T07:24:17.531Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 2.1s (6259 modules)
+⚠️  2024-10-08T07:24:18.437Z [WARN] [LogFlare] [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+🔍 2024-10-08T07:24:18.975Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /log ...
+🔍 2024-10-08T07:24:21.359Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /log in 2.9s (6476 modules)
+🔍 2024-10-08T07:24:21.814Z [DEBUG] [LogFlare]Log
+🔍 2024-10-08T07:24:21.816Z [DEBUG] [LogFlare]Log
+⚠️  2024-10-08T07:24:21.896Z [WARN] [LogFlare] [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+🔍 2024-10-08T07:24:38.621Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled in 3.2s (6491 modules)
+🔍 2024-10-08T07:24:38.675Z [DEBUG] [LogFlare]Log
+🔍 2024-10-08T07:25:02.742Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /dashboard ...
+🔍 2024-10-08T07:25:06.393Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /dashboard in 4.2s (7196 modules)
+🔍 2024-10-08T07:26:14.462Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /me ...
+🔍 2024-10-08T07:26:17.424Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /me in 3.5s (6853 modules)
+🚨 2024-10-08T07:26:17.802Z [ERROR] [LogFlare] [31m[1m⨯[22m[39m Error: The default export is not a React Component in page: "/me"
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+🚨 2024-10-08T07:26:17.803Z [ERROR] [LogFlare]digest: "3091868976"
+🚨 2024-10-08T07:26:17.811Z [ERROR] [LogFlare] [31m[1m⨯[22m[39m Error: The default export is not a React Component in page: "/me"
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+🚨 2024-10-08T07:26:17.811Z [ERROR] [LogFlare]digest: "3091868976"
+🔍 2024-10-08T07:27:12.519Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /me/logs ...
+🔍 2024-10-08T07:27:13.027Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /me/logs in 1055ms (6859 modules)
+🔍 2024-10-08T07:27:15.618Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /api/logs ...
+🔍 2024-10-08T07:27:16.170Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /api/logs in 1053ms (3368 modules)
+🚨 2024-10-08T07:27:16.764Z [ERROR] [LogFlare]Error fetching logs: LibsqlError: SQLITE_ERROR: no such table: logs
+    at mapSqliteError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:374:16[90m)[39m
+    at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:279:15[90m)[39m
+    at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+[90m    ... 5 lines matching cause stack trace ...[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+  code: [32m'SQLITE_ERROR'[39m,
+  rawCode: [33m1[39m,
+  [cause]: SqliteError: no such table: logs
+      at convertError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:49:12[90m)[39m
+      at Database.prepare [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:113:13[90m)[39m
+      at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:250:28[90m)[39m
+      at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+      at LibSQLPreparedQuery.values (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:181:59)
+      at LibSQLPreparedQuery.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:125:29)
+      at SQLiteSelectBase.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:602:28)
+      at SQLiteSelectBase.execute (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:611:17)
+      at SQLiteSelectBase.then (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/query-promise.js:26:17)
+  [90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+    code: [32m'SQLITE_ERROR'[39m,
+    rawCode: [33m1[39m
+  }
+}
+🚨 2024-10-08T07:27:16.973Z [ERROR] [LogFlare]Error fetching logs: LibsqlError: SQLITE_ERROR: no such table: logs
+    at mapSqliteError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:374:16[90m)[39m
+    at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:279:15[90m)[39m
+    at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+[90m    ... 5 lines matching cause stack trace ...[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+  code: [32m'SQLITE_ERROR'[39m,
+  rawCode: [33m1[39m,
+  [cause]: SqliteError: no such table: logs
+      at convertError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:49:12[90m)[39m
+      at Database.prepare [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:113:13[90m)[39m
+      at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:250:28[90m)[39m
+      at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+      at LibSQLPreparedQuery.values (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:181:59)
+      at LibSQLPreparedQuery.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:125:29)
+      at SQLiteSelectBase.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:602:28)
+      at SQLiteSelectBase.execute (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:611:17)
+      at SQLiteSelectBase.then (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/query-promise.js:26:17)
+  [90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+    code: [32m'SQLITE_ERROR'[39m,
+    rawCode: [33m1[39m
+  }
+}
+🚨 2024-10-08T07:27:17.381Z [ERROR] [LogFlare]Error fetching logs: LibsqlError: SQLITE_ERROR: no such table: logs
+    at mapSqliteError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:374:16[90m)[39m
+    at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:279:15[90m)[39m
+    at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+[90m    ... 5 lines matching cause stack trace ...[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+  code: [32m'SQLITE_ERROR'[39m,
+  rawCode: [33m1[39m,
+  [cause]: SqliteError: no such table: logs
+      at convertError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:49:12[90m)[39m
+      at Database.prepare [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:113:13[90m)[39m
+      at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:250:28[90m)[39m
+      at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+      at LibSQLPreparedQuery.values (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:181:59)
+      at LibSQLPreparedQuery.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:125:29)
+      at SQLiteSelectBase.all (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:602:28)
+      at SQLiteSelectBase.execute (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/select.js:611:17)
+      at SQLiteSelectBase.then (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/query-promise.js:26:17)
+  [90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+    code: [32m'SQLITE_ERROR'[39m,
+    rawCode: [33m1[39m
+  }
+}
+🔍 2024-10-08T07:27:45.226Z [DEBUG] [LogFlare] [37m[1m○[22m[39m Compiling /me/api-keys ...
+🔍 2024-10-08T07:27:45.572Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /me/api-keys in 847ms (6969 modules)
+🔍 2024-10-08T07:27:47.988Z [DEBUG] [LogFlare] [32m[1m✓[22m[39m Compiled /api/api-keys in 470ms (3373 modules)
+🚨 2024-10-08T07:27:48.320Z [ERROR] [LogFlare]Error fetching API keys: TypeError: _server_db_schema__WEBPACK_IMPORTED_MODULE_1__.apiKeys.userId.equals is not a function
+    at GET (webpack-internal:///(rsc)/./src/app/api/api-keys/route.ts:27:216)
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:55038
+    at async ek.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:45808[90m)[39m
+    at async ek.handle [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:56292[90m)[39m
+    at async doRender [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1377:42[90m)[39m
+    at async cacheEntry.responseCache.get.routeKind [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1599:28[90m)[39m
+    at async DevServer.renderToResponseWithComponentsImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1507:28[90m)[39m
+    at async DevServer.renderPageComponent [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1931:24[90m)[39m
+    at async DevServer.renderToResponseImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1969:32[90m)[39m
+    at async DevServer.pipeImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:920:25[90m)[39m
+    at async NextNodeServer.handleCatchallRenderRequest [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/next-server.js:272:17[90m)[39m
+    at async DevServer.handleRequestImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:816:17[90m)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/trace/trace.js:154:20[90m)[39m
+🚨 2024-10-08T07:27:48.736Z [ERROR] [LogFlare]Error fetching API keys: TypeError: _server_db_schema__WEBPACK_IMPORTED_MODULE_1__.apiKeys.userId.equals is not a function
+    at GET (webpack-internal:///(rsc)/./src/app/api/api-keys/route.ts:27:216)
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:55038
+    at async ek.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:45808[90m)[39m
+    at async ek.handle [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:56292[90m)[39m
+    at async doRender [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1377:42[90m)[39m
+    at async cacheEntry.responseCache.get.routeKind [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1599:28[90m)[39m
+    at async DevServer.renderToResponseWithComponentsImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1507:28[90m)[39m
+    at async DevServer.renderPageComponent [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1931:24[90m)[39m
+    at async DevServer.renderToResponseImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1969:32[90m)[39m
+    at async DevServer.pipeImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:920:25[90m)[39m
+    at async NextNodeServer.handleCatchallRenderRequest [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/next-server.js:272:17[90m)[39m
+    at async DevServer.handleRequestImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:816:17[90m)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/trace/trace.js:154:20[90m)[39m
+🚨 2024-10-08T07:27:48.952Z [ERROR] [LogFlare]Error fetching API keys: TypeError: _server_db_schema__WEBPACK_IMPORTED_MODULE_1__.apiKeys.userId.equals is not a function
+    at GET (webpack-internal:///(rsc)/./src/app/api/api-keys/route.ts:27:216)
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:55038
+    at async ek.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:45808[90m)[39m
+    at async ek.handle [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/compiled/next-server/app-route.runtime.dev.js:6:56292[90m)[39m
+    at async doRender [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1377:42[90m)[39m
+    at async cacheEntry.responseCache.get.routeKind [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1599:28[90m)[39m
+    at async DevServer.renderToResponseWithComponentsImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1507:28[90m)[39m
+    at async DevServer.renderPageComponent [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1931:24[90m)[39m
+    at async DevServer.renderToResponseImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:1969:32[90m)[39m
+    at async DevServer.pipeImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:920:25[90m)[39m
+    at async NextNodeServer.handleCatchallRenderRequest [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/next-server.js:272:17[90m)[39m
+    at async DevServer.handleRequestImpl [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/base-server.js:816:17[90m)[39m
+    at async [90m/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/next@14.2.6_@babel+core@7.25.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/[4mnext[24m/dist/trace/trace.js:154:20[90m)[39m
+🚨 2024-10-08T07:27:50.111Z [ERROR] [LogFlare]Error generating API key: LibsqlError: SQLITE_ERROR: no such table: api_keys
+    at mapSqliteError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:374:16[90m)[39m
+    at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:279:15[90m)[39m
+    at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+[90m    ... 4 lines matching cause stack trace ...[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+  code: [32m'SQLITE_ERROR'[39m,
+  rawCode: [33m1[39m,
+  [cause]: SqliteError: no such table: api_keys
+      at convertError [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:49:12[90m)[39m
+      at Database.prepare [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/libsql@0.4.1/node_modules/[4mlibsql[24m/index.js:113:13[90m)[39m
+      at executeStmt [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:250:28[90m)[39m
+      at Sqlite3Client.execute [90m(/Users/lacy/repo/todo-today/[39mnode_modules/[4m.pnpm[24m/@libsql+client@0.9.0/node_modules/[4m@libsql[24m/client/lib-cjs/sqlite3.js:101:16[90m)[39m
+      at LibSQLPreparedQuery.run (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/libsql/session.js:115:58)
+      at QueryPromise.run (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/insert.js:153:28)
+      at QueryPromise.execute (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/sqlite-core/query-builders/insert.js:165:54)
+      at QueryPromise.then (webpack-internal:///(rsc)/./node_modules/[4m.pnpm[24m/drizzle-orm@0.33.0_@libsql+client@0.9.0_@types+react@18.3.4_better-sqlite3@11.3.0_kysely@0.27.4_react@18.3.1/node_modules/[4mdrizzle-orm[24m/query-promise.js:26:17)
+  [90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m {
+    code: [32m'SQLITE_ERROR'[39m,
+    rawCode: [33m1[39m
+  }
+}
