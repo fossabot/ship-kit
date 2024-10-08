@@ -3,7 +3,7 @@
 import { LatestPost } from "@/app/_components/post";
 import { UserGreeting } from "@/app/_components/UserGreeting";
 import { buttonVariants } from "@/components/ui/button";
-import { routes } from "@/constants/routes";
+import { routes } from "@/lib/routes";
 import logger from '@/utils/logger';
 import { useStackApp, useUser } from "@stackframe/stack";
 import Link from "next/link";
@@ -22,7 +22,7 @@ const HomePage = () => {
         <LatestPost />
         <p className="mb-4">Please sign in to manage your tasks</p>
         {user ? (
-          <Link href={routes.dashboard} className={buttonVariants()}>
+          <Link href={routes.tasks} className={buttonVariants()}>
             Proceed to Dashboard
           </Link>
         ) : (

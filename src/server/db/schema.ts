@@ -2,11 +2,10 @@ import { relations, sql } from "drizzle-orm";
 import {
   index,
   int,
-  integer,
   primaryKey,
   sqliteTable,
   sqliteTableCreator,
-  text,
+  text
 } from "drizzle-orm/sqlite-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
@@ -118,16 +117,29 @@ export const verificationTokens = createTable(
   }),
 );
 
-export const logs = sqliteTable('logs', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  timestamp: text('timestamp').notNull(),
-  level: text('level').notNull(),
-  message: text('message').notNull(),
-});
-
 export const apiKeys = sqliteTable('api_keys', {
   id: text('id').primaryKey(),
   key: text('key').notNull().unique(),
   createdAt: text('created_at').notNull(),
   userId: text('user_id').notNull().references(() => users.id),
 });
+
+export const logs = sqliteTable('logs', {
+  id: int('id').primaryKey({ autoIncrement: true }),
+  timestamp: text('timestamp').notNull(),
+  level: text('level').notNull(),
+  message: text('message').notNull(),
+  prefix: text('prefix'),
+  emoji: text('emoji'),
+  metadata: text('metadata'), // Store as JSON string
+  apiKeyId: text('api_key_id').notNull().references(() => apiKeys.id),
+});
+
+export const apiKeysRelations = relations(apiKeys, ({ one, many }) => ({
+  user: one(users, { fields: [apiKeys.userId], references: [users.id] }),
+  logs: many(logs),
+}));
+
+export const logsRelations = relations(logs, ({ one }) => ({
+  apiKey: one(apiKeys, { fields: [logs.apiKeyId], references: [apiKeys.id] }),
+}));

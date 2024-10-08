@@ -17,7 +17,7 @@ const LandingPage = () => {
           </Link>
           <Link
             className={buttonVariants({ size: "lg", variant: "outline" })}
-            href="https://github.com/your-repo/logflare"
+            href="https://github.com/lacymorrow/logflare"
             target="_blank"
           >
             GitHub

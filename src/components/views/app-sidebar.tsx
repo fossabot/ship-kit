@@ -2,22 +2,14 @@
 
 import {
   Atom,
-  Bird,
   BookOpen,
-  Bot,
   Code2,
   Eclipse,
   Frame,
-  History,
   LifeBuoy,
-  Map,
-  PieChart,
   Rabbit,
   Send,
-  Settings2,
-  SquareTerminal,
-  Star,
-  Turtle,
+  SquareTerminal
 } from "lucide-react";
 
 import {
@@ -34,6 +26,7 @@ import { NavSecondary } from "@/components/views/nav-secondary";
 import { NavUser } from "@/components/views/nav-user";
 import { StorageCard } from "@/components/views/storage-card";
 import { TeamSwitcher } from "@/components/views/team-switcher";
+import { routes } from "@/lib/routes";
 const data = {
   teams: [
     {
@@ -59,55 +52,16 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Live Dashboard",
+      url: routes.live,
       icon: SquareTerminal,
       isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-          icon: History,
-          description: "View your recent prompts",
-        },
-        {
-          title: "Starred",
-          url: "#",
-          icon: Star,
-          description: "Browse your starred prompts",
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          description: "Configure your playground",
-        },
-      ],
     },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-          icon: Rabbit,
-          description: "Our fastest model for general use cases.",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-          icon: Bird,
-          description: "Performance and speed for efficiency.",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-          icon: Turtle,
-          description: "The most powerful model for complex computations.",
-        },
-      ],
+            {
+      title: "Logs",
+      url: routes.me.logs,
+      icon: SquareTerminal,
+      isActive: true,
     },
     {
       title: "Documentation",
@@ -123,65 +77,33 @@ const data = {
           url: "#",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
           title: "Changelog",
           url: "#",
         },
       ],
     },
     {
-      title: "API",
+      title: "Me",
       url: "#",
       icon: Code2,
       items: [
         {
-          title: "Chat",
-          url: "#",
-        },
-        {
-          title: "Completion",
-          url: "#",
-        },
-        {
-          title: "Images",
-          url: "#",
-        },
-        {
-          title: "Video",
-          url: "#",
-        },
-        {
-          title: "Speech",
-          url: "#",
+          title: "API Keys",
+          url: routes.me.apiKeys,
         },
       ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: Settings2,
+    //   items: [
+    //     {
+    //       title: "General",
+    //       url: "#",
+    //     },
+    //   ],
+    // },
   ],
 
   navSecondary: [
@@ -202,16 +124,6 @@ const data = {
       url: "#",
       icon: Frame,
     },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
   ],
   searchResults: [
     {
@@ -224,24 +136,6 @@ const data = {
       title: "Layouts and Templates",
       teaser:
         "The special files layout.js and template.js allow you to create UI that is shared between routes. This page will guide you through how and when to use these special files.",
-      url: "#",
-    },
-    {
-      title: "Data Fetching, Caching, and Revalidating",
-      teaser:
-        "Data fetching is a core part of any application. This page goes through how you can fetch, cache, and revalidate data in React and Next.js.",
-      url: "#",
-    },
-    {
-      title: "Server and Client Composition Patterns",
-      teaser:
-        "When building React applications, you will need to consider what parts of your application should be rendered on the server or the client. ",
-      url: "#",
-    },
-    {
-      title: "Server Actions and Mutations",
-      teaser:
-        "Server Actions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications.",
       url: "#",
     },
   ],

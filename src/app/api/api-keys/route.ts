@@ -1,5 +1,5 @@
 import { db } from '@/server/db';
-import { apiKeys } from '@/server/db/schema';
+import { apiKeys, users } from '@/server/db/schema';
 import { stackServerApp } from '@/stack';
 import crypto from 'crypto';
 import { eq } from 'drizzle-orm';
@@ -25,6 +25,20 @@ export async function POST() {
     const user = await stackServerApp.getUser();
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Check if the user exists in the database
+    const existingUser = await db.query.users.findFirst({
+      where: eq(users.id, user.id),
+    });
+
+    if (!existingUser && user.primaryEmail) {
+      // If the user doesn't exist, create them first
+      await db.insert(users).values({
+        id: user.id,
+        primaryEmail: user.primaryEmail, // Add this line
+        displayName: user.displayName || null,
+      });
     }
 
     const newKey = {
