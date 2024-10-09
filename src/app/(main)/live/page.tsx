@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { routes } from '@/lib/routes';
 import logger from '@/utils/logger';
 import { useUser } from '@stackframe/stack';
 import { useEffect, useState } from 'react';
@@ -12,38 +11,61 @@ interface Log {
   metadata?: any;
 }
 
-const LiveLogsPage = () => {
+/**
+ * Component for displaying live logs from the SSE endpoint
+ */
+const LiveLogs = () => {
   const [logs, setLogs] = useState<Log[]>([]);
+  const [apiKey, setApiKey] = useState<string>('');
   const user = useUser();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !apiKey) return;
 
-    logger.info('Connecting to WebSocket for live logs');
-    const socket = new WebSocket(`ws://${window.location.host}${routes.api.live}`);
+    logger.info('Connecting to SSE for live logs');
+    const eventSource = new EventSource(`/api/sse-logs?apiKey=${apiKey}`);
 
-    socket.onopen = () => {
-      logger.info('WebSocket connection established');
-    };
-
-    socket.onmessage = (event) => {
+    eventSource.onmessage = (event) => {
       const newLog = JSON.parse(event.data);
       setLogs((prevLogs) => [...prevLogs, newLog]);
     };
 
-    socket.onerror = (error) => {
-      logger.error('WebSocket error:', error);
+    eventSource.onerror = (error) => {
+      logger.error('SSE error:', error);
+      eventSource.close();
     };
 
     return () => {
-      logger.info('Closing WebSocket connection');
-      socket.close();
+      logger.info('Closing SSE connection');
+      eventSource.close();
     };
-  }, [user]);
+  }, [user, apiKey]);
+
+  const handleApiKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const newApiKey = formData.get('apiKey') as string;
+    setApiKey(newApiKey);
+    setLogs([]); // Clear previous logs when changing API key
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Live Application Logs</h1>
+      
+      <form onSubmit={handleApiKeySubmit} className="mb-4">
+        <input
+          type="text"
+          name="apiKey"
+          placeholder="Enter API Key"
+          className="border p-2 mr-2"
+          required
+        />
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          Connect
+        </button>
+      </form>
+
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full">
           <thead className="bg-gray-50">
@@ -72,4 +94,4 @@ const LiveLogsPage = () => {
   );
 };
 
-export default LiveLogsPage;
+export default LiveLogs;

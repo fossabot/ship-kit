@@ -59,39 +59,27 @@ const bufferedLogger = new BufferedLogger();
 
 import { WebSocket, WebSocketServer } from 'ws';
 
-const sendLogToWebSocket = (log: LogEntry) => {
-  if (typeof window === 'undefined') {
-    const wss = (global as any).wss as WebSocketServer | undefined;
-    if (wss) {
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(log));
-        }
-      });
-    }
-  }
-};
 
 const logger = {
   debug: (message: string, metadata?: any) => {
     const log = createLog('debug', message, metadata);
     bufferedLogger.debug(message, metadata);
-    sendLogToWebSocket(log);
+    // sendLogToWebSocket(log);
   },
   info: (message: string, metadata?: any) => {
     const log = createLog('info', message, metadata);
     bufferedLogger.info(message, metadata);
-    sendLogToWebSocket(log);
+    // sendLogToWebSocket(log);
   },
   warn: (message: string, metadata?: any) => {
     const log = createLog('warn', message, metadata);
     bufferedLogger.warn(message, metadata);
-    sendLogToWebSocket(log);
+    // sendLogToWebSocket(log);
   },
   error: (message: string, metadata?: any) => {
     const log = createLog('error', message, metadata);
     bufferedLogger.error(message, metadata);
-    sendLogToWebSocket(log);
+    // sendLogToWebSocket(log);
   },
 };
 
@@ -114,3 +102,15 @@ export const getLogStreamForApiKey = async function* (apiKey: string) {
 };
 
 export default logger;
+const sendLogToWebSocket = (log: LogEntry) => {
+  if (typeof window === 'undefined') {
+    const wss = (global as any).wss as WebSocketServer | undefined;
+    if (wss) {
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(log));
+        }
+      });
+    }
+  }
+};

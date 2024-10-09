@@ -1,7 +1,7 @@
 import { db } from '@/server/db';
-import { apiKeys, users } from '@/server/db/schema';
+import { apiKeys, projects, teamMembers } from '@/server/db/schema';
+import { createApiKey, createProjectForTeam, getTeamProjects, isTeamPremium } from '@/server/utils/team-utils';
 import { stackServerApp } from '@/stack';
-import crypto from 'crypto';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
@@ -20,38 +20,65 @@ export async function GET() {
   }
 }
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     const user = await stackServerApp.getUser();
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check if the user exists in the database
-    const existingUser = await db.query.users.findFirst({
-      where: eq(users.id, user.id),
+    const { projectId, isTestKey } = await request.json();
+
+    // Get user's team
+    const userTeam = await db.query.teamMembers.findFirst({
+      where: eq(teamMembers.userId, user.id),
     });
 
-    if (!existingUser && user.primaryEmail) {
-      // If the user doesn't exist, create them first
-      await db.insert(users).values({
-        id: user.id,
-        primaryEmail: user.primaryEmail, // Add this line
-        displayName: user.displayName || null,
-      });
+    if (!userTeam) {
+      return NextResponse.json({ error: 'User not associated with a team' }, { status: 400 });
     }
 
-    const newKey = {
-      id: crypto.randomUUID(),
-      key: crypto.randomBytes(32).toString('hex'),
-      createdAt: new Date().toISOString(),
-      userId: user.id,
-    };
+    let targetProject;
 
-    await db.insert(apiKeys).values(newKey);
-    return NextResponse.json(newKey);
+    if (!projectId) {
+      // Check if the team already has a project
+      const teamProjects = await getTeamProjects(userTeam.teamId);
+
+      if (teamProjects.length === 0) {
+        // Create a new project if the team doesn't have one
+        targetProject = await createProjectForTeam(userTeam.teamId, 'Default Project');
+      } else if (teamProjects.length === 1 && !await isTeamPremium(userTeam.teamId)) {
+        // Use the existing project for non-premium teams
+        targetProject = teamProjects[0];
+      } else if (teamProjects.length >= 1 && !await isTeamPremium(userTeam.teamId)) {
+        // Redirect to pricing page for non-premium teams trying to create additional projects
+        return NextResponse.json({ redirect: '/pricing' }, { status: 303 });
+      } else {
+        // For premium teams, create a new project
+        targetProject = await createProjectForTeam(userTeam.teamId, 'New Project');
+      }
+    } else {
+      // Verify that the provided projectId belongs to the user's team
+      targetProject = await db.query.projects.findFirst({
+        where: eq(projects.id, projectId),
+      });
+
+      if (!targetProject || targetProject.teamId !== userTeam.teamId) {
+        return NextResponse.json({ error: 'Invalid project ID' }, { status: 400 });
+      }
+    }
+
+    const expiresIn = isTestKey ? 24 * 60 * 60 * 1000 : undefined; // 24 hours for test keys
+    
+    try {
+      const newApiKey = await createApiKey(targetProject.id, expiresIn);
+      return NextResponse.json(newApiKey);
+    } catch (error) {
+      console.error('Error creating API key:', error);
+      return NextResponse.json({ error: 'Failed to create API key' }, { status: 500 });
+    }
   } catch (error) {
-    console.error('Error generating API key:', error);
-    return NextResponse.json({ error: 'Failed to generate API key' }, { status: 500 });
+    console.error('Error in API key creation process:', error);
+    return NextResponse.json({ error: 'An unexpected error occurred' }, { status: 500 });
   }
 }
