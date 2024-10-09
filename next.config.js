@@ -1,6 +1,6 @@
 // @ts-check
 
-import withLogFlare from "./src/plugins/withLogFlare.js";
+import { withLogFlare } from "./src/lib/withLogFlare.js";
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
@@ -9,9 +9,11 @@ import withLogFlare from "./src/plugins/withLogFlare.js";
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
 
-/** @type {import("./src/plugins/withLogFlare.js").LogFlareOptions} */
+};
+
+/** @type {import("./src/lib/withLogFlare.js").LogFlareOptions} */
 const logFlareOptions = {
   prefix: '[LogFlare]',
   logLevel: process.env.NODE_ENV === 'production' ? 'warn' : 'debug',

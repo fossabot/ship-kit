@@ -57,7 +57,7 @@ const data = {
       icon: SquareTerminal,
       isActive: true,
     },
-            {
+    {
       title: "Logs",
       url: routes.me.logs,
       icon: SquareTerminal,

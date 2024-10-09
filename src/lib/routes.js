@@ -40,8 +40,8 @@ export const routes = {
 
   // API routes
   api: {
-    logger: "/api/logger",
     logs: "/api/logs",
+    live: "/api/live-logs",
     apiKeys: "/api/api-keys",
     apiKey: createRoute("/api/api-keys/:key", { key: null }),
   },

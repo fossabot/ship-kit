@@ -3,7 +3,6 @@ import {
   index,
   int,
   primaryKey,
-  sqliteTable,
   sqliteTableCreator,
   text
 } from "drizzle-orm/sqlite-core";
@@ -117,14 +116,14 @@ export const verificationTokens = createTable(
   }),
 );
 
-export const apiKeys = sqliteTable('api_keys', {
+export const apiKeys = createTable('api_keys', {
   id: text('id').primaryKey(),
   key: text('key').notNull().unique(),
   createdAt: text('created_at').notNull(),
   userId: text('user_id').notNull().references(() => users.id),
 });
 
-export const logs = sqliteTable('logs', {
+export const logs = createTable('logs', {
   id: int('id').primaryKey({ autoIncrement: true }),
   timestamp: text('timestamp').notNull(),
   level: text('level').notNull(),

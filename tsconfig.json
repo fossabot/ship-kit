@@ -28,7 +28,10 @@
     "paths": {
       "@/public/*": ["./public/*"],
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* Types */
+    "types": ["node", "ws"]
   },
   "include": [
     ".eslintrc.cjs",

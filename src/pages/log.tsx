@@ -5,5 +5,5 @@ export default function Log() {
     useEffect(() => {
         console.log('after')
     }, [])
-  return <div>Log</div>
+  return <div>Next.JS Pages Route - LogFlare Demo</div>
 }

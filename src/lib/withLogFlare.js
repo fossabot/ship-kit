@@ -2,6 +2,14 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
+import { routes } from './routes.js';
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? (process.env.URL ?? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : "http://localhost:" + process.env.PORT;
+
 
 /**
  * @typedef {'debug' | 'info' | 'warn' | 'error'} LogLevel
@@ -78,17 +86,18 @@ export const withLogFlare = (options = {}) => {
 
     let isApiKeyValid = false;
     let apiKeyChecked = false;
+    let invalidKeyErrorShown = false;
 
     originalConsole.debug(`Initializing LogFlare with key: ${process.env.NEXT_PUBLIC_LOGFLARE_KEY}`);
 
     /**
-     * Checks if the API key is valid
+     * Checks if the API key is valid (only once)
      * @returns {Promise<boolean>}
      */
     const checkApiKey = async () => {
       if (apiKeyChecked) return isApiKeyValid;
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || BASE_URL; // TODO: Change to HARDCODED URL
       try {
         const response = await fetch(`${apiUrl}/api/api-keys/${process.env.NEXT_PUBLIC_LOGFLARE_KEY}`, {
           method: 'GET',
@@ -153,7 +162,7 @@ export const withLogFlare = (options = {}) => {
           const isValid = await checkApiKey();
           if (isValid) {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-            fetch(`${apiUrl}/api/logs`, {
+            fetch(`${apiUrl}${routes.api.logs}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -165,8 +174,9 @@ export const withLogFlare = (options = {}) => {
             }).catch(error => {
               originalConsole.error('Failed to send log to API:', error);
             });
-          } else {
-            originalConsole.error('Invalid API key. Log not sent to API.');
+          } else if (!invalidKeyErrorShown) {
+            originalConsole.error('Invalid API key. Logs will not be sent to API.');
+            invalidKeyErrorShown = true;
           }
         }
       }
@@ -183,6 +193,22 @@ export const withLogFlare = (options = {}) => {
         ...nextConfig.experimental,
         instrumentationHook: true,
       },
+      // webpack: (config, context) => {
+      //   // Handle the webpack configuration here
+      //   if (!context.isServer) {
+      //     config.resolve.fallback = {
+      //       ...config.resolve.fallback,
+      //       ws: false, // Set to false instead of using require.resolve
+      //     };
+      //   }
+
+      //   // Call the original webpack function if it exists
+      //   if (typeof nextConfig.webpack === 'function') {
+      //     return nextConfig.webpack(config, context);
+      //   }
+
+      //   return config;
+      // },
     };
   };
 };

@@ -1,5 +1,6 @@
 'use client';
 
+import { routes } from '@/lib/routes';
 import { useUser } from '@stackframe/stack';
 import { useEffect, useState } from 'react';
 
@@ -18,7 +19,7 @@ const ApiKeysPage = () => {
     const fetchApiKeys = async () => {
       if (!user) return;
       try {
-        const response = await fetch('/api/api-keys');
+        const response = await fetch(routes.api.apiKeys);
         if (!response.ok) throw new Error('Failed to fetch API keys');
         const data = await response.json();
         setApiKeys(data);
@@ -34,7 +35,7 @@ const ApiKeysPage = () => {
 
   const generateApiKey = async () => {
     try {
-      const response = await fetch('/api/api-keys', { method: 'POST' });
+      const response = await fetch(routes.api.apiKeys, { method: 'POST' });
       if (!response.ok) throw new Error('Failed to generate API key');
       const newKey = await response.json();
       setApiKeys([...apiKeys, newKey]);
