@@ -1,41 +1,38 @@
 "use client";
 
-import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/views/app-sidebar";
-import TaskList from "@/components/views/task-list";
-import { UserButton, useUser } from "@stackframe/stack";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { LatestPost } from "@/app/_components/post";
+import { UserGreeting } from "@/app/_components/UserGreeting";
+import { buttonVariants } from "@/components/ui/button";
+import { routes } from "@/lib/routes";
+import logger from '@/utils/logger';
+import { useStackApp, useUser } from "@stackframe/stack";
+import Link from "next/link";
 
-const DashboardPage = () => {
-  const router = useRouter();
-  const user = useUser({ or: "redirect" });
+const HomePage = () => {
+  const user = useUser();
+  const stackApp = useStackApp();
 
-  useEffect(() => {
-    // Redirect to home page if user is not logged in
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
-
-  if (!user) return null; // Prevent rendering while redirecting
+  logger.info('Rendering HomePage');
 
   return (
-    <SidebarLayout defaultOpen={true}>
-      <AppSidebar />
-      <main className="flex flex-1 flex-col p-4 transition-all duration-300 ease-in-out">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Your Dashboard</h1>
-          <UserButton />
-        </div>
-        <p className="mb-4">Welcome, {user.displayName ?? "anonymous user"}</p>
-        <div className="rounded-md border-2 border-dashed p-4">
-          <TaskList />
-        </div>
-        <SidebarTrigger />
-      </main>
-    </SidebarLayout>
+    <>
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <h1 className="mb-4 text-3xl font-bold">Welcome to Task Manager</h1>
+        <UserGreeting />
+        <LatestPost />
+        <p className="mb-4">Please sign in to manage your tasks</p>
+        {user ? (
+          <Link href={routes.tasks} className={buttonVariants()}>
+            Proceed to Dashboard
+          </Link>
+        ) : (
+          <Link href={stackApp.urls.signIn} className={buttonVariants()}>
+            Sign in
+          </Link>
+        )}
+      </div>
+    </>
   );
 };
 
-export default DashboardPage;
+export default HomePage;

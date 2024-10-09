@@ -4,8 +4,12 @@
  */
 
 /**
+ * @typedef {import('next').Route} Route
+ */
+
+/**
  * Type definition for a route object
- * @typedef {Object} Route
+ * @typedef {Object} RouteObject
  * @property {string} path - The route path
  * @property {Object<string, any>} [params] - Optional parameters for dynamic segments
  */
@@ -14,12 +18,19 @@
  * Creates a route object with optional dynamic segments
  * @param {string} path - The route path
  * @param {Object<string, any>} [params] - Optional parameters for dynamic segments
- * @returns {Route} Route object with path and optional params
+ * @returns {RouteObject} Route object with path and optional params
  */
 export const createRoute = (path, params = {}) => ({ path, params });
 
 /**
- * @constant {Object} routes - An object containing all the route paths used in the application.
+ * @typedef {Route|RouteObject} RouteValueBase
+ * @interface RoutesInterface
+ * @property {Object<string, RouteValueBase>} [children]
+ * @typedef {RouteValueBase} RouteValue
+ * @typedef {Object<string, RouteValue>} Routes
+ */
+/**
+ * @constant {Routes} routes - An object containing all the route paths used in the application.
  */
 export const routes = {
   // Public routes
@@ -85,9 +96,9 @@ export const createRedirects = (sources, destination, permanent = false) => {
 
 /**
  * Generates a full path for a route, replacing any dynamic segments with provided values
- * @param {string|Route} route - The route string or object from ROUTES
+ * @param {string|RouteObject} route - The route string or object from ROUTES
  * @param {Object<string, any>} [params] - Values for dynamic segments
- * @returns {string} The full path with dynamic segments replaced
+ * @returns {Route} The full path with dynamic segments replaced
  */
 export const getRoutePath = (route, params = {}) => {
   if (typeof route === "string") {
@@ -108,7 +119,7 @@ export const getRoutePath = (route, params = {}) => {
  * Helper function to lookup routes easily
  * @param {string} path - Dot-notation path to the desired route
  * @param {Object} [params] - Optional parameters for dynamic segments
- * @returns {any} The resolved route path
+ * @returns {Route} The resolved route path
  */
 export const rx = (path, params = {}) => {
   const parts = path.split(".");

@@ -43,7 +43,7 @@ export const teamMembers = createTable("team_member", {
 export const apiKeys = createTable('api_key', {
   id: text('id').notNull().primaryKey(),
   key: text('key').notNull().unique(),
-  projectId: text('project_id').notNull().references(() => projects.id),
+  projectId: text('project_id'), // Allow null values
   createdAt: int('created_at', { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
   expiresAt: int('expires_at', { mode: "timestamp" }),
 });
@@ -115,4 +115,35 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
   user: one(users, { fields: [accounts.userId], references: [users.id] }),
 }));
 
-// Sessions and VerificationTokens tables remain unchanged
+export const projectMembers = createTable('project_member', {
+  id: text('id').notNull().primaryKey(),
+  projectId: text('project_id').notNull().references(() => projects.id),
+  userId: text('user_id').notNull().references(() => users.id),
+  role: text('role', { enum: ['owner', 'admin', 'member'] }).notNull(),
+});
+
+export const projectRelations = relations(projects, ({ many }) => ({
+  members: many(projectMembers),
+}));
+
+export const userRelations = relations(users, ({ many }) => ({
+  projectMemberships: many(projectMembers),
+}));
+
+export const projectMemberRelations = relations(projectMembers, ({ one }) => ({
+  project: one(projects, {
+    fields: [projectMembers.projectId],
+    references: [projects.id],
+  }),
+  user: one(users, {
+    fields: [projectMembers.userId],
+    references: [users.id],
+  }),
+}));
+
+export const apiKeyRelations = relations(apiKeys, ({ one }) => ({
+  project: one(projects, {
+    fields: [apiKeys.projectId],
+    references: [projects.id],
+  }),
+}));

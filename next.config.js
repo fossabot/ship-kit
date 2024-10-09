@@ -10,11 +10,26 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  reactStrictMode: true,
 
-};
+  devIndicators: {
+    buildActivityPosition: 'bottom-left',
+  },
+    experimental: {
+    typedRoutes: true,
+      webVitalsAttribution: ['CLS', 'LCP']
+  },
+
+  compiler: {
+    // Remove all console logs
+    // removeConsole: true
+        // Remove console logs only in production, excluding error logs
+    // removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false
+  }};
 
 /** @type {import("./src/lib/withLogFlare.js").LogFlareOptions} */
 const logFlareOptions = {
+  apiKey: 'DBGXtXGeBoDeduJAucKHJzubQm0iy17P',
   prefix: '[LogFlare]',
   logLevel: process.env.NODE_ENV === 'production' ? 'warn' : 'debug',
   logToFile: true,

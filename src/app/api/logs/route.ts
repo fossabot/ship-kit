@@ -1,27 +1,60 @@
 import { db } from '@/server/db';
-import { apiKeys, logs } from '@/server/db/schema';
+import { apiKeys, logs, projectMembers } from '@/server/db/schema';
 import { stackServerApp } from '@/stack';
-import { desc, eq, inArray } from 'drizzle-orm';
+import { and, desc, eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
-    const user = await stackServerApp.getUser();
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { searchParams } = new URL(request.url);
+    const apiKeyId = searchParams.get('id');
+
+    if (!apiKeyId) {
+      return NextResponse.json({ error: 'API key ID is required' }, { status: 400 });
     }
 
-    // Get all API keys for the user
-    const userApiKeys = await db.select({ id: apiKeys.id })
-      .from(apiKeys)
-      .where(eq(apiKeys.userId, user.id));
+    const user = await stackServerApp.getUser();
 
-    const apiKeyIds = userApiKeys.map(key => key.id);
+    // Find the API key record
+    const apiKeyRecord = await db.query.apiKeys.findFirst({
+      where: eq(apiKeys.id, apiKeyId),
+      with: {
+        project: true,
+      },
+    });
 
-    // Get logs for all of the user's API keys
+    if (!apiKeyRecord) {
+      return NextResponse.json({ error: 'Invalid API key ID' }, { status: 401 });
+    }
+
+    // Check permissions
+    if (apiKeyRecord.projectId) {
+      // API key is associated with a project
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+
+      const userProjectMember = await db.query.projectMembers.findFirst({
+        where: and(
+          eq(projectMembers.projectId, apiKeyRecord.projectId),
+          eq(projectMembers.userId, user.id)
+        ),
+      });
+
+      if (!userProjectMember) {
+        return NextResponse.json({ error: 'Unauthorized access to project' }, { status: 403 });
+      }
+    } else {
+      // API key is not associated with a project
+      if (user) {
+        return NextResponse.json({ error: 'Unauthorized access to non-project API key' }, { status: 403 });
+      }
+    }
+
+    // Get logs for the specified API key
     const logEntries = await db.select()
       .from(logs)
-      .where(inArray(logs.apiKeyId, apiKeyIds))
+      .where(eq(logs.apiKeyId, apiKeyRecord.id))
       .orderBy(desc(logs.timestamp))
       .limit(100);
 
@@ -48,8 +81,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
     }
 
+    // Convert timestamp to a number if it's not already
+    const numericTimestamp = typeof timestamp === 'string' ? Date.parse(timestamp) / 1000 : 
+                             timestamp instanceof Date ? Math.floor(timestamp.getTime() / 1000) : 
+                             Math.floor(Number(timestamp) / 1000);
+
     await db.insert(logs).values({ 
-      timestamp, 
+      timestamp: timestamp instanceof Date ? timestamp : new Date(),
       level, 
       message,
       prefix,

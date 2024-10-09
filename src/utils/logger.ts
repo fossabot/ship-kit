@@ -1,13 +1,11 @@
-type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+/**
+ * This module provides a buffered logging system for use throughout the application.
+ * It includes a BufferedLogger class and a main logger object.
+ */
 
-interface LogEntry {
-  level: LogLevel;
-  message: string;
-  timestamp: string;
-  metadata?: any;
-}
+import { LogData, LogLevel } from "@/lib/withLogFlare";
 
-const createLog = (level: LogLevel, message: string, metadata?: any): LogEntry => ({
+const createLog = (level: LogLevel, message: string, metadata?: any): LogData => ({
   level,
   message,
   timestamp: new Date().toISOString(),
@@ -15,20 +13,21 @@ const createLog = (level: LogLevel, message: string, metadata?: any): LogEntry =
 });
 
 class BufferedLogger {
-  private buffer: LogEntry[] = [];
+  private buffer: LogData[] = [];
   private bufferSize: number;
   private flushInterval: number;
+  private flushIntervalId?: NodeJS.Timeout;
 
   constructor(bufferSize = 10, flushInterval = 5000) {
     this.bufferSize = bufferSize;
     this.flushInterval = flushInterval;
 
     if (typeof window !== 'undefined') {
-      setInterval(() => this.flush(), this.flushInterval);
+      this.flushIntervalId = setInterval(() => this.flush(), this.flushInterval);
     }
   }
 
-  private log(level: LogLevel, message: string, metadata?: any) {
+  private log = (level: LogLevel, message: string, metadata?: any) => {
     const logEntry = createLog(level, message, metadata);
     this.buffer.push(logEntry);
 
@@ -37,11 +36,10 @@ class BufferedLogger {
     }
   }
 
-  private flush() {
+  private flush = () => {
+    console.log('Flushing buffer', this.buffer);
     if (this.buffer.length === 0) return;
 
-    // In a real-world scenario, you might want to send this to a server
-    // For now, we'll just console.log the buffered entries
     this.buffer.forEach(entry => {
       console[entry.level](`${entry.timestamp} [${entry.level.toUpperCase()}] ${entry.message}`, entry.metadata);
     });
@@ -49,68 +47,25 @@ class BufferedLogger {
     this.buffer = [];
   }
 
-  debug(message: string, metadata?: any) { this.log('debug', message, metadata); }
-  info(message: string, metadata?: any) { this.log('info', message, metadata); }
-  warn(message: string, metadata?: any) { this.log('warn', message, metadata); }
-  error(message: string, metadata?: any) { this.log('error', message, metadata); }
+  debug = (message: string, metadata?: any) => this.log('debug', message, metadata);
+  info = (message: string, metadata?: any) => this.log('info', message, metadata);
+  warn = (message: string, metadata?: any) => this.log('warn', message, metadata);
+  error = (message: string, metadata?: any) => this.log('error', message, metadata);
+
+  stop = () => {
+    if (this.flushIntervalId) {
+      clearInterval(this.flushIntervalId);
+    }
+  }
 }
 
 const bufferedLogger = new BufferedLogger();
 
-import { WebSocket, WebSocketServer } from 'ws';
-
-
 const logger = {
-  debug: (message: string, metadata?: any) => {
-    const log = createLog('debug', message, metadata);
-    bufferedLogger.debug(message, metadata);
-    // sendLogToWebSocket(log);
-  },
-  info: (message: string, metadata?: any) => {
-    const log = createLog('info', message, metadata);
-    bufferedLogger.info(message, metadata);
-    // sendLogToWebSocket(log);
-  },
-  warn: (message: string, metadata?: any) => {
-    const log = createLog('warn', message, metadata);
-    bufferedLogger.warn(message, metadata);
-    // sendLogToWebSocket(log);
-  },
-  error: (message: string, metadata?: any) => {
-    const log = createLog('error', message, metadata);
-    bufferedLogger.error(message, metadata);
-    // sendLogToWebSocket(log);
-  },
-};
-
-/**
- * Returns an async iterable stream of logs for a given API key
- * @param apiKey - The API key to fetch logs for
- */
-export const getLogStreamForApiKey = async function* (apiKey: string) {
-  // This is a placeholder implementation. In a real-world scenario,
-  // you would connect to your logging database or service and stream logs.
-  while (true) {
-    yield {
-      level: ['info', 'warn', 'error'][Math.floor(Math.random() * 3)],
-      message: `Log message for API key: ${apiKey}`,
-      timestamp: new Date().toISOString(),
-      metadata: { apiKey, randomData: Math.random() },
-    };
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay between logs
-  }
+  debug: (message: string, metadata?: any) => bufferedLogger.debug(message, metadata),
+  info: (message: string, metadata?: any) => bufferedLogger.info(message, metadata),
+  warn: (message: string, metadata?: any) => bufferedLogger.warn(message, metadata),
+  error: (message: string, metadata?: any) => bufferedLogger.error(message, metadata),
 };
 
 export default logger;
-const sendLogToWebSocket = (log: LogEntry) => {
-  if (typeof window === 'undefined') {
-    const wss = (global as any).wss as WebSocketServer | undefined;
-    if (wss) {
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(log));
-        }
-      });
-    }
-  }
-};

@@ -72,36 +72,49 @@ export async function createProjectForTeam(teamId: string, projectName: string) 
   return { id: newProjectId, name: projectName, teamId };
 }
 
-export async function createApiKey(projectId: string, expiresIn?: number) {
+export async function createApiKey(projectId?: string, expiresIn?: number) {
+  console.log(`Creating API key, projectId: ${projectId}, expiresIn: ${expiresIn}`);
   const newApiKeyId = nanoid();
   const key = nanoid(32); // Generate a 32-character API key
   const createdAt = new Date();
   const expiresAt = expiresIn ? new Date(Date.now() + expiresIn) : undefined;
 
-  // First, check if the project exists
-  const project = await db.query.projects.findFirst({
-    where: eq(projects.id, projectId),
-  });
-
-  if (!project) {
-    console.error(`Project not found for ID: ${projectId}`);
-    throw new Error("Project not found");
-  }
-
   try {
+    console.log(`Inserting API key`);
     await db.insert(apiKeys).values({
       id: newApiKeyId,
       key: key,
-      projectId: projectId,
+      projectId: projectId || null, // Allow null projectId
       createdAt: createdAt,
       expiresAt: expiresAt,
     });
+    console.log(`API key inserted successfully`);
   } catch (error) {
     console.error('Error inserting API key:', error);
     throw new Error("Failed to create API key");
   }
 
   return { id: newApiKeyId, key: key };
+}
+
+async function createTestProject() {
+  const testTeamId = 'test-team-' + nanoid();
+  const testProjectId = 'test-project-' + nanoid();
+
+  await db.transaction(async (tx) => {
+    await tx.insert(teams).values({
+      id: testTeamId,
+      name: "Test Team",
+    });
+
+    await tx.insert(projects).values({
+      id: testProjectId,
+      name: "Test Project",
+      teamId: testTeamId,
+    });
+  });
+
+  return { id: testProjectId, teamId: testTeamId };
 }
 
 export async function getTeamProjects(teamId: string) {

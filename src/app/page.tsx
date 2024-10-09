@@ -1,3 +1,4 @@
+import { CreateTestApiKey } from "@/components/modules/api-keys/test-api";
 import { buttonVariants } from "@/components/ui/button";
 import Link from 'next/link';
 
@@ -8,6 +9,7 @@ const LandingPage = () => {
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
           Welcome to <span className="text-[hsl(280,100%,70%)]">LogFlare</span>
         </h1>
+        <CreateTestApiKey />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className={buttonVariants({ size: "lg" })}

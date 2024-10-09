@@ -5,6 +5,7 @@ import { useUser } from '@stackframe/stack';
 import { useEffect, useState } from 'react';
 
 interface Log {
+  id: string;
   level: string;
   message: string;
   timestamp: string;
@@ -16,14 +17,14 @@ interface Log {
  */
 const LiveLogs = () => {
   const [logs, setLogs] = useState<Log[]>([]);
-  const [apiKey, setApiKey] = useState<string>('');
+  const [apiKeyId, setApiKeyId] = useState<string>('');
   const user = useUser();
 
   useEffect(() => {
-    if (!user || !apiKey) return;
+    if (!user || !apiKeyId) return;
 
     logger.info('Connecting to SSE for live logs');
-    const eventSource = new EventSource(`/api/sse-logs?apiKey=${apiKey}`);
+    const eventSource = new EventSource(`/api/sse-logs?id=${apiKeyId}`);
 
     eventSource.onmessage = (event) => {
       const newLog = JSON.parse(event.data);
@@ -39,13 +40,13 @@ const LiveLogs = () => {
       logger.info('Closing SSE connection');
       eventSource.close();
     };
-  }, [user, apiKey]);
+  }, [user, apiKeyId]);
 
   const handleApiKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newApiKey = formData.get('apiKey') as string;
-    setApiKey(newApiKey);
+    const newApiKeyId = formData.get('apiKeyId') as string;
+    setApiKeyId(newApiKeyId);
     setLogs([]); // Clear previous logs when changing API key
   };
 
@@ -56,8 +57,8 @@ const LiveLogs = () => {
       <form onSubmit={handleApiKeySubmit} className="mb-4">
         <input
           type="text"
-          name="apiKey"
-          placeholder="Enter API Key"
+          name="apiKeyId"
+          placeholder="Enter API Key ID"
           className="border p-2 mr-2"
           required
         />
@@ -77,8 +78,8 @@ const LiveLogs = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {logs.map((log, index) => (
-              <tr key={index}>
+            {logs.map((log) => (
+              <tr key={log.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(log.timestamp).toLocaleString()}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{log.level}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{log.message}</td>

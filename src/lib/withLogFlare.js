@@ -12,11 +12,12 @@ const BASE_URL =
 
 
 /**
- * @typedef {'debug' | 'info' | 'warn' | 'error'} LogLevel
+ * @typedef {'debug' | 'info' | 'warn' | 'error' | 'log'} LogLevel
  */
 
 /**
  * @typedef {Object} LogFlareOptions
+ * @property {string} [apiKey] - Your LogFlare API Key
  * @property {string} [prefix='> '] - Prefix for log messages
  * @property {LogLevel} [logLevel='info'] - Minimum log level to display
  * @property {boolean} [logToFile=process.env.NODE_ENV === 'production'] - Whether to log to a file
@@ -30,11 +31,11 @@ const BASE_URL =
  /**
  * @typedef {Object} LogData
  * @property {string} timestamp - Timestamp of the log
- * @property {string} emoji - Emoji for the log level
  * @property {LogLevel} level - Log level
- * @property {string} prefix - Prefix for the log message
  * @property {string} message - Log message
  * @property {Object} metadata - Metadata for the log
+ * @property {string} [emoji] - Emoji for the log level (optional)
+ * @property {string} [prefix] - Prefix for the log message (optional)
  */
 
 
@@ -65,6 +66,7 @@ const defaultSettings = {
 export const withLogFlare = (options = {}) => {
   return (nextConfig) => {
     const {
+      apiKey = process.env.NEXT_PUBLIC_LOGFLARE_KEY,
       prefix = '> ',
       logLevel = 'info',
       logToFile = process.env.NODE_ENV === 'production',
@@ -88,7 +90,7 @@ export const withLogFlare = (options = {}) => {
     let apiKeyChecked = false;
     let invalidKeyErrorShown = false;
 
-    originalConsole.debug(`Initializing LogFlare with key: ${process.env.NEXT_PUBLIC_LOGFLARE_KEY}`);
+    originalConsole.debug(`Initializing LogFlare with key: ${apiKey}`);
 
     /**
      * Checks if the API key is valid (only once)
@@ -99,7 +101,7 @@ export const withLogFlare = (options = {}) => {
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || BASE_URL; // TODO: Change to HARDCODED URL
       try {
-        const response = await fetch(`${apiUrl}/api/api-keys/${process.env.NEXT_PUBLIC_LOGFLARE_KEY}`, {
+        const response = await fetch(`${apiUrl}/api/api-keys/${apiKey}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -158,10 +160,10 @@ export const withLogFlare = (options = {}) => {
         }
 
         // Send log to the API without colors or emojis
-        if (process.env.NEXT_PUBLIC_LOGFLARE_KEY) {
+        if (apiKey) {
           const isValid = await checkApiKey();
           if (isValid) {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || BASE_URL; // TODO: Change to HARDCODED URL
             fetch(`${apiUrl}${routes.api.logs}`, {
               method: 'POST',
               headers: {
@@ -169,7 +171,7 @@ export const withLogFlare = (options = {}) => {
               },
               body: JSON.stringify({
                 ...logData,
-                api_key: process.env.NEXT_PUBLIC_LOGFLARE_KEY
+                api_key: apiKey
               })
             }).catch(error => {
               originalConsole.warn('Failed to send log to API:', error);

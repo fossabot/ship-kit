@@ -29,6 +29,27 @@
       "when": 1728455501325,
       "tag": "0003_careful_tag",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1728499417332,
+      "tag": "0004_bright_echo",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1728501244687,
+      "tag": "0005_wise_dust",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1728502564831,
+      "tag": "0006_nifty_mongu",
+      "breakpoints": true
     }
   ]
 }
