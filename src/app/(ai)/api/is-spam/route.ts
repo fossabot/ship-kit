@@ -9,7 +9,7 @@
  * Utilizes OpenAI GPT-3.5 Turbo model for analysis.
  */
 
-import { isSpam } from "@/server/api/services/is-spam";
+import { isSpam } from "@/lib/services/is-spam";
 import { createSafeRoute } from "next-safe-route";
 import { z } from "zod";
 

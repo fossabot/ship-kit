@@ -108,7 +108,7 @@ export const withLogFlare = (options = {}) => {
         const data = await response.json();
         isApiKeyValid = data.isValid;
       } catch (error) {
-        console.error('Failed to check API key:', error);
+        console.info('Failed to check API key:', error);
         isApiKeyValid = false;
       }
       apiKeyChecked = true;
@@ -172,7 +172,7 @@ export const withLogFlare = (options = {}) => {
                 api_key: process.env.NEXT_PUBLIC_LOGFLARE_KEY
               })
             }).catch(error => {
-              originalConsole.error('Failed to send log to API:', error);
+              originalConsole.warn('Failed to send log to API:', error);
             });
           } else if (!invalidKeyErrorShown) {
             originalConsole.error('Invalid API key. Logs will not be sent to API.');

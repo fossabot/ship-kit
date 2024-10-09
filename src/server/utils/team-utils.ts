@@ -75,8 +75,8 @@ export async function createProjectForTeam(teamId: string, projectName: string) 
 export async function createApiKey(projectId: string, expiresIn?: number) {
   const newApiKeyId = nanoid();
   const key = nanoid(32); // Generate a 32-character API key
-  const createdAt = Math.floor(Date.now() / 1000); // Current timestamp in seconds
-  const expiresAt = expiresIn ? Math.floor((Date.now() + expiresIn) / 1000) : undefined;
+  const createdAt = new Date();
+  const expiresAt = expiresIn ? new Date(Date.now() + expiresIn) : undefined;
 
   // First, check if the project exists
   const project = await db.query.projects.findFirst({

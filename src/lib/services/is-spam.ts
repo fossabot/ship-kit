@@ -2,7 +2,7 @@
 
 import { env } from "@/env";
 import { logger } from "@/lib/logger";
-import { isSpamSchema } from "@/server/api/services/is-spam-schema";
+import { isSpamSchema } from "@/lib/services/is-spam-schema";
 import OpenAI from "openai";
 import { type ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { type z } from "zod";
