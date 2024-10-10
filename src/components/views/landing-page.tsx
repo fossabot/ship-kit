@@ -120,6 +120,7 @@ export function LandingPageComponent() {
         
 
         <section className="relative py-20 px-4 text-white">
+
           <div className="max-w-4xl mx-auto bg-[#1a0f2e] rounded-lg shadow-2xl overflow-hidden">
             <div className="p-4 border-b border-gray-700">
               <div className="flex items-center space-x-2 text-gray-400">
