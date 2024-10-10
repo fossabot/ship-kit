@@ -1,9 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-import { Loader2, AlertCircle, CheckCircle, Info } from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -18,13 +14,16 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { AnimatePresence, motion } from 'framer-motion'
+import { AlertCircle, CheckCircle, Info, Loader2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 type LogLevel = 'info' | 'warning' | 'error' | 'success'
 
 interface Log {
   id: number
   message: string
-  timestamp: Date
+  timestamp: string
   level: LogLevel
 }
 
@@ -50,46 +49,11 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => {
-      const timestamp = row.getValue("timestamp") as Date
-      return timestamp.toLocaleString()
+      const timestamp = row.getValue("timestamp") as string
+      return new Date(timestamp).toLocaleString()
     },
   },
 ]
-
-const getRandomLogLevel = (): LogLevel => {
-  const levels: LogLevel[] = ['info', 'warning', 'error', 'success']
-  return levels[Math.floor(Math.random() * levels.length)]
-}
-
-const getRandomLogMessage = (level: LogLevel): string => {
-  const messages = {
-    info: [
-      "User logged in successfully",
-      "Data sync completed",
-      "Configuration updated",
-      "New user registered"
-    ],
-    warning: [
-      "High CPU usage detected",
-      "Low disk space warning",
-      "API rate limit approaching",
-      "Outdated dependency found"
-    ],
-    error: [
-      "Database connection failed",
-      "API request timeout",
-      "Uncaught exception in module",
-      "Authentication error"
-    ],
-    success: [
-      "Backup completed successfully",
-      "Payment processed",
-      "Email sent successfully",
-      "Task completed ahead of schedule"
-    ]
-  }
-  return messages[level][Math.floor(Math.random() * messages[level].length)]
-}
 
 const LogIcon = ({ level }: { level: LogLevel }) => {
   switch (level) {
@@ -104,7 +68,11 @@ const LogIcon = ({ level }: { level: LogLevel }) => {
   }
 }
 
-export function AppLoggingDashboardComponent() {
+interface AppLoggingDashboardComponentProps {
+  apiKey: string | null;
+}
+
+export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComponentProps) {
   const [logs, setLogs] = useState<Log[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -115,34 +83,32 @@ export function AppLoggingDashboardComponent() {
   })
 
   useEffect(() => {
-    // Simulate initial loading
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      addLog()
-      addLog()
-      addLog()
-    }, 1500)
-  }, [])
+    if (!apiKey) return;
 
-  const addLog = () => {
-    const level = getRandomLogLevel()
-    const newLog: Log = {
-      id: Date.now(),
-      message: getRandomLogMessage(level),
-      timestamp: new Date(),
-      level: level
-    }
-    setLogs(prevLogs => [...prevLogs, newLog])
-  }
+    setIsLoading(true);
+    const eventSource = new EventSource(`/api/sse-logs?key=${apiKey}`);
+
+    eventSource.onmessage = (event) => {
+      const newLog = JSON.parse(event.data);
+      setLogs((prevLogs) => [...prevLogs, newLog]);
+      setIsLoading(false);
+    };
+
+    eventSource.onerror = (error) => {
+      console.error('SSE error:', error);
+      eventSource.close();
+      setIsLoading(false);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, [apiKey]);
 
   return (
     <div className="w-full max-w-6xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">App Logging Dashboard</h1>
       <div className="mb-4 flex justify-between items-center">
-        <Button onClick={addLog} size="sm">
-          Add Log
-        </Button>
         <div className="text-sm text-gray-500">
           Total Logs: {logs.length}
         </div>

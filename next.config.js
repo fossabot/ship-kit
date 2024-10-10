@@ -16,7 +16,7 @@ const config = {
     buildActivityPosition: 'bottom-left',
   },
     experimental: {
-    typedRoutes: true,
+    // typedRoutes: true,
       webVitalsAttribution: ['CLS', 'LCP']
   },
 
@@ -29,7 +29,7 @@ const config = {
 
 /** @type {import("./src/lib/withLogFlare.js").LogFlareOptions} */
 const logFlareOptions = {
-  apiKey: 'U4Mrw0yGjxwNdyjdIv0kV12PrDtmRlju',
+  apiKey: 'U4Mrw0yGjxwNdyjdIv0kV12PrDtmRlju', // Move to env
   prefix: '[LogFlare]',
   logLevel: process.env.NODE_ENV === 'production' ? 'warn' : 'debug',
   logToFile: true,

@@ -1,13 +1,19 @@
 'use client'
 
-import { AppLoggingDashboardComponent } from '@/components/views/app-logging-dashboard'
-import { ConsoleComponentComponent } from '@/components/views/console-component'
-import { motion } from 'framer-motion'
+import { Button, buttonVariants } from "@/components/ui/button"
+import { ConsoleComponent } from "@/components/views/console-component"
+import { routes } from "@/lib/routes"
+import { useStackApp, useUser } from "@stackframe/stack"
+import { AnimatePresence, motion } from 'framer-motion'
 import { Calendar, CheckSquare, FileText, Map, Mic, Search } from 'lucide-react'
+import Link from "next/link"
 import { useEffect, useState } from 'react'
 
 export function LandingPageComponent() {
+  const user = useUser()
+  const stackApp = useStackApp()
   const [scrollY, setScrollY] = useState(0)
+  const [testApiKey, setTestApiKey] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -15,9 +21,32 @@ export function LandingPageComponent() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const createTestApiKey = async () => {
+    try {
+      const response = await fetch('/api/api-keys', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isTestKey: true }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setTestApiKey(data.key);
+        return data.key;
+      } else {
+        console.error('Failed to create test API key');
+        throw new Error('Failed to create test API key');
+      }
+    } catch (error) {
+      console.error('Error creating test API key:', error);
+      throw error;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0a001f] text-white overflow-hidden">
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-opacity-90 bg-[#0a001f] backdrop-blur-sm">
+    <div className="min-h-screen bg-[#0a001f] overflow-hidden">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-opacity-50 bg-[#0a001f] text-white backdrop-blur-sm">
         <div className="flex items-center space-x-2">
           <motion.div
             className="w-8 h-8 bg-purple-600 rounded-lg"
@@ -25,7 +54,7 @@ export function LandingPageComponent() {
           />
           <span className="text-xl font-bold">LogFlare</span>
         </div>
-        <nav className="hidden md:flex space-x-4">
+        <nav className="hidden md:flex space-x-8">
           <a href="#" className="hover:text-purple-400 transition-colors">Product</a>
           <a href="#" className="hover:text-purple-400 transition-colors">Pricing</a>
         </nav>
@@ -39,31 +68,57 @@ export function LandingPageComponent() {
         </div>
       </header>
 
-      <ConsoleComponentComponent />
-      <AppLoggingDashboardComponent />
-
       <main className="pt-20">
-        <section className="relative h-screen flex flex-col items-center justify-center text-center px-4">
+        <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center p-lg text-white">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Think better with Reflect</h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8">Never miss a note, idea or connection.</p>
-          </motion.div>
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-          >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500 rounded-full blur-3xl opacity-30" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-pink-500 rounded-full blur-3xl opacity-20" />
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">LogFlare: Illuminate Your Logs</h1>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8">Real-time logging made simple.</p>
+            <div className="flex space-x-4 justify-center">
+              <div className="relative h-12">
+                <AnimatePresence mode="wait">
+                  {!testApiKey ? (
+                    <motion.div
+                      key="button"
+                      initial={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Button onClick={createTestApiKey}>
+                        Create Live API Key
+                      </Button>
+                      <Link className={buttonVariants({ variant: "outline" })} href={user ? routes.me.logs : stackApp.urls.signIn}>Dashboard</Link>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="apiKey"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                      className="bg-purple-800 rounded-lg p-3"
+                    >
+                      <p className="text-sm">Your Test API Key:</p>
+                      <p className="font-mono text-lg">{testApiKey}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </motion.div>
         </section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          <ConsoleComponent onCreateTestKey={createTestApiKey} apiKey={testApiKey} />
+        </motion.div>
+        
 
-        <section className="relative py-20 px-4">
+        <section className="relative py-20 px-4 text-white">
           <div className="max-w-4xl mx-auto bg-[#1a0f2e] rounded-lg shadow-2xl overflow-hidden">
             <div className="p-4 border-b border-gray-700">
               <div className="flex items-center space-x-2 text-gray-400">
