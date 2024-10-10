@@ -4,7 +4,7 @@
  */
 
 /**
- * @typedef {import('next').Route} Route
+ * @typedef {import('next').Route|string} Route //TODO: Remove the or string part when next is updated
  */
 
 /**

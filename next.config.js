@@ -29,7 +29,7 @@ const config = {
 
 /** @type {import("./src/lib/withLogFlare.js").LogFlareOptions} */
 const logFlareOptions = {
-  apiKey: 'DBGXtXGeBoDeduJAucKHJzubQm0iy17P',
+  apiKey: 'U4Mrw0yGjxwNdyjdIv0kV12PrDtmRlju',
   prefix: '[LogFlare]',
   logLevel: process.env.NODE_ENV === 'production' ? 'warn' : 'debug',
   logToFile: true,

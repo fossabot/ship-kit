@@ -1,3 +1,5 @@
+// Todo Wtf
+
 import { type ILogObj, Logger } from "tslog";
 
 export const logger = new Logger<ILogObj>({

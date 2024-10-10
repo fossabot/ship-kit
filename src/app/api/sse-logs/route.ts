@@ -12,27 +12,30 @@ import { NextResponse } from 'next/server';
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url);
   const apiKeyId = searchParams.get('id');
+  const apiKey = searchParams.get('key');
 
-  if (!apiKeyId) {
-    return new NextResponse('API key ID is required', { status: 400 });
+  if (!apiKeyId && !apiKey) {
+    return new NextResponse('API key ID or key is required', { status: 400 });
   }
 
   const user = await stackServerApp.getUser();
-
   // Find the API key record
   const apiKeyRecord = await db.query.apiKeys.findFirst({
-    where: eq(apiKeys.id, apiKeyId),
+    where: apiKeyId ? eq(apiKeys.id, apiKeyId) : eq(apiKeys.key, apiKey as string),
     with: {
       project: true,
     },
   });
 
   if (!apiKeyRecord) {
-    return new NextResponse('Invalid API key ID', { status: 401 });
+    return new NextResponse('Invalid API key ID or key', { status: 401 });
   }
 
-  // Check permissions
-  if (apiKeyRecord.projectId) {
+  // Check if it's a test key
+  const isTestKey = !apiKeyRecord.projectId;
+
+  // Check permissions only if it's not a test key
+  if (!isTestKey && apiKeyRecord.projectId) {
     // API key is associated with a project
     if (!user) {
       return new NextResponse('Unauthorized', { status: 401 });
@@ -48,14 +51,9 @@ export const GET = async (req: Request) => {
     if (!userProjectMember) {
       return new NextResponse('Unauthorized access to project', { status: 403 });
     }
-  } else {
-    // API key is not associated with a project
-    if (user) {
-      return new NextResponse('Unauthorized access to non-project API key', { status: 403 });
-    }
   }
 
-  const logStream = streamApiLogs(apiKeyId);
+  const logStream = streamApiLogs(apiKeyRecord.id);
 
   const responseStream = new TransformStream();
   const writer = responseStream.writable.getWriter();

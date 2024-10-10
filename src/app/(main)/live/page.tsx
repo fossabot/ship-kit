@@ -17,14 +17,16 @@ interface Log {
  */
 const LiveLogs = () => {
   const [logs, setLogs] = useState<Log[]>([]);
-  const [apiKeyId, setApiKeyId] = useState<string>('');
+  const [apiKey, setApiKey] = useState<string>('');
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [isSendingTestLog, setIsSendingTestLog] = useState<boolean>(false);
   const user = useUser();
 
   useEffect(() => {
-    if (!user || !apiKeyId) return;
+    if (!apiKey || !isConnected) return;
 
     logger.info('Connecting to SSE for live logs');
-    const eventSource = new EventSource(`/api/sse-logs?id=${apiKeyId}`);
+    const eventSource = new EventSource(`/api/sse-logs?key=${apiKey}`);
 
     eventSource.onmessage = (event) => {
       const newLog = JSON.parse(event.data);
@@ -33,21 +35,54 @@ const LiveLogs = () => {
 
     eventSource.onerror = (error) => {
       logger.error('SSE error:', error);
+      setIsConnected(false);
       eventSource.close();
     };
 
     return () => {
       logger.info('Closing SSE connection');
+      setIsConnected(false);
       eventSource.close();
     };
-  }, [user, apiKeyId]);
+  }, [apiKey, isConnected]);
 
   const handleApiKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newApiKeyId = formData.get('apiKeyId') as string;
-    setApiKeyId(newApiKeyId);
+    const newApiKey = formData.get('apiKey') as string;
+    setApiKey(newApiKey);
     setLogs([]); // Clear previous logs when changing API key
+    setIsConnected(true);
+  };
+
+  const handleDisconnect = () => {
+    setIsConnected(false);
+    setLogs([]);
+  };
+
+  const handleSendTestLog = async () => {
+    if (!apiKey) return;
+
+    setIsSendingTestLog(true);
+    try {
+      const response = await fetch('/api/send-test-log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ apiKey }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send test log');
+      }
+
+      logger.info('Test log sent successfully');
+    } catch (error) {
+      logger.error('Error sending test log:', error);
+    } finally {
+      setIsSendingTestLog(false);
+    }
   };
 
   return (
@@ -57,15 +92,32 @@ const LiveLogs = () => {
       <form onSubmit={handleApiKeySubmit} className="mb-4">
         <input
           type="text"
-          name="apiKeyId"
-          placeholder="Enter API Key ID"
+          name="apiKey"
+          placeholder="Enter API Key"
           className="border p-2 mr-2"
           required
+          disabled={isConnected}
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Connect
-        </button>
+        {!isConnected ? (
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+            Connect
+          </button>
+        ) : (
+          <button type="button" onClick={handleDisconnect} className="bg-red-500 text-white p-2 rounded">
+            Disconnect
+          </button>
+        )}
       </form>
+
+      {isConnected && (
+        <button
+          onClick={handleSendTestLog}
+          disabled={isSendingTestLog}
+          className="bg-green-500 text-white p-2 rounded mb-4 disabled:bg-green-300"
+        >
+          {isSendingTestLog ? 'Sending...' : 'Send Test Log'}
+        </button>
+      )}
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full">

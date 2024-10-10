@@ -1,1 +1,0 @@
-ALTER TABLE `todo-today_api_key` ADD `expires_at` integer;

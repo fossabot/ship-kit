@@ -1,0 +1,5 @@
+Use open-source libraries when they would enhance the user/developer experience.
+Use best practices, write production-ready code.
+Fix bugs and improve performance.
+Comment any complex or hard-to-read code.
+fix all typescript errors and warnings.

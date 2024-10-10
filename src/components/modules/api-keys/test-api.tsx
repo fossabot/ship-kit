@@ -20,14 +20,20 @@ export const CreateTestApiKey = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setApiKey(data.key);
+        if (data.key) {
+          setApiKey(data.key);
+        } else {
+          throw new Error('API key not found in response');
+        }
       } else if (response.status === 303) {
         router.push('/pricing');
       } else {
-        setError('Failed to create test API key');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create test API key');
       }
     } catch (error) {
-      setError('An error occurred while creating the test API key');
+      console.error('Error creating test API key:', error);
+      setError(error instanceof Error ? error.message : 'An error occurred while creating the test API key');
     }
   };
 

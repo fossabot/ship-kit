@@ -1,63 +1,43 @@
-import { db } from '@/server/db';
-import { apiKeys, logs, projectMembers } from '@/server/db/schema';
+import { getApiKeyIdFromApiKey } from '@/lib/services/api-keys/api-keys';
+import { createLog, getApiKeyLogs, getUserLogs, userHasAccessToApiKey } from '@/lib/services/logs/log-service';
 import { stackServerApp } from '@/stack';
-import { and, desc, eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const apiKeyId = searchParams.get('id');
-
-    if (!apiKeyId) {
-      return NextResponse.json({ error: 'API key ID is required' }, { status: 400 });
-    }
+    const apiKey = searchParams.get('key');
+    let apiKeyId = searchParams.get('id');
+    const limitParam = searchParams.get('limit');
+    const limit = limitParam ? parseInt(limitParam, 10) : 100;
 
     const user = await stackServerApp.getUser();
 
-    // Find the API key record
-    const apiKeyRecord = await db.query.apiKeys.findFirst({
-      where: eq(apiKeys.id, apiKeyId),
-      with: {
-        project: true,
-      },
-    });
-
-    if (!apiKeyRecord) {
-      return NextResponse.json({ error: 'Invalid API key ID' }, { status: 401 });
+    if (apiKey) {
+      apiKeyId = await getApiKeyIdFromApiKey(apiKey) ?? null;
+      if (!apiKeyId) {
+        return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
+      }
     }
 
-    // Check permissions
-    if (apiKeyRecord.projectId) {
-      // API key is associated with a project
+    if (!apiKeyId) {
       if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
-
-      const userProjectMember = await db.query.projectMembers.findFirst({
-        where: and(
-          eq(projectMembers.projectId, apiKeyRecord.projectId),
-          eq(projectMembers.userId, user.id)
-        ),
-      });
-
-      if (!userProjectMember) {
-        return NextResponse.json({ error: 'Unauthorized access to project' }, { status: 403 });
-      }
-    } else {
-      // API key is not associated with a project
-      if (user) {
-        return NextResponse.json({ error: 'Unauthorized access to non-project API key' }, { status: 403 });
-      }
+      const userLogs = await getUserLogs(user.id, limit);
+      return NextResponse.json(userLogs);
     }
 
-    // Get logs for the specified API key
-    const logEntries = await db.select()
-      .from(logs)
-      .where(eq(logs.apiKeyId, apiKeyRecord.id))
-      .orderBy(desc(logs.timestamp))
-      .limit(100);
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
+    const hasAccess = await userHasAccessToApiKey(user.id, apiKeyId);
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Unauthorized access to API key' }, { status: 403 });
+    }
+
+    const logEntries = await getApiKeyLogs(apiKeyId, limit);
     return NextResponse.json(logEntries);
   } catch (error) {
     console.error('Error fetching logs:', error);
@@ -73,30 +53,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'API key is required' }, { status: 400 });
     }
 
-    const apiKeyRecord = await db.query.apiKeys.findFirst({
-      where: eq(apiKeys.key, api_key),
-    });
-
-    if (!apiKeyRecord) {
-      return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
-    }
-
-    // Convert timestamp to a number if it's not already
-    const numericTimestamp = typeof timestamp === 'string' ? Date.parse(timestamp) / 1000 : 
-                             timestamp instanceof Date ? Math.floor(timestamp.getTime() / 1000) : 
-                             Math.floor(Number(timestamp) / 1000);
-
-    await db.insert(logs).values({ 
-      timestamp: timestamp instanceof Date ? timestamp : new Date(),
-      level, 
+    const createdLog = await createLog({
+      level,
       message,
+      timestamp: new Date(timestamp),
       prefix,
       emoji,
-      metadata: JSON.stringify(metadata),
-      apiKeyId: apiKeyRecord.id 
+      metadata,
+      apiKey: api_key,
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, log: createdLog });
   } catch (error) {
     console.error('Error creating log:', error);
     return NextResponse.json({ error: 'Failed to create log' }, { status: 500 });

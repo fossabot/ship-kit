@@ -11,40 +11,55 @@ import { type AdapterAccount } from "next-auth/adapters";
 export const createTable = sqliteTableCreator((name) => `todo-today_${name}`);
 
 export const users = createTable("user", {
-  id: text("id", { length: 255 }).notNull().primaryKey(),
-  displayName: text("display_name", { length: 255 }),
-  primaryEmail: text("primary_email", { length: 255 }).notNull(),
-  primaryEmailVerified: int("primary_email_verified", { mode: "boolean" }).notNull().default(false),
-  profileImageUrl: text("profile_image_url", { length: 255 }),
-  signedUpAt: int("signed_up_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  id: text("id").notNull().primaryKey(),
+  email: text("email").notNull().unique(),
+  name: text("name"),
+  emailVerified: int("email_verified", { mode: "boolean" }).notNull().default(false),
+  image: text("image"),
+  createdAt: int("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
 });
 
 export const teams = createTable("team", {
   id: text("id").notNull().primaryKey(),
-  name: text("name", { length: 255 }).notNull(),
-  createdAt: int("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+  name: text("name").notNull(),
+  createdAt: int("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
 });
 
-export const projects = createTable("project", {
-  id: text("id").notNull().primaryKey(),
-  name: text("name", { length: 255 }).notNull(),
-  teamId: text("team_id").notNull().references(() => teams.id),
-  createdAt: int("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+export const projects = createTable('project', {
+  id: text('id').notNull().primaryKey(),
+  name: text('name').notNull(),
+  teamId: text('team_id').notNull().references(() => teams.id),
+  createdAt: int('created_at', { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int('updated_at', { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
 });
 
 export const teamMembers = createTable("team_member", {
   id: text("id").notNull().primaryKey(),
   userId: text("user_id").notNull().references(() => users.id),
   teamId: text("team_id").notNull().references(() => teams.id),
-  role: text("role", { length: 50 }).notNull(), // e.g., 'owner', 'admin', 'member'
-  joinedAt: int("joined_at", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+  role: text("role", { enum: ['owner', 'admin', 'member'] }).notNull(),
+  createdAt: int("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+});
+
+export const projectMembers = createTable('project_member', {
+  id: text('id').notNull().primaryKey(),
+  projectId: text('project_id').notNull().references(() => projects.id),
+  userId: text('user_id').notNull().references(() => users.id),
+  role: text('role', { enum: ['owner', 'admin', 'member'] }).notNull(),
+  createdAt: int("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
 });
 
 export const apiKeys = createTable('api_key', {
   id: text('id').notNull().primaryKey(),
   key: text('key').notNull().unique(),
-  projectId: text('project_id'), // Allow null values
-  createdAt: int('created_at', { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+  projectId: text('project_id').references(() => projects.id),
+  name: text('name'),
+  createdAt: int('created_at', { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+  updatedAt: int('updated_at', { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
   expiresAt: int('expires_at', { mode: "timestamp" }),
 });
 
@@ -73,6 +88,7 @@ export const teamsRelations = relations(teams, ({ many }) => ({
 export const projectsRelations = relations(projects, ({ one, many }) => ({
   team: one(teams, { fields: [projects.teamId], references: [teams.id] }),
   apiKeys: many(apiKeys),
+  members: many(projectMembers),
 }));
 
 export const teamMembersRelations = relations(teamMembers, ({ one }) => ({
@@ -114,13 +130,6 @@ export const accounts = createTable(
 export const accountsRelations = relations(accounts, ({ one }) => ({
   user: one(users, { fields: [accounts.userId], references: [users.id] }),
 }));
-
-export const projectMembers = createTable('project_member', {
-  id: text('id').notNull().primaryKey(),
-  projectId: text('project_id').notNull().references(() => projects.id),
-  userId: text('user_id').notNull().references(() => users.id),
-  role: text('role', { enum: ['owner', 'admin', 'member'] }).notNull(),
-});
 
 export const projectRelations = relations(projects, ({ many }) => ({
   members: many(projectMembers),

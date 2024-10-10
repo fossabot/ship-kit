@@ -11,16 +11,26 @@ interface LogProviderProps {
 
 /**
  * Provides consistent logging behavior on both client and server sides
+ * while preserving the original stack trace
  */
 export const LogProvider: React.FC<LogProviderProps> = ({ children, prefix = '> ', logLevel = 'info' }) => {
   useEffect(() => {
     const originalConsole = { ...console };
 
+    // Helper function to create a wrapped console method
+    const createWrappedMethod = (originalMethod: (...args: any[]) => void) => {
+      return (...args: any[]) => {
+        const error = new Error();
+        const stack = error.stack?.split('\n').slice(2).join('\n');
+        originalMethod(prefix, ...args, '\n', stack);
+      };
+    };
+
     // Override console methods
-    console.log = (...args) => originalConsole.log(prefix, ...args);
-    console.info = (...args) => originalConsole.info(prefix, ...args);
-    console.warn = (...args) => originalConsole.warn(prefix, ...args);
-    console.error = (...args) => originalConsole.error(prefix, ...args);
+    console.log = createWrappedMethod(originalConsole.log);
+    console.info = createWrappedMethod(originalConsole.info);
+    console.warn = createWrappedMethod(originalConsole.warn);
+    console.error = createWrappedMethod(originalConsole.error);
 
     // Filter logs based on logLevel
     if (logLevel === 'warn') {
