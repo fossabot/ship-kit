@@ -59,7 +59,7 @@ const data = {
     },
     {
       title: "Logs",
-      url: routes.me.logs,
+      url: routes.app.logs,
       icon: SquareTerminal,
       isActive: true,
     },
@@ -89,7 +89,7 @@ const data = {
       items: [
         {
           title: "API Keys",
-          url: routes.me.apiKeys,
+          url: routes.app.apiKeys,
         },
       ],
     },

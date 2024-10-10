@@ -16,7 +16,7 @@ const LandingPage = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className={buttonVariants({ size: "lg" })}
-            href="/dashboard"
+            href="/app"
           >
             Get Started
           </Link>

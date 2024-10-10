@@ -44,9 +44,9 @@ export const routes = {
     signOut: "/sign-out",
   },
 
-  me: {
-    apiKeys: "/me/api-keys",
-    logs: "/me/logs",
+  app: {
+    apiKeys: "/api-keys",
+    logs: "/logs",
   },
 
   // API routes

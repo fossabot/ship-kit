@@ -2,7 +2,6 @@
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ConsoleComponent } from "@/components/views/console-component"
-import { routes } from "@/lib/routes"
 import { useStackApp, useUser } from "@stackframe/stack"
 import { AnimatePresence, motion } from 'framer-motion'
 import { Calendar, CheckSquare, FileText, Map, Mic, Search } from 'lucide-react'
@@ -69,13 +68,13 @@ export function LandingPageComponent() {
       </header>
 
       <main className="pt-20">
-        <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center p-lg text-white">
+        <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center p-lg ">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">LogFlare: Illuminate Your Logs</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">LogFlare: Illuminate Your Logs</h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">Real-time logging made simple.</p>
             <div className="flex space-x-4 justify-center">
               <div className="relative h-12">
@@ -87,10 +86,12 @@ export function LandingPageComponent() {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Button onClick={createTestApiKey}>
-                        Create Live API Key
+                      <div className="flex space-x-4">
+                        <Button onClick={createTestApiKey}>
+                          Create Live API Key
                       </Button>
-                      <Link className={buttonVariants({ variant: "outline" })} href={user ? routes.me.logs : stackApp.urls.signIn}>Dashboard</Link>
+                      <Link className={buttonVariants({ variant: "outline" })} href={user ? '/app' : stackApp.urls.signIn}>Dashboard</Link>
+                      </div>
                     </motion.div>
                   ) : (
                     <motion.div
