@@ -1,11 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { LoadingIndicator } from "@/components/primitives/loading-indicator"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Loader2, AlertCircle, CheckCircle, Info, ArrowUpDown, MoreHorizontal } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -18,23 +33,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { motion } from "framer-motion"
+import { AlertCircle, ArrowUpDown, CheckCircle, Info, MoreHorizontal } from "lucide-react"
+import { useEffect, useState } from "react"
 
 type LogLevel = "info" | "warning" | "error" | "success"
 
@@ -264,9 +265,7 @@ export function EnhancedLogDatatable() {
       </div>
       <div className="bg-gray-50 rounded-lg p-4 relative min-h-[500px]">
         {isLoading ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-          </div>
+          <LoadingIndicator />
         ) : (
           <div>
             <div className="flex items-center py-4">

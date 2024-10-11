@@ -15,7 +15,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { AnimatePresence, motion } from 'framer-motion'
-import { AlertCircle, CheckCircle, Info, Loader2 } from 'lucide-react'
+import { AlertCircle, CheckCircle, Info } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 type LogLevel = 'info' | 'warning' | 'error' | 'success'
@@ -115,9 +115,7 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
       </div>
       <div className="bg-gray-50 rounded-lg p-4 relative min-h-[500px]">
         {isLoading ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-          </div>
+          <LoadingIndicator />
         ) : (
           <div className="border rounded-md">
             <Table>

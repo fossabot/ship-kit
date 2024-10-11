@@ -1,8 +1,5 @@
 "use client"
 
-import * as React from "react"
-import { ChevronsUpDown, Plus } from "lucide-react"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +9,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { routes } from "@/lib/routes"
+import { ChevronsUpDown, Plus } from "lucide-react"
+import Link from "next/link"
+import * as React from "react"
 
 export function TeamSwitcher({
   teams,
@@ -31,7 +32,7 @@ export function TeamSwitcher({
           <div className="flex h-5 w-5 items-center justify-center rounded-sm bg-primary text-primary-foreground">
             <activeTeam.logo className="h-3.5 w-3.5 shrink-0" />
           </div>
-          <div className="line-clamp-1 flex-1 pr-2 font-medium">
+          <div className="line-clamp-1 flex-1 pr-2 font-medium text-sm">
             {activeTeam.name}
           </div>
           <ChevronsUpDown className="ml-auto h-4 w-4 text-muted-foreground/50" />
@@ -71,7 +72,7 @@ export function TeamSwitcher({
           <div className="flex h-8 w-8 items-center justify-center rounded-md border bg-background">
             <Plus className="h-5 w-5" />
           </div>
-          <div className="font-medium text-muted-foreground">Add workspace</div>
+          <Link href={routes.premium} className="font-medium text-muted-foreground">Add team</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

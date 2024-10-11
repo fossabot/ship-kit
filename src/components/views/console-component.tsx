@@ -78,7 +78,7 @@ export function ConsoleComponent({ onCreateTestKey, apiKey }: ConsoleComponentPr
           {isActive ? (
             <ScrollArea className="h-full">
               <AnimatePresence initial={false}>
-                {logs.map((log, index) => (
+                {logs.length > 0 ? logs.map((log, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -89,13 +89,15 @@ export function ConsoleComponent({ onCreateTestKey, apiKey }: ConsoleComponentPr
                   >
                     {log}
                   </motion.div>
-                ))}
+                )) : (
+                  <div className="text-gray-400 text-center opacity-80">Waiting for logs...<br /><Button variant="link" className="text-gray-400 text-xs underline opacity-80 hover:text-gray-300" onClick={sendTestLog}>Send a test log</Button></div>
+                )}
               </AnimatePresence>
             </ScrollArea>
           ): (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
               <Button onClick={handleStart} variant="outline">
-                {apiKey ? 'Start Console' : 'Create API Key & Start Console'}
+                {apiKey ? 'Start Console' : 'Live Demo'}
               </Button>
             </div>
           )}

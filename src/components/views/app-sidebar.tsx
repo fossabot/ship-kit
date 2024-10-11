@@ -1,10 +1,8 @@
 "use client";
 
 import {
-  Atom,
   BookOpen,
   Code2,
-  Eclipse,
   Frame,
   LifeBuoy,
   Rabbit,
@@ -12,6 +10,7 @@ import {
   SquareTerminal
 } from "lucide-react";
 
+import { SearchButton } from "@/components/search/search-button";
 import {
   Sidebar,
   SidebarContent,
@@ -27,34 +26,21 @@ import { NavUser } from "@/components/views/nav-user";
 import { StorageCard } from "@/components/views/storage-card";
 import { TeamSwitcher } from "@/components/views/team-switcher";
 import { routes } from "@/lib/routes";
+import { DashboardIcon } from "@radix-ui/react-icons";
+import { useUser } from "@stackframe/stack";
 const data = {
   teams: [
     {
-      name: "Acme Inc",
-      logo: Atom,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: Eclipse,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
+      name: "Personal",
       logo: Rabbit,
       plan: "Free",
     },
   ],
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
+    navMain: [
     {
-      title: "Live Dashboard",
-      url: routes.live,
-      icon: SquareTerminal,
+      title: "Dashboard",
+      url: routes.app.dashboard,
+      icon: DashboardIcon,
       isActive: true,
     },
     {
@@ -64,49 +50,23 @@ const data = {
       isActive: true,
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Me",
-      url: "#",
+      title: "API Keys",
+      url: routes.app.apiKeys,
       icon: Code2,
-      items: [
-        {
-          title: "API Keys",
-          url: routes.app.apiKeys,
-        },
-      ],
     },
     // {
     //   title: "Settings",
-    //   url: "#",
+    //   url: routes.app.settings,
     //   icon: Settings2,
-    //   items: [
-    //     {
-    //       title: "General",
-    //       url: "#",
-    //     },
-    //   ],
     // },
   ],
 
   navSecondary: [
+    {
+      title: "Documentation",
+      url: routes.docs,
+      icon: BookOpen,
+    },
     {
       title: "Support",
       url: "#",
@@ -120,7 +80,7 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "My Project",
       url: "#",
       icon: Frame,
     },
@@ -142,12 +102,23 @@ const data = {
 };
 
 export function AppSidebar() {
+  const user = useUser()
+
+  const userInfo = {
+    name: user?.displayName ?? "Me",
+    email: user?.primaryEmail ?? "me@logflare.com",
+    avatar: user?.profileImageUrl ?? "",
+  }
+
   return (
     <Sidebar>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
+        <SidebarItem>
+          <SearchButton />
+        </SidebarItem>
         <SidebarItem>
           <SidebarLabel>Platform</SidebarLabel>
           <NavMain items={data.navMain} searchResults={data.searchResults} />
@@ -165,7 +136,7 @@ export function AppSidebar() {
         </SidebarItem>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userInfo} />
       </SidebarFooter>
     </Sidebar>
   );

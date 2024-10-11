@@ -35,8 +35,10 @@ export const createRoute = (path, params = {}) => ({ path, params });
 export const routes = {
   // Public routes
   home: "/",
-  tasks: "/tasks",
-  live: "/live",
+    tasks: "/tasks",
+  docs: "/docs",
+    premium: "/premium",
+
   // Authentication routes
   auth: {
     signIn: "/sign-in",
@@ -45,22 +47,38 @@ export const routes = {
   },
 
   app: {
+    dashboard: "/app",
     apiKeys: "/api-keys",
     logs: "/logs",
+    network: "/network",
+    live: "/live",
+    settings: "/settings",
   },
 
   // API routes
   api: {
     logs: "/api/logs",
     live: "/api/live-logs",
+    sse: "/api/sse-logs",
     apiKeys: "/api/api-keys",
     apiKey: createRoute("/api/api-keys/:key", { key: null }),
+    sendTestLog: "/api/send-test-log",
   },
 
-  // Web Service Workers
   // From the public directory
+  // Web Service Workers
   workers: {
     logger: "/workers/workers/logger-worker.js", // Used to log errors and other events to the server
+  },
+
+  // Demo routes
+  demo: {
+    network: "/demo/network",
+  },
+
+  // External links
+  external: {
+    github: "https://github.com/lacymorrow/logflare",
   },
 
   // TODO: Used to mark routes that are not yet implemented
@@ -69,7 +87,7 @@ export const routes = {
 
 export const redirects = async () => {
   return [
-    ...createRedirects(["/join", "/signup"], routes.home), // TODO: Add back in and redirect to routes.signUp
+    ...createRedirects(["/join", "/signup"], routes.auth.signUp),
     ...createRedirects(["/login", "/log-in", "/signin"], routes.auth.signIn),
     ...createRedirects(["/logout", "/log-out", "/signout"], routes.auth.signOut),
   ];

@@ -4,6 +4,7 @@ import { DynamicDataTable } from "@/components/dynamic-data-table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { routes } from "@/lib/routes";
 import logger from '@/utils/logger';
 import { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from 'react';
@@ -84,7 +85,7 @@ export const LiveLogs = () => {
     if (!apiKey || !isConnected) return;
 
     logger.info('Connecting to SSE for live logs');
-    const eventSource = new EventSource(`/api/sse-logs?key=${apiKey}`);
+    const eventSource = new EventSource(`${routes.api.sse}?key=${apiKey}`);
 
     eventSource.onmessage = (event) => {
       const newLog = JSON.parse(event.data);
@@ -118,18 +119,18 @@ export const LiveLogs = () => {
     setLogs([]);
   };
 
-  const handleSendTestLog = async () => {
-    if (!apiKey) return;
+const handleSendTestLog = async () => {
+  if (!apiKey) return;
 
-    setIsSendingTestLog(true);
-    try {
-      const response = await fetch('/api/send-test-log', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ apiKey }),
-      });
+  setIsSendingTestLog(true);
+  try {
+    const response = await fetch(routes.api.sendTestLog, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ apiKey }),
+    });
 
       if (!response.ok) {
         throw new Error('Failed to send test log');

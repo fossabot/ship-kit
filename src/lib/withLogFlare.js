@@ -60,11 +60,16 @@ const defaultSettings = {
 
 /**
  * Wraps the Next.js config to add logging functionality
- * @param {LogFlareOptions} options - Configuration options for the logger
+ * @param {LogFlareOptions | string} options - Configuration options for the logger
  * @returns {function(import('next').NextConfig): import('next').NextConfig}
  */
 export const withLogFlare = (options = {}) => {
   return (nextConfig) => {
+    // Allow for a single string API key to be passed in
+    if (typeof options === 'string') {
+      options = { apiKey: options };
+    }
+
     const {
       apiKey = process.env.NEXT_PUBLIC_LOGFLARE_KEY,
       prefix = '> ',

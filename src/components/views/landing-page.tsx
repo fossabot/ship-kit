@@ -1,10 +1,11 @@
 'use client'
 
+import { NetworkLog } from "@/app/(demo)/network/network-log"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ConsoleComponent } from "@/components/views/console-component"
+import { routes } from "@/lib/routes"
 import { useStackApp, useUser } from "@stackframe/stack"
 import { AnimatePresence, motion } from 'framer-motion'
-import { Calendar, CheckSquare, FileText, Map, Mic, Search } from 'lucide-react'
 import Link from "next/link"
 import { useEffect, useState } from 'react'
 
@@ -45,30 +46,32 @@ export function LandingPageComponent() {
 
   return (
     <div className="min-h-screen bg-[#0a001f] overflow-hidden">
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-opacity-50 bg-[#0a001f] text-white backdrop-blur-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-opacity-80 bg-[#0a001f] text-white backdrop-blur-sm">
         <div className="flex items-center space-x-2">
           <motion.div
             className="w-8 h-8 bg-purple-600 rounded-lg"
-            animate={{ rotate: scrollY }}
+            animate={{ rotate: scrollY/10 }}
           />
           <span className="text-xl font-bold">LogFlare</span>
         </div>
-        <nav className="hidden md:flex space-x-8">
+        {/* <nav className="hidden md:flex space-x-8">
           <a href="#" className="hover:text-purple-400 transition-colors">Product</a>
           <a href="#" className="hover:text-purple-400 transition-colors">Pricing</a>
-        </nav>
+        </nav> */}
         <div className="flex space-x-2">
-          <button className="px-4 py-2 text-sm bg-transparent border border-purple-500 rounded-md hover:bg-purple-500 transition-colors">
-            Login
-          </button>
-          <button className="px-4 py-2 text-sm bg-purple-600 rounded-md hover:bg-purple-700 transition-colors">
-            Start free trial
-          </button>
+          <Link href={stackApp.urls.signIn} className="px-4 py-2 text-sm bg-transparent border border-purple-500 rounded-md hover:bg-purple-500 transition-colors">
+            GitHub
+          </Link>
+          {user ? <Link href={routes.app.dashboard} className="px-4 py-2 text-sm bg-purple-600 rounded-md hover:bg-purple-700 transition-colors">
+            Dashboard
+          </Link>: <Link href={stackApp.urls.signUp} className="px-4 py-2 text-sm bg-transparent border border-purple-500 rounded-md hover:bg-purple-500 transition-colors">
+            Sign up
+          </Link>}
         </div>
       </header>
 
       <main className="pt-20">
-        <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center p-lg ">
+        <section className="relative min-h-[60vh] flex md:flex-row items-center justify-center text-center p-lg text-white">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,10 +102,24 @@ export function LandingPageComponent() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: 0.2 }}
-                      className="bg-purple-800 rounded-lg p-3"
+                      >
+                      <>
+                      <div
+                      className="bg-purple-800/20 backdrop-blur-sm text-muted rounded-lg p-3"
                     >
                       <p className="text-sm">Your Test API Key:</p>
                       <p className="font-mono text-lg">{testApiKey}</p>
+                      </div>
+                      
+                      <h2 className="text-lg font-bold">To see it in action, copy your API key and paste it into your application.</h2>
+                      <code className="text-muted-foreground text-left">
+                        <pre>{`// ...in next.config.js
+import { withLogFlare } from 'logflare'
+
+// Replace \`export default nextConfig;\` with the following:
+export default withLogFlare('${testApiKey}')(nextConfig);`}</pre>
+                      </code>
+                      </>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -120,47 +137,10 @@ export function LandingPageComponent() {
         
 
         <section className="relative py-20 px-4 text-white">
-
-          <div className="max-w-4xl mx-auto bg-[#1a0f2e] rounded-lg shadow-2xl overflow-hidden">
-            <div className="p-4 border-b border-gray-700">
-              <div className="flex items-center space-x-2 text-gray-400">
-                <Search className="w-4 h-4" />
-                <input type="text" placeholder="Search anything..." className="bg-transparent w-full focus:outline-none" />
-                <Mic className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="grid grid-cols-4 gap-4 p-4">
-              <div className="col-span-1 space-y-4">
-                <div className="flex items-center space-x-2 text-purple-400">
-                  <Calendar className="w-4 h-4" />
-                  <span>Daily notes</span>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-400">
-                  <FileText className="w-4 h-4" />
-                  <span>All notes</span>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-400">
-                  <CheckSquare className="w-4 h-4" />
-                  <span>Tasks</span>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-400">
-                  <Map className="w-4 h-4" />
-                  <span>Map</span>
-                </div>
-              </div>
-              <div className="col-span-3 space-y-4">
-                <h2 className="text-xl font-semibold">Sun, April 2nd, 2023</h2>
-                <p className="text-gray-400">Today I started using Reflect</p>
-                <ul className="list-disc list-inside space-y-2 text-gray-300">
-                  <li>What is Reflect?</li>
-                  <li>A note-taking tool designed to mirror the way we think</li>
-                  <li>Our brains remember things through associations. Reflect mimics this by backlinking notes to each other</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <NetworkLog />
         </section>
       </main>
+
     </div>
   )
 }

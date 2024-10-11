@@ -1,6 +1,7 @@
 'use client';
 
 import { DynamicDataTable } from "@/components/dynamic-data-table";
+import { LoadingIndicator } from "@/components/primitives/loading-indicator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { routes } from '@/lib/routes';
 import { useUser } from '@stackframe/stack';
@@ -39,11 +40,16 @@ const columns: ColumnDef<Log>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "emoji",
+    // header: "Emoji",
+    cell: ({ row }) => <div className="truncate">{row.getValue("emoji")}</div>,
+  },
+  {
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => (
       <div className="truncate" title={new Date(row.getValue("timestamp")).toLocaleString()}>
-        {new Date(row.getValue("timestamp")).toLocaleString()}
+        {new Date(row.getValue("timestamp")).toLocaleString('en-US', { hour12: false })}
       </div>
     ),
   },
@@ -51,11 +57,6 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "level",
     header: "Level",
     cell: ({ row }) => <div className="truncate">{row.getValue("level")}</div>,
-  },
-  {
-    accessorKey: "emoji",
-    header: "Emoji",
-    cell: ({ row }) => <div className="truncate">{row.getValue("emoji")}</div>,
   },
   {
     accessorKey: "prefix",
@@ -115,7 +116,7 @@ const LogsPage = () => {
     fetchLogs();
   }, [user]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingIndicator />;
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -1,6 +1,7 @@
 'use client';
 
 import { DynamicDataTable } from "@/components/dynamic-data-table";
+import { SuspenseFallback } from "@/components/primitives/suspense-fallback";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { routes } from '@/lib/routes';
@@ -104,7 +105,7 @@ const ApiKeysPage = () => {
     }
   };
 
-  if (isLoading) return <div>Loading API keys...</div>;
+  if (isLoading) return <SuspenseFallback />;
 
   return (
     <div className="container mx-auto px-4 py-8">
