@@ -1,41 +1,47 @@
-"use client";
+import { ensureUserHasTeam, getTeamProjects } from "@/server/utils/team-utils";
+import { stackServerApp } from "@/stack";
+import Link from "next/link";
 
-import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/views/app-sidebar";
-import TaskList from "@/components/views/task-list";
-import { UserButton, useUser } from "@stackframe/stack";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+export default async function DashboardPage() {
+  const user = await stackServerApp.getUser({ or: "redirect" });
+  console.log("user", user);
 
-const DashboardPage = () => {
-  const router = useRouter();
-  const user = useUser({ or: "redirect" });
+  let teamId;
+  let projects;
+  let error;
 
-  useEffect(() => {
-    // Redirect to home page if user is not logged in
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
-
-  if (!user) return null; // Prevent rendering while redirecting
+  try {
+    teamId = await ensureUserHasTeam(user);
+    projects = await getTeamProjects(teamId);
+  } catch (err) {
+    console.error("Error ensuring user has team:", err);
+    error = "An error occurred while setting up your dashboard. Please try again later.";
+  }
 
   return (
-    <SidebarLayout defaultOpen={true}>
-      <AppSidebar />
-      <main className="flex flex-1 flex-col p-4 transition-all duration-300 ease-in-out">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Your Dashboard</h1>
-          <UserButton />
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">Welcome to your dashboard!</h1>
+      {error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Your Projects</h2>
+          {projects && projects.map((project) => (
+            <div key={project.id} className="bg-white shadow rounded-lg p-4 mb-4">
+              <h3 className="text-xl font-medium">{project.name}</h3>
+              <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Create API Key
+              </button>
+            </div>
+          ))}
+          <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            Create New Project
+          </button>
         </div>
-        <p className="mb-4">Welcome, {user.displayName ?? "anonymous user"}</p>
-        <div className="rounded-md border-2 border-dashed p-4">
-          <TaskList />
-        </div>
-        <SidebarTrigger />
-      </main>
-    </SidebarLayout>
+      )}
+      <Link href="/api-keys/test" className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+        Create Test API Key
+      </Link>
+    </div>
   );
-};
-
-export default DashboardPage;
+}

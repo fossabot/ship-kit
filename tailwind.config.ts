@@ -13,6 +13,14 @@ const config = {
   prefix: "",
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          // "var(--font-sans)",
+          "var(--font-geist-sans)",
+          ...fontFamily.sans,
+        ],
+        serif: ["var(--font-serif)", ...fontFamily.serif],
+      },
       borderRadius: {
         DEFAULT: "var(--radius)",
         lg: "var(--radius)",
@@ -67,14 +75,6 @@ const config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-      },
-      fontFamily: {
-        sans: [
-          // "var(--font-sans)",
-          "var(--font-geist-sans)",
-          ...fontFamily.sans,
-        ],
-        serif: ["var(--font-serif)", ...fontFamily.serif],
       },
       keyframes: {
         "accordion-down": {

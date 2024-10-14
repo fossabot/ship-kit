@@ -3,8 +3,8 @@
 import { LatestPost } from "@/app/_components/post";
 import { UserGreeting } from "@/app/_components/UserGreeting";
 import { buttonVariants } from "@/components/ui/button";
+import { logger } from '@/lib/logger';
 import { routes } from "@/lib/routes";
-import logger from '@/utils/logger';
 import { useStackApp, useUser } from "@stackframe/stack";
 import Link from "next/link";
 

@@ -11,10 +11,8 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
+import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
-import { users } from "@/server/db/schema";
-import { stackServerApp } from "@/stack";
-import { eq } from "drizzle-orm";
 
 /**
  * 1. CONTEXT
@@ -29,33 +27,11 @@ import { eq } from "drizzle-orm";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const user = await stackServerApp.getUser();
-
-  // {{ Ensure the user exists in the database }}
-  if (user) {
-    const existingUser = await db.query.users.findFirst({
-      where: eq(users.id, user.id),
-    });
-    if (!existingUser) {
-      await db.insert(users).values({
-        id: user.id,
-        displayName: user.displayName ?? undefined,
-        primaryEmail: user.primaryEmail,
-        profileImageUrl: user.profileImageUrl ?? undefined,
-      });
-    }
-  }
+  const session = await getServerAuthSession();
 
   return {
     db,
-    session: {
-      user: {
-        name: user?.displayName,
-        email: user?.primaryEmail,
-        image: user?.profileImageUrl,
-        id: user?.id,
-      },
-    },
+    session,
     ...opts,
   };
 };

@@ -1,25 +1,16 @@
 "use client";
 
 import {
-  Atom,
-  Bird,
   BookOpen,
-  Bot,
   Code2,
-  Eclipse,
   Frame,
-  History,
   LifeBuoy,
-  Map,
-  PieChart,
   Rabbit,
   Send,
-  Settings2,
-  SquareTerminal,
-  Star,
-  Turtle,
+  SquareTerminal
 } from "lucide-react";
 
+import { SearchButton } from "@/components/search/search-button";
 import {
   Sidebar,
   SidebarContent,
@@ -34,157 +25,48 @@ import { NavSecondary } from "@/components/views/nav-secondary";
 import { NavUser } from "@/components/views/nav-user";
 import { StorageCard } from "@/components/views/storage-card";
 import { TeamSwitcher } from "@/components/views/team-switcher";
+import { routes } from "@/lib/routes";
+import { DashboardIcon } from "@radix-ui/react-icons";
+import { useUser } from "@stackframe/stack";
 const data = {
   teams: [
     {
-      name: "Acme Inc",
-      logo: Atom,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: Eclipse,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
+      name: "Personal",
       logo: Rabbit,
       plan: "Free",
     },
   ],
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
+    navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Dashboard",
+      url: routes.app.dashboard,
+      icon: DashboardIcon,
+      isActive: true,
+    },
+    {
+      title: "Logs",
+      url: routes.app.logs,
       icon: SquareTerminal,
       isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-          icon: History,
-          description: "View your recent prompts",
-        },
-        {
-          title: "Starred",
-          url: "#",
-          icon: Star,
-          description: "Browse your starred prompts",
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          description: "Configure your playground",
-        },
-      ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-          icon: Rabbit,
-          description: "Our fastest model for general use cases.",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-          icon: Bird,
-          description: "Performance and speed for efficiency.",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-          icon: Turtle,
-          description: "The most powerful model for complex computations.",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API",
-      url: "#",
+      title: "API Keys",
+      url: routes.app.apiKeys,
       icon: Code2,
-      items: [
-        {
-          title: "Chat",
-          url: "#",
-        },
-        {
-          title: "Completion",
-          url: "#",
-        },
-        {
-          title: "Images",
-          url: "#",
-        },
-        {
-          title: "Video",
-          url: "#",
-        },
-        {
-          title: "Speech",
-          url: "#",
-        },
-      ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+    // {
+    //   title: "Settings",
+    //   url: routes.app.settings,
+    //   icon: Settings2,
+    // },
   ],
 
   navSecondary: [
+    {
+      title: "Documentation",
+      url: routes.docs,
+      icon: BookOpen,
+    },
     {
       title: "Support",
       url: "#",
@@ -198,19 +80,9 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "My Project",
       url: "#",
       icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
   searchResults: [
@@ -226,34 +98,27 @@ const data = {
         "The special files layout.js and template.js allow you to create UI that is shared between routes. This page will guide you through how and when to use these special files.",
       url: "#",
     },
-    {
-      title: "Data Fetching, Caching, and Revalidating",
-      teaser:
-        "Data fetching is a core part of any application. This page goes through how you can fetch, cache, and revalidate data in React and Next.js.",
-      url: "#",
-    },
-    {
-      title: "Server and Client Composition Patterns",
-      teaser:
-        "When building React applications, you will need to consider what parts of your application should be rendered on the server or the client. ",
-      url: "#",
-    },
-    {
-      title: "Server Actions and Mutations",
-      teaser:
-        "Server Actions are asynchronous functions that are executed on the server. They can be used in Server and Client Components to handle form submissions and data mutations in Next.js applications.",
-      url: "#",
-    },
   ],
 };
 
 export function AppSidebar() {
+  const user = useUser()
+
+  const userInfo = {
+    name: user?.displayName ?? "Me",
+    email: user?.primaryEmail ?? "me@logflare.com",
+    avatar: user?.profileImageUrl ?? "",
+  }
+
   return (
     <Sidebar>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
+        <SidebarItem>
+          <SearchButton />
+        </SidebarItem>
         <SidebarItem>
           <SidebarLabel>Platform</SidebarLabel>
           <NavMain items={data.navMain} searchResults={data.searchResults} />
@@ -271,7 +136,7 @@ export function AppSidebar() {
         </SidebarItem>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userInfo} />
       </SidebarFooter>
     </Sidebar>
   );

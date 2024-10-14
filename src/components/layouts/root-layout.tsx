@@ -20,7 +20,6 @@ const fontSansOld = Noto_Sans({
 });
 
 const fontSerif = FontSerif({
-  // display: "swap", // This allows the text to display while it is loaded
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
@@ -42,20 +41,17 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
-
         <StackProvider app={stackServerApp}>
           <StackTheme>
             <TRPCReactProvider>
-            <HolyLoader showSpinner />
+              <HolyLoader showSpinner />
               <TooltipProvider>
                 {children}
 
-                {/* This prevents the error toast from blocking the page from loading */}
                 <Suspense>
                   <ErrorToast />
                 </Suspense>
 
-                {/* <ThemeToggle /> */}
                 <Toaster />
                 <SonnerToaster />
               </TooltipProvider>

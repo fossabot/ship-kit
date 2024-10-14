@@ -1,153 +1,29 @@
-# Next.js Dashboard Starter Boilerplate
+# Create T3 App
 
-A comprehensive Next.js dashboard starter built with the T3 Stack, offering a robust foundation for building scalable and feature-rich applications.
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## Table of Contents
+## What's next? How do I make an app with this?
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Development Server](#running-the-development-server)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
-- [Resources](#resources)
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-## Features
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-- **Responsive Sidebar Navigation**: Seamless navigation with a collapsible sidebar supporting multiple sections.
-- **Dynamic Dashboard Pages**: Multiple dashboard layouts (e.g., `dashboard-01.tsx`, `dashboard-02.tsx`) tailored for different use cases.
-- **User Authentication**: Secure authentication flow using NextAuth.js.
-- **Role-Based Access Control**: Manage permissions and access based on user roles.
-- **CRUD Operations**: Perform Create, Read, Update, Delete operations with ease.
-- **Theming with Tailwind CSS**: Customize the appearance using Tailwind CSS for rapid UI development.
-- **API Integration**: Leveraging tRPC for type-safe APIs.
-- **Database Management**: Utilize Prisma and Drizzle for efficient database interactions.
-- **Optimized for Performance**: Built with best practices to ensure fast load times and smooth interactions.
-- **Comprehensive Documentation**: Detailed guides and references to help you get started and extend the boilerplate.
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Drizzle](https://orm.drizzle.team)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-## Technologies Used
+## Learn More
 
-- [Next.js](https://nextjs.org) - React framework for production.
-- [NextAuth.js](https://next-auth.js.org) - Authentication for Next.js applications.
-- [Prisma](https://prisma.io) - Next-generation ORM for Node.js and TypeScript.
-- [Drizzle ORM](https://orm.drizzle.team) - Lightweight TypeScript ORM.
-- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework.
-- [tRPC](https://trpc.io) - End-to-end type-safe APIs.
-- [Lucide React](https://lucide.dev/) - Icon library.
-- [Radix UI](https://www.radix-ui.com/) - Primitives for building accessible UI components.
-- [StackFrame](https://stackframe.com/) - User management and analytics.
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-## Getting Started
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-### Prerequisites
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-- **Node.js**: Ensure you have Node.js installed. Download it from [here](https://nodejs.org/).
-- **npm or Yarn**: Package managers to install dependencies.
+## How do I deploy this?
 
-### Installation
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/your-username/nextjs-dashboard-starter.git
-   cd nextjs-dashboard-starter
-   ```
-
-2. **Install Dependencies**
-
-   Using npm:
-
-   ```bash
-   npm install
-   ```
-
-   Or using Yarn:
-
-   ```bash
-   yarn install
-   ```
-
-3. **Configure Environment Variables**
-
-   Create a `.env` file in the root directory and add the necessary environment variables. Refer to `.env.example` for guidance.
-
-   ```env
-   DATABASE_URL=your_database_url
-   NEXTAUTH_SECRET=your_nextauth_secret
-   NEXTAUTH_URL=http://localhost:3000
-   ```
-
-### Running the Development Server
-
-Start the development server with:
-
-Using npm:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application in the browser.
-
-## Deployment
-
-Deploy the application using your preferred platform. Recommended options include:
-
-- **Vercel**: Optimized for Next.js applications. Follow the [Vercel Deployment Guide](https://create.t3.gg/en/deployment/vercel).
-- **Netlify**: Another excellent choice for deploying Next.js apps. Refer to the [Netlify Deployment Guide](https://create.t3.gg/en/deployment/netlify).
-- **Docker**: Containerize your application for consistent deployments. See the [Docker Deployment Guide](https://create.t3.gg/en/deployment/docker).
-
-Ensure environment variables are correctly set up in your deployment environment.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. **Fork the Repository**
-2. **Create a Feature Branch**
-
-   ```bash
-   git checkout -b feature/NewFeature
-   ```
-
-3. **Commit Your Changes**
-
-   ```bash
-   git commit -m "Add new feature"
-   ```
-
-4. **Push to the Branch**
-
-   ```bash
-   git push origin feature/NewFeature
-   ```
-
-5. **Open a Pull Request**
-
-Please ensure your code adheres to the project's coding standards and passes all tests.
-
-## Style Guide
-
-- Anything that is disabled should have a tooltip explaining why.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Resources
-
-- [T3 Stack Documentation](https://create.t3.gg/)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction)
-- [Prisma Documentation](https://www.prisma.io/docs/)
-- [Drizzle ORM Documentation](https://orm.drizzle.team/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [tRPC Documentation](https://trpc.io/docs)
-- [Radix UI Documentation](https://www.radix-ui.com/docs/primitives/overview/introduction)
-- [Lucide React Icons](https://lucide.dev/)
-- [StackFrame Documentation](https://stackframe.com/docs)
-
-For additional help and support, join our [Discord Community](https://t3.gg/discord).
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.

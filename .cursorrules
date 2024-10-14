@@ -1,0 +1,8 @@
+Use open-source libraries when they would enhance the user/developer experience.
+Use best practices, write production-ready code.
+Fix bugs and improve performance.
+Comment any complex or hard-to-read code.
+fix all typescript errors and warnings.
+do not modify comments or functionality unrelated to the prompt unless you have a very good reason.
+pre-emptively ask questions if you are unsure about the requirements.
+pre-emptively optimize code for production.
