@@ -23,6 +23,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
+import { ElementType } from "react"
 
 export function NavMain({
   className,
@@ -32,20 +33,17 @@ export function NavMain({
   items: {
     title: string
     url: string
-    icon: LucideIcon
+    icon: LucideIcon | ElementType
     isActive?: boolean
     items?: {
       title: string
       url: string
     }[]
   }[]
-  searchResults: React.ComponentProps<typeof SidebarSearch>["results"]
+  searchResults?: React.ComponentProps<typeof SidebarSearch>["results"]
 } & React.ComponentProps<"ul">) {
   return (
     <ul className={cn("grid gap-0.5", className)}>
-      <li>
-        <SidebarSearch results={searchResults} />
-      </li>
       {items.map((item) => (
         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
           <li>
@@ -59,19 +57,22 @@ export function NavMain({
                   <div className="line-clamp-1 pr-6">{item.title}</div>
                 </div>
               </Link>
-              <CollapsibleTrigger asChild>
-                <Button
-                  variant="ghost"
+              {item.items && (
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant="ghost"
                   className="absolute right-1 h-6 w-6 rounded-md p-0 ring-ring transition-all focus-visible:ring-2 data-[state=open]:rotate-90"
                 >
                   <ChevronRight className="h-4 w-4 text-muted-foreground" />
                   <span className="sr-only">Toggle</span>
-                </Button>
-              </CollapsibleTrigger>
+                  </Button>
+                </CollapsibleTrigger>
+              )}
             </div>
-            <CollapsibleContent className="px-4 py-0.5">
-              <ul className="grid border-l px-2">
-                {item.items?.map((subItem) => (
+            {item.items && (
+              <CollapsibleContent className="px-4 py-0.5">
+                <ul className="grid border-l px-2">
+                  {item.items?.map((subItem) => (
                   <li key={subItem.title}>
                     <Link
                       href={subItem.url}
@@ -81,9 +82,10 @@ export function NavMain({
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </CollapsibleContent>
-          </li>
+                  </ul>
+                </CollapsibleContent>
+              )}
+            </li>
         </Collapsible>
       ))}
     </ul>

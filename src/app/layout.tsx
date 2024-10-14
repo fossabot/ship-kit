@@ -5,8 +5,8 @@ import { type Metadata } from "next";
 import RootLayout from "@/components/layouts/root-layout";
 
 export const metadata: Metadata = {
-  title: "Flag Spam API",
-  description: "Flag Spam API",
+  title: "LogFlare",
+  description: "Illuminate your logs, ignite your insights",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
