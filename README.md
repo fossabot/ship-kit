@@ -129,6 +129,10 @@ Contributions are welcome! Please follow these steps:
 
 Please ensure your code adheres to the project's coding standards and passes all tests.
 
+## Style Guide
+
+- Anything that is disabled should have a tooltip explaining why.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
