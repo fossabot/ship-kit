@@ -54,7 +54,7 @@ export function LandingPageComponent() {
             className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#818cf8] to-[#ec4899]"
             animate={{ rotate: scrollY / 10 }}
           />
-          <span className="text-xl font-bold">LogFlare</span>
+          <span className="text-xl font-bold">Lacy</span>
         </div>
         {/* <nav className="hidden md:flex space-x-8">
           <a href="#" className="hover:text-purple-400 transition-colors">Product</a>

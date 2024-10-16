@@ -106,7 +106,7 @@ export function AppSidebar() {
 
   const userInfo = {
     name: user?.displayName ?? "Me",
-    email: user?.primaryEmail ?? "me@logflare.com",
+    email: user?.primaryEmail ?? "me@lacy.com",
     avatar: user?.profileImageUrl ?? "",
   }
 

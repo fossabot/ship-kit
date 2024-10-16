@@ -78,7 +78,7 @@ export const routes = {
 
   // External links
   external: {
-    github: "https://github.com/lacymorrow/logflare",
+    github: "https://github.com/lacymorrow/juicy-stack",
   },
 
   // TODO: Used to mark routes that are not yet implemented
