@@ -14,7 +14,12 @@ const config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: [\\n          // "var(--font-sans)",\\n          "var(--font-geist-sans)",\\n          ...fontFamily.sans,\\n        ],\n  			serif: ["var(--font-serif)", ...fontFamily.serif]
+  			        sans: [
+          // "var(--font-sans)",
+          "var(--font-geist-sans)",
+          ...fontFamily.sans,
+        ],
+        serif: ["var(--font-serif)", ...fontFamily.serif],
   		},
   		borderRadius: {
   			DEFAULT: 'var(--radius)',
