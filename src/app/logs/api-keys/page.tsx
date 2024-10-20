@@ -1,6 +1,6 @@
 'use client';
 
-import { DynamicDataTable } from "@/components/dynamic-data-table";
+import { DynamicDataTable } from "@/components/blocks/dynamic-data-table";
 import { SuspenseFallback } from "@/components/primitives/suspense-fallback";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";

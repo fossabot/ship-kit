@@ -1,8 +1,8 @@
 "use client";
 
+import { AppSidebar } from "@/components/blocks/app-sidebar";
+import TaskList from "@/components/blocks/task-list";
 import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/views/app-sidebar";
-import TaskList from "@/components/views/task-list";
 import { UserButton, useUser } from "@stackframe/stack";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

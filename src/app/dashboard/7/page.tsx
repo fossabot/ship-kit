@@ -1,4 +1,4 @@
-import Dashboard from "@/components/views/dashboard-07";
+import Dashboard from "@/components/blocks/dashboard-07";
 
 export default function Page() {
   return <Dashboard />;

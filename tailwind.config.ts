@@ -14,10 +14,9 @@ const config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			        sans: [
-          // "var(--font-sans)",
-          "var(--font-geist-sans)",
-          ...fontFamily.sans,
+  			sans: [
+				"var(--font-geist-sans)",
+				...fontFamily.sans,
         ],
         serif: ["var(--font-serif)", ...fontFamily.serif],
   		},
@@ -28,7 +27,7 @@ const config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		container: {
-  			center: 'true',
+  			center: true,
   			padding: '2rem',
   			screens: {
   				'2xl': '1400px'

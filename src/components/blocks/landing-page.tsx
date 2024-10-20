@@ -1,9 +1,9 @@
 "use client";
 
 import { NetworkLog } from "@/app/(demo)/network/network-log";
+import { ConsoleComponent } from "@/components/blocks/console-component";
 import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ConsoleComponent } from "@/components/views/console-component";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { useStackApp, useUser } from "@stackframe/stack";

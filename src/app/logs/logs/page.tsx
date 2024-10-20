@@ -1,6 +1,6 @@
 'use client';
 
-import { DynamicDataTable } from "@/components/dynamic-data-table";
+import { DynamicDataTable } from "@/components/blocks/dynamic-data-table";
 import { LoadingIndicator } from "@/components/primitives/loading-indicator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { routes } from '@/lib/routes';

@@ -1,9 +1,9 @@
-import * as React from "react"
 import { Plus } from "lucide-react"
+import * as React from "react"
 
-import { Calendars } from "@/components/calendars"
-import { DatePicker } from "@/components/date-picker"
-import { NavUser } from "@/components/nav-user"
+import { Calendars } from "@/components/blocks/calendars"
+import { DatePicker } from "@/components/blocks/date-picker"
+import { NavUser } from "@/components/blocks/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -12,8 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
-  SidebarSeparator,
+  SidebarSeparator
 } from "@/components/ui/sidebar"
 
 // This is sample data.

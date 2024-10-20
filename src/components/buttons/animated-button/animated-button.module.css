@@ -2,19 +2,22 @@
   content: '';
   position: absolute;
   z-index: -1;
-  left: 1px;
   top: 1px;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
   width: calc(100% - 2px);
   height: calc(100% - 2px);
   border-radius: 0.3125rem;
-  background-color: var(--bg-color, white); /* Use CSS variable for dynamic color */
+  background-color: white; /* Todo: make this dynamic */
+  background-color: #111827; 
 }
 
 .animatedBackground {
   background-image: conic-gradient(
     from 0deg at 50% 50%,
     transparent 0deg,
-    var(--bg-color, blue) 60deg,
+    #4f46e5 60deg,
     transparent 120deg,
     transparent 360deg
   );
@@ -25,6 +28,8 @@
   from {
     transform: rotate(0deg);
   }
+  50% {
+  }
   to {
     transform: rotate(360deg);
   }
@@ -32,11 +37,11 @@
 
 @media (prefers-color-scheme: dark) {
   .buttonWrapper::after {
-    background-color: var(--button-bg-color-dark, #111827); /* Use CSS variable for dark mode */
+    background-color: #111827; /* dark:bg-gray-900 */
   }
 
   .animatedBackground {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* dark:bg-white/10 */
     background-image: conic-gradient(
       from 0deg at 50% 50%,
       transparent 0deg,
