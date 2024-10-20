@@ -1,47 +1,44 @@
-import { ensureUserHasTeam, getTeamProjects } from "@/server/utils/team-utils";
-import { stackServerApp } from "@/stack";
-import Link from "next/link";
+import { SidebarLeft } from "@/components/sidebar-left"
+import { SidebarRight } from "@/components/sidebar-right"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
-export default async function DashboardPage() {
-  const user = await stackServerApp.getUser({ or: "redirect" });
-  console.log("user", user);
-
-  let teamId;
-  let projects;
-  let error;
-
-  try {
-    teamId = await ensureUserHasTeam(user);
-    projects = await getTeamProjects(teamId);
-  } catch (err) {
-    console.error("Error ensuring user has team:", err);
-    error = "An error occurred while setting up your dashboard. Please try again later.";
-  }
-
+export default function Page() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Welcome to your dashboard!</h1>
-      {error ? (
-        <p className="text-red-500">{error}</p>
-      ) : (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Your Projects</h2>
-          {projects && projects.map((project) => (
-            <div key={project.id} className="bg-white shadow rounded-lg p-4 mb-4">
-              <h3 className="text-xl font-medium">{project.name}</h3>
-              <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Create API Key
-              </button>
-            </div>
-          ))}
-          <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            Create New Project
-          </button>
+    <SidebarProvider>
+      <SidebarLeft />
+      <SidebarInset>
+        <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 bg-background">
+          <div className="flex flex-1 items-center gap-2 px-3">
+            <SidebarTrigger />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="line-clamp-1">
+                    Project Management & Task Tracking
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-muted/50" />
+          <div className="mx-auto h-[100vh] w-full max-w-3xl rounded-xl bg-muted/50" />
         </div>
-      )}
-      <Link href="/api-keys/test" className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
-        Create Test API Key
-      </Link>
-    </div>
-  );
+      </SidebarInset>
+      <SidebarRight />
+    </SidebarProvider>
+  )
 }
