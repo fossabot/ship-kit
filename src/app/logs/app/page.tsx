@@ -2,7 +2,7 @@
 
 import { LiveLogs } from "@/app/(saas)/_components/live-logs";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { routes } from "@/lib/routes";
+import { routes } from "@/config/routes";
 import { UserButton, useUser } from "@stackframe/stack";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

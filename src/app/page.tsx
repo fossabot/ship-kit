@@ -1,7 +1,14 @@
 import { HeroSection } from "@/components/blocks/hero-section";
-import AnimatedButton from '@/components/buttons/animated-button/animated-button';
+import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { HoverGrid } from "@/components/grid/hover-grid";
-import { ClockIcon, GridIcon, InboxIcon, LayersIcon, MapIcon, RefreshCwIcon } from "lucide-react";
+import {
+  ClockIcon,
+  GridIcon,
+  InboxIcon,
+  LayersIcon,
+  MapIcon,
+  RefreshCwIcon,
+} from "lucide-react";
 
 const features = [
   {
@@ -30,20 +37,20 @@ const features = [
     description: "Plan visually with live predictions",
   },
   {
-    icon: <InboxIcon/>,
+    icon: <InboxIcon />,
     title: "Backlog",
     description: "A place for new issues and ideas",
   },
-]
+];
 
 export default function Home() {
-  return <>
-    <HeroSection />
+  return (
+    <>
+      <HeroSection />
 
-    <HoverGrid
-      content={features}
-    />
+      <HoverGrid content={features} />
 
-    <AnimatedButton href="/next-page">Click Me</AnimatedButton>
-  </>;
+      <AnimatedButton href="/next-page">Click Me</AnimatedButton>
+    </>
+  );
 }

@@ -3,8 +3,8 @@
 import { LatestPost } from "@/app/_components/post";
 import { UserGreeting } from "@/app/_components/UserGreeting";
 import { buttonVariants } from "@/components/ui/button";
-import { logger } from '@/lib/logger';
-import { routes } from "@/lib/routes";
+import { routes } from "@/config/routes";
+import { logger } from "@/lib/logger";
 import { useStackApp, useUser } from "@stackframe/stack";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ const HomePage = () => {
   const user = useUser();
   const stackApp = useStackApp();
 
-  logger.info('Rendering HomePage');
+  logger.info("Rendering HomePage");
 
   return (
     <>

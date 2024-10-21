@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import { DynamicDataTable } from "@/components/blocks/dynamic-data-table";
 import { SuspenseFallback } from "@/components/primitives/suspense-fallback";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { routes } from '@/lib/routes';
-import { useUser } from '@stackframe/stack';
+import { routes } from "@/config/routes";
+import { useUser } from "@stackframe/stack";
 import { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ApiKey {
   id: string;
@@ -48,7 +48,10 @@ const columns: ColumnDef<ApiKey>[] = [
     accessorKey: "createdAt",
     header: "Created At",
     cell: ({ row }) => (
-      <div className="truncate" title={new Date(row.getValue("createdAt")).toLocaleString()}>
+      <div
+        className="truncate"
+        title={new Date(row.getValue("createdAt")).toLocaleString()}
+      >
         {new Date(row.getValue("createdAt")).toLocaleString()}
       </div>
     ),
@@ -65,11 +68,11 @@ const ApiKeysPage = () => {
       if (!user) return;
       try {
         const response = await fetch(routes.api.apiKeys);
-        if (!response.ok) throw new Error('Failed to fetch API keys');
+        if (!response.ok) throw new Error("Failed to fetch API keys");
         const data = await response.json();
         setApiKeys(data);
       } catch (error) {
-        console.error('Error fetching API keys:', error);
+        console.error("Error fetching API keys:", error);
       } finally {
         setIsLoading(false);
       }
@@ -80,28 +83,28 @@ const ApiKeysPage = () => {
 
   const generateApiKey = async () => {
     try {
-      const response = await fetch(routes.api.apiKeys, { method: 'POST' });
-      if (!response.ok) throw new Error('Failed to generate API key');
+      const response = await fetch(routes.api.apiKeys, { method: "POST" });
+      if (!response.ok) throw new Error("Failed to generate API key");
       const newKey = await response.json();
       setApiKeys([...apiKeys, newKey]);
     } catch (error) {
-      console.error('Error generating API key:', error);
+      console.error("Error generating API key:", error);
     }
   };
 
   const handleRowAction = (action: string, apiKey: ApiKey) => {
     switch (action) {
-      case 'view':
-        console.log('View details for:', apiKey);
+      case "view":
+        console.log("View details for:", apiKey);
         break;
-      case 'edit':
-        console.log('Edit:', apiKey);
+      case "edit":
+        console.log("Edit:", apiKey);
         break;
-      case 'delete':
-        console.log('Delete:', apiKey);
+      case "delete":
+        console.log("Delete:", apiKey);
         break;
       default:
-        console.log('Unknown action:', action);
+        console.log("Unknown action:", action);
     }
   };
 
@@ -109,11 +112,8 @@ const ApiKeysPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">API Keys</h1>
-      <Button
-        onClick={generateApiKey}
-        className="mb-4"
-      >
+      <h1 className="mb-4 text-2xl font-bold">API Keys</h1>
+      <Button onClick={generateApiKey} className="mb-4">
         Generate New API Key
       </Button>
       <DynamicDataTable

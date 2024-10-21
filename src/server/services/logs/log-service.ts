@@ -2,18 +2,26 @@ import { db } from "@/server/db";
 import { apiKeys, logs, projectMembers } from "@/server/db/schema";
 import { and, desc, eq, inArray } from "drizzle-orm";
 
+/**
+ * Retrieves logs for a user based on their project memberships.
+ * @param userId - The ID of the user.
+ * @param limit - The maximum number of logs to retrieve.
+ * @returns A list of logs.
+ */
 export async function getUserLogs(userId: string, limit: number = 100) {
-  const userProjectIds = await db.select({ projectId: projectMembers.projectId })
+  const userProjectIds = await db
+    .select({ projectId: projectMembers.projectId })
     .from(projectMembers)
     .where(eq(projectMembers.userId, userId));
 
-  const projectIds = userProjectIds.map(up => up.projectId);
+  const projectIds = userProjectIds.map((up) => up.projectId);
 
-  const apiKeyIds = await db.select({ id: apiKeys.id })
+  const apiKeyIds = await db
+    .select({ id: apiKeys.id })
     .from(apiKeys)
     .where(inArray(apiKeys.projectId, projectIds));
 
-  const keyIds = apiKeyIds.map(ak => ak.id);
+  const keyIds = apiKeyIds.map((ak) => ak.id);
 
   return db.query.logs.findMany({
     where: inArray(logs.apiKeyId, keyIds),
@@ -29,6 +37,12 @@ export async function getUserLogs(userId: string, limit: number = 100) {
   });
 }
 
+/**
+ * Retrieves logs for a specific API key.
+ * @param apiKeyId - The ID of the API key.
+ * @param limit - The maximum number of logs to retrieve.
+ * @returns A list of logs.
+ */
 export async function getApiKeyLogs(apiKeyId: string, limit: number = 100) {
   return db.query.logs.findMany({
     where: eq(logs.apiKeyId, apiKeyId),
@@ -37,6 +51,11 @@ export async function getApiKeyLogs(apiKeyId: string, limit: number = 100) {
   });
 }
 
+/**
+ * Creates a new log entry.
+ * @param logData - The data for the log entry.
+ * @returns The created log entry.
+ */
 export async function createLog(logData: {
   level: string;
   message: string;
@@ -51,23 +70,35 @@ export async function createLog(logData: {
   });
 
   if (!apiKeyRecord) {
-    throw new Error('Invalid API key');
+    throw new Error("Invalid API key");
   }
 
-  const [createdLog] = await db.insert(logs).values({
-    timestamp: logData.timestamp,
-    level: logData.level,
-    message: logData.message,
-    prefix: logData.prefix,
-    emoji: logData.emoji,
-    metadata: logData.metadata ? JSON.stringify(logData.metadata) : null,
-    apiKeyId: apiKeyRecord.id,
-  }).returning();
+  const [createdLog] = await db
+    .insert(logs)
+    .values({
+      timestamp: logData.timestamp,
+      level: logData.level,
+      message: logData.message,
+      prefix: logData.prefix,
+      emoji: logData.emoji,
+      metadata: logData.metadata ? JSON.stringify(logData.metadata) : null,
+      apiKeyId: apiKeyRecord.id,
+    })
+    .returning();
 
   return createdLog;
 }
 
-export async function userHasAccessToApiKey(userId: string, apiKeyId: string): Promise<boolean> {
+/**
+ * Checks if a user has access to a specific API key.
+ * @param userId - The ID of the user.
+ * @param apiKeyId - The ID of the API key.
+ * @returns True if the user has access, otherwise false.
+ */
+export async function userHasAccessToApiKey(
+  userId: string,
+  apiKeyId: string,
+): Promise<boolean> {
   const apiKeyRecord = await db.query.apiKeys.findFirst({
     where: eq(apiKeys.id, apiKeyId),
     with: {
@@ -82,7 +113,7 @@ export async function userHasAccessToApiKey(userId: string, apiKeyId: string): P
   const userProjectMember = await db.query.projectMembers.findFirst({
     where: and(
       eq(projectMembers.projectId, apiKeyRecord.project.id),
-      eq(projectMembers.userId, userId)
+      eq(projectMembers.userId, userId),
     ),
   });
 
@@ -108,13 +139,16 @@ export async function getProjectApiKeys(projectId: string) {
 
 // New function to create an API key for a project
 export async function createApiKey(projectId: string, expiresAt?: Date) {
-  const [newApiKey] = await db.insert(apiKeys).values({
-    id: crypto.randomUUID(),
-    key: generateApiKey(),
-    projectId: projectId,
-    createdAt: new Date(),
-    expiresAt: expiresAt,
-  }).returning();
+  const [newApiKey] = await db
+    .insert(apiKeys)
+    .values({
+      id: crypto.randomUUID(),
+      key: generateApiKey(),
+      projectId: projectId,
+      createdAt: new Date(),
+      expiresAt: expiresAt,
+    })
+    .returning();
 
   return newApiKey;
 }

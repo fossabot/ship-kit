@@ -4,7 +4,7 @@ import { NetworkLog } from "@/app/(demo)/network/network-log";
 import { ConsoleComponent } from "@/components/blocks/console-component";
 import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { routes } from "@/lib/routes";
+import { routes } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useStackApp, useUser } from "@stackframe/stack";
 import { AnimatePresence, motion } from "framer-motion";
@@ -54,7 +54,7 @@ export function LandingPageComponent() {
             className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#818cf8] to-[#ec4899]"
             animate={{ rotate: scrollY / 10 }}
           />
-          <span className="text-xl font-bold">Lacy</span>
+          <span className="text-xl font-bold">Ship Kit</span>
         </div>
         {/* <nav className="hidden md:flex space-x-8">
           <a href="#" className="hover:text-purple-400 transition-colors">Product</a>
@@ -82,16 +82,16 @@ export function LandingPageComponent() {
       </header>
 
       <main className="pt-20">
-        <section className="p-lg relative flex min-h-[60vh] items-center justify-center text-center md:flex-row">
+        <section className="relative flex min-h-[60vh] items-center justify-center p-lg text-center md:flex-row">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
-              LogFlare: Illuminate Your Logs
+              Ship Kit: Illuminate Your Logs
             </h1>
-            <p className="mb-8 text-xl text-gray-300 text-white md:text-2xl">
+            <p className="mb-8 text-xl text-gray-300 md:text-2xl">
               Real-time logging made simple.
             </p>
             <div className="flex justify-center space-x-4">
@@ -124,7 +124,7 @@ export function LandingPageComponent() {
                       transition={{ duration: 0.3, delay: 0.2 }}
                     >
                       <>
-                        <div className="text-muted rounded-lg bg-purple-800/20 p-3 backdrop-blur-sm">
+                        <div className="rounded-lg bg-purple-800/20 p-3 text-muted backdrop-blur-sm">
                           <p className="text-sm">Your Test API Key:</p>
                           <p className="font-mono text-lg">{testApiKey}</p>
                         </div>
@@ -133,12 +133,12 @@ export function LandingPageComponent() {
                           To see it in action, copy your API key and paste it
                           into your application.
                         </h2>
-                        <code className="text-muted-foreground text-left">
+                        <code className="text-left text-muted-foreground">
                           <pre>{`// ...in next.config.js
-import { withLogFlare } from 'logflare'
+import { withShipKit } from 'ship-kit'
 
 // Replace \`export default nextConfig;\` with the following:
-export default withLogFlare('${testApiKey}')(nextConfig);`}</pre>
+export default withShipKit('${testApiKey}')(nextConfig);`}</pre>
                         </code>
                       </>
                     </motion.div>

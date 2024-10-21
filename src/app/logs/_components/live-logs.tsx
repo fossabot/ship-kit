@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import { DynamicDataTable } from "@/components/blocks/dynamic-data-table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { routes } from "@/lib/routes";
-import logger from '@/utils/logger';
+import { routes } from "@/config/routes";
+import logger from "@/utils/logger";
 import { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface Log {
   id: string;
@@ -41,7 +41,10 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => (
-      <div className="truncate" title={new Date(row.getValue("timestamp")).toLocaleString()}>
+      <div
+        className="truncate"
+        title={new Date(row.getValue("timestamp")).toLocaleString()}
+      >
         {new Date(row.getValue("timestamp")).toLocaleString()}
       </div>
     ),
@@ -77,14 +80,14 @@ const columns: ColumnDef<Log>[] = [
 
 export const LiveLogs = () => {
   const [logs, setLogs] = useState<Log[]>([]);
-  const [apiKey, setApiKey] = useState<string>('');
+  const [apiKey, setApiKey] = useState<string>("");
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isSendingTestLog, setIsSendingTestLog] = useState<boolean>(false);
 
   useEffect(() => {
     if (!apiKey || !isConnected) return;
 
-    logger.info('Connecting to SSE for live logs');
+    logger.info("Connecting to SSE for live logs");
     const eventSource = new EventSource(`${routes.api.sse}?key=${apiKey}`);
 
     eventSource.onmessage = (event) => {
@@ -93,13 +96,13 @@ export const LiveLogs = () => {
     };
 
     eventSource.onerror = (error) => {
-      logger.error('SSE error:', error);
+      logger.error("SSE error:", error);
       setIsConnected(false);
       eventSource.close();
     };
 
     return () => {
-      logger.info('Closing SSE connection');
+      logger.info("Closing SSE connection");
       setIsConnected(false);
       eventSource.close();
     };
@@ -108,7 +111,7 @@ export const LiveLogs = () => {
   const handleApiKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newApiKey = formData.get('apiKey') as string;
+    const newApiKey = formData.get("apiKey") as string;
     setApiKey(newApiKey);
     setLogs([]); // Clear previous logs when changing API key
     setIsConnected(true);
@@ -119,26 +122,26 @@ export const LiveLogs = () => {
     setLogs([]);
   };
 
-const handleSendTestLog = async () => {
-  if (!apiKey) return;
+  const handleSendTestLog = async () => {
+    if (!apiKey) return;
 
-  setIsSendingTestLog(true);
-  try {
-    const response = await fetch(routes.api.sendTestLog, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ apiKey }),
-    });
+    setIsSendingTestLog(true);
+    try {
+      const response = await fetch(routes.api.sendTestLog, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ apiKey }),
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to send test log');
+        throw new Error("Failed to send test log");
       }
 
-      logger.info('Test log sent successfully');
+      logger.info("Test log sent successfully");
     } catch (error) {
-      logger.error('Error sending test log:', error);
+      logger.error("Error sending test log:", error);
     } finally {
       setIsSendingTestLog(false);
     }
@@ -146,8 +149,8 @@ const handleSendTestLog = async () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Live Application Logs</h1>
-      
+      <h1 className="mb-4 text-2xl font-bold">Live Application Logs</h1>
+
       <form onSubmit={handleApiKeySubmit} className="mb-4">
         <Input
           type="text"
@@ -158,9 +161,7 @@ const handleSendTestLog = async () => {
           disabled={isConnected}
         />
         {!isConnected ? (
-          <Button type="submit">
-            Connect
-          </Button>
+          <Button type="submit">Connect</Button>
         ) : (
           <Button onClick={handleDisconnect} variant="destructive">
             Disconnect
@@ -174,15 +175,11 @@ const handleSendTestLog = async () => {
           disabled={isSendingTestLog}
           className="mb-4"
         >
-          {isSendingTestLog ? 'Sending...' : 'Send Test Log'}
+          {isSendingTestLog ? "Sending..." : "Send Test Log"}
         </Button>
       )}
 
-      <DynamicDataTable
-        columns={columns}
-        data={logs}
-        filterColumn="message"
-      />
+      <DynamicDataTable columns={columns} data={logs} filterColumn="message" />
     </div>
   );
 };

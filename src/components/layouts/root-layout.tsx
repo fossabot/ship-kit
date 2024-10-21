@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans as fontSans } from "geist/font/sans";
 import { Noto_Serif_Display as FontSerif, Noto_Sans } from "next/font/google";
 
+import { Analytics } from "@/components/primitives/analytics";
 import { ErrorToast } from "@/components/primitives/error-toast";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -41,16 +42,18 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
+        <HolyLoader showSpinner />
         <StackProvider app={stackServerApp}>
           <StackTheme>
             <TRPCReactProvider>
-              <HolyLoader showSpinner />
               <TooltipProvider>
                 {children}
 
                 <Suspense>
                   <ErrorToast />
                 </Suspense>
+
+                <Analytics />
 
                 <Toaster />
                 <SonnerToaster />

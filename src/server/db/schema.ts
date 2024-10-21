@@ -129,3 +129,133 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+/**
+ * Schema for a SaaS application with teams, users, projects, and API keys.
+ *
+ * - Users can belong to multiple teams.
+ * - Teams can have multiple projects.
+ * - Projects can have multiple API keys.
+ * - Logs are associated with API keys.
+ */
+
+export const teams = createTable("team", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 255 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+});
+
+export const teamMembers = createTable("team_member", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("user_id", { length: 255 })
+    .notNull()
+    .references(() => users.id),
+  teamId: varchar("team_id", { length: 255 })
+    .notNull()
+    .references(() => teams.id),
+  role: varchar("role", { length: 50 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+});
+
+export const projects = createTable("project", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 255 }).notNull(),
+  teamId: varchar("team_id", { length: 255 })
+    .notNull()
+    .references(() => teams.id),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+});
+
+export const projectMembers = createTable("project_member", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  projectId: varchar("project_id", { length: 255 })
+    .notNull()
+    .references(() => projects.id),
+  userId: varchar("user_id", { length: 255 })
+    .notNull()
+    .references(() => users.id),
+  role: varchar("role", { length: 50 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+});
+
+export const apiKeys = createTable("api_key", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  key: varchar("key", { length: 255 }).notNull(),
+  projectId: varchar("project_id", { length: 255 })
+    .notNull()
+    .references(() => projects.id),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+});
+
+// Define relations
+export const teamRelations = relations(teams, ({ many }) => ({
+  members: many(teamMembers),
+  projects: many(projects),
+}));
+
+export const projectRelations = relations(projects, ({ many }) => ({
+  members: many(projectMembers),
+  apiKeys: many(apiKeys),
+}));
+
+export const userRelations = relations(users, ({ many }) => ({
+  teamMemberships: many(teamMembers),
+  projectMemberships: many(projectMembers),
+}));
+
+export const logs = createTable("log", {
+  id: serial("id").primaryKey(),
+  timestamp: timestamp("timestamp", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  level: text("level").notNull(),
+  message: text("message").notNull(),
+  prefix: text("prefix"),
+  emoji: text("emoji"),
+  metadata: text("metadata"), // Store as JSON string
+  apiKeyId: varchar("api_key_id", { length: 255 })
+    .notNull()
+    .references(() => apiKeys.id),
+});
+
+export const logRelations = relations(logs, ({ one }) => ({
+  apiKey: one(apiKeys, { fields: [logs.apiKeyId], references: [apiKeys.id] }),
+}));

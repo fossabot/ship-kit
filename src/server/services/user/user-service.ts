@@ -1,9 +1,20 @@
 import { db } from "@/server/db";
-import { projectMembers, projects, teamMembers, teams, users } from "@/server/db/schema";
+import {
+  projectMembers,
+  projects,
+  teamMembers,
+  teams,
+  users,
+} from "@/server/db/schema";
 import { User } from "@stackframe/stack";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
+/**
+ * Ensures a user exists in the database, creating them if necessary.
+ * @param authUser - The authenticated user object.
+ * @returns The database user object.
+ */
 export async function ensureUserExists(authUser: User) {
   let dbUser = await db.query.users.findFirst({
     where: eq(users.id, authUser.id),
@@ -11,7 +22,7 @@ export async function ensureUserExists(authUser: User) {
 
   if (!dbUser) {
     if (!authUser.primaryEmail) {
-      throw new Error('User does not have a primary email');
+      throw new Error("User does not have a primary email");
     }
 
     const newUser = {
@@ -37,6 +48,10 @@ export async function ensureUserExists(authUser: User) {
   return dbUser;
 }
 
+/**
+ * Creates a default team and project for a new user.
+ * @param userId - The ID of the user.
+ */
 async function createTeamAndProjectForUser(userId: string) {
   const teamId = nanoid();
   const projectId = nanoid();
@@ -80,11 +95,16 @@ async function createTeamAndProjectForUser(userId: string) {
   return { teamId, projectId };
 }
 
-export async function getUserProjects(userId: string) {
+/**
+ * Retrieves all projects associated with a user.
+ * @param userId - The ID of the user.
+ * @returns A list of projects.
+ */
+export const getUserProjects = async (userId: string) => {
   return db.query.projectMembers.findMany({
     where: eq(projectMembers.userId, userId),
     with: {
       project: true,
     },
   });
-}
+};

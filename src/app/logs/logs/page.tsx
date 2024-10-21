@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import { DynamicDataTable } from "@/components/blocks/dynamic-data-table";
 import { LoadingIndicator } from "@/components/primitives/loading-indicator";
 import { Checkbox } from "@/components/ui/checkbox";
-import { routes } from '@/lib/routes';
-import { useUser } from '@stackframe/stack';
+import { routes } from "@/config/routes";
+import { useUser } from "@stackframe/stack";
 import { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface Log {
   id: number;
@@ -48,8 +48,13 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => (
-      <div className="truncate" title={new Date(row.getValue("timestamp")).toLocaleString()}>
-        {new Date(row.getValue("timestamp")).toLocaleString('en-US', { hour12: false })}
+      <div
+        className="truncate"
+        title={new Date(row.getValue("timestamp")).toLocaleString()}
+      >
+        {new Date(row.getValue("timestamp")).toLocaleString("en-US", {
+          hour12: false,
+        })}
       </div>
     ),
   },
@@ -89,7 +94,9 @@ const columns: ColumnDef<Log>[] = [
   {
     accessorKey: "apiKeyId",
     header: "API Key ID",
-    cell: ({ row }) => <div className="truncate">{row.getValue("apiKeyId")}</div>,
+    cell: ({ row }) => (
+      <div className="truncate">{row.getValue("apiKeyId")}</div>
+    ),
   },
 ];
 
@@ -103,11 +110,11 @@ const LogsPage = () => {
       if (!user) return;
       try {
         const response = await fetch(routes.api.logs);
-        if (!response.ok) throw new Error('Failed to fetch logs');
+        if (!response.ok) throw new Error("Failed to fetch logs");
         const data = await response.json();
         setLogs(data);
       } catch (error) {
-        console.error('Error fetching logs:', error);
+        console.error("Error fetching logs:", error);
       } finally {
         setIsLoading(false);
       }
@@ -120,12 +127,8 @@ const LogsPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Application Logs</h1>
-      <DynamicDataTable
-        columns={columns}
-        data={logs}
-        filterColumn="message"
-      />
+      <h1 className="mb-4 text-2xl font-bold">Application Logs</h1>
+      <DynamicDataTable columns={columns} data={logs} filterColumn="message" />
     </div>
   );
 };
