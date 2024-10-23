@@ -1,3 +1,4 @@
+import { ParticlesHero } from "@/app/(landing)/_components/particles-hero";
 import { HeroSection } from "@/components/blocks/hero-section";
 import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { HoverGrid } from "@/components/grid/hover-grid";
@@ -46,6 +47,8 @@ const features = [
 export default function Home() {
   return (
     <>
+      <ParticlesHero />
+
       <HeroSection />
 
       <HoverGrid content={features} />

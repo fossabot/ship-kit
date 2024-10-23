@@ -1,5 +1,21 @@
 # Create T3 App
 
+## Setup
+
+```bash
+pnpm install
+```
+
+## Tools
+
+### Shadcn
+
+```bash
+npx shadcn-ui@latest add
+```
+
+### [MagicUI](https://magicui.design/)
+
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 ## What's next? How do I make an app with this?

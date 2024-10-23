@@ -14,11 +14,8 @@ const config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: [
-				"var(--font-geist-sans)",
-				...fontFamily.sans,
-        ],
-        serif: ["var(--font-serif)", ...fontFamily.serif],
+  			sans: [\n				"var(--font-geist-sans)",\n				...fontFamily.sans,\n        ],
+  			serif: ["var(--font-serif)", ...fontFamily.serif]
   		},
   		borderRadius: {
   			DEFAULT: 'var(--radius)',
@@ -27,7 +24,7 @@ const config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		container: {
-  			center: true,
+  			center: 'true',
   			padding: '2rem',
   			screens: {
   				'2xl': '1400px'
@@ -101,11 +98,17 @@ const config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'border-beam': {
+  				'100%': {
+  					'offset-distance': '100%'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear'
   		},
   		spacing: {
   			'2xs': '0.25rem',
