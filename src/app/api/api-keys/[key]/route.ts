@@ -3,10 +3,8 @@ import { apiKeys } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { key: string } }
-) {
+export async function GET(request: Request, props: { params: Promise<{ key: string }> }) {
+  const params = await props.params;
   const apiKey = params.key;
 
   if (!apiKey) {
