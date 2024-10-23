@@ -6,7 +6,7 @@ import {
   teams,
   users,
 } from "@/server/db/schema";
-import { User } from "@stackframe/stack";
+import type { User } from "@auth/core/types";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
@@ -21,16 +21,12 @@ export async function ensureUserExists(authUser: User) {
   });
 
   if (!dbUser) {
-    if (!authUser.primaryEmail) {
+    if (!authUser.email) {
       throw new Error("User does not have a primary email");
     }
 
     const newUser = {
-      id: authUser.id,
-      email: authUser.primaryEmail,
-      name: authUser.displayName ?? null,
-      emailVerified: authUser.primaryEmailVerified ?? false,
-      image: authUser.profileImageUrl ?? null,
+      ...authUser,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

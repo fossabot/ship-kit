@@ -1,6 +1,6 @@
 "use client";
 
-import { STATUS_CODES } from "@/config/status-codes";
+import { STATUS_CODES } from "@/constants/status-codes";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -15,10 +15,10 @@ export const ErrorToast = () => {
 
       console.log(error, toast);
       if (error) {
-        // Todo: renders twice
+        // Todo: renders twice - maybe strict mode is causing this
         setTimeout(() => {
           toast.error(error.message);
-        }, 1000);
+        }, 500);
       }
     }
   }, [errorCode]);

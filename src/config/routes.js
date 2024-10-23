@@ -35,15 +35,18 @@ export const createRoute = (path, params = {}) => ({ path, params });
 export const routes = {
   // Public routes
   home: "/",
-    tasks: "/tasks",
-  docs: "/docs",
-    premium: "/premium",
+  tasks: "/tasks",
 
   // Authentication routes
   auth: {
     signIn: "/sign-in",
     signUp: "/sign-up",
     signOut: "/sign-out",
+    forgotPassword: "/forgot-password",
+    signInPage: "/api/auth/signin", // This is the default sign in page provided by Auth.js
+    signOutPage: "/api/auth/signout", // This is the default sign out page provided by Auth.js
+    signOutIn: "/sign-out-in", // Special page that signs the user out then redirects to the sign in page
+    error: "/error",
   },
 
   app: {
@@ -78,7 +81,7 @@ export const routes = {
 
   // External links
   external: {
-    github: "https://github.com/lacymorrow/juicy-stack",
+    github: "https://github.com/lacymorrow/ship-kit",
   },
 
   // TODO: Used to mark routes that are not yet implemented
@@ -89,7 +92,10 @@ export const redirects = async () => {
   return [
     ...createRedirects(["/join", "/signup"], routes.auth.signUp),
     ...createRedirects(["/login", "/log-in", "/signin"], routes.auth.signIn),
-    ...createRedirects(["/logout", "/log-out", "/signout"], routes.auth.signOut),
+    ...createRedirects(
+      ["/logout", "/log-out", "/signout"],
+      routes.auth.signOut,
+    ),
   ];
 };
 
@@ -125,7 +131,9 @@ export const getRoutePath = (route, params = {}) => {
 
   let path = route.path;
   Object.entries(route.params ?? {}).forEach(([key, defaultValue]) => {
-    const value = Object.prototype.hasOwnProperty.call(params, key) ? params[key] : defaultValue;
+    const value = Object.prototype.hasOwnProperty.call(params, key)
+      ? params[key]
+      : defaultValue;
     if (value !== null) {
       path = path.replace(`:${key}`, value);
     }
