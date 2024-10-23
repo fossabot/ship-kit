@@ -27,7 +27,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     <Link
       className={cn(
         buttonVariants({ variant: "outline" }),
-        "border border-transparent bg-transparent transition-all duration-1000 ease-in-out hover:border-[#818cf8]",
+        "border border-transparent bg-transparent transition-all ease-in-out hover:border-[#818cf8]",
         className,
       )}
       href={props.href}
@@ -48,7 +48,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   return (
     <div
-      className={`${styles.buttonWrapper} relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md`}
+      className={`${styles.buttonWrapper} relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md text-black [--background:#fafafc] dark:text-white dark:[--background:#111827]`}
     >
       <div
         className={`${styles.animatedBackground} absolute z-[-2] m-auto h-[200px] w-[200px] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[0_0] bg-no-repeat`}

@@ -1,5 +1,5 @@
 .buttonWrapper::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   top: 1px;
@@ -10,7 +10,7 @@
   height: calc(100% - 2px);
   border-radius: 0.3125rem;
   background-color: white; /* Todo: make this dynamic */
-  background-color: #111827; 
+  background-color: var(--background);
 }
 
 .animatedBackground {
@@ -36,10 +36,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .buttonWrapper::after {
-    background-color: #111827; /* dark:bg-gray-900 */
-  }
-
   .animatedBackground {
     background-color: rgba(255, 255, 255, 0.1); /* dark:bg-white/10 */
     background-image: conic-gradient(

@@ -1,23 +1,42 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import styles from "@/styles/header.module.css";
 import { useWindowScroll } from "@uidotdev/usehooks";
-import { CircleUserIcon, Menu, Package2, Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Link from "next/link";
 
-export const Header = () => {
+import AnimatedButton from "@/components/buttons/animated-button/animated-button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import { ThemeToggle } from "@/components/ui/theme";
+import styles from "@/styles/header.module.css";
+
+// Define types for our props
+type NavLink = {
+  href: string;
+  label: string;
+  isCurrent?: boolean;
+};
+
+type HeaderProps = {
+  navLinks: NavLink[];
+  logoHref: string;
+  logoIcon: React.ReactNode;
+  logoText: string;
+  searchPlaceholder: string;
+  userMenuItems: { label: string; action: () => void }[];
+};
+
+export const Header: React.FC<HeaderProps> = ({
+  navLinks,
+  logoHref,
+  logoIcon,
+  logoText,
+  searchPlaceholder,
+  userMenuItems,
+}) => {
   const [{ x, y }, scrollTo] = useWindowScroll();
   const isOpaque = y && y > 100;
 
@@ -29,126 +48,84 @@ export const Header = () => {
           styles.header,
           styles.container,
           isOpaque && styles.opaque,
-          isOpaque && "-top-xs",
+          isOpaque && "-top-[12px]",
         )}
       >
-        <div className="h-xs w-full"></div>
-        <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
-          <Link
-            href="#"
-            className="flex items-center gap-2 text-lg font-semibold md:text-base"
-          >
-            <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Orders
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Products
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Customers
-          </Link>
-          <Link
-            href="#"
-            className="text-foreground transition-colors hover:text-foreground"
-          >
-            Settings
-          </Link>
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="shrink-0 md:hidden"
+        <div className="h-[12px] w-full"></div>
+        <div className="container">
+          <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
+            <Link
+              href={logoHref}
+              className="flex items-center gap-2 text-lg font-semibold md:text-base"
             >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium">
+              {logoIcon}
+              <span className="sr-only">{logoText}</span>
+            </Link>
+            {navLinks.map((link) => (
               <Link
-                href="#"
-                className="flex items-center gap-2 text-lg font-semibold"
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "transition-colors hover:text-foreground",
+                  link.isCurrent ? "text-foreground" : "text-muted-foreground",
+                )}
               >
-                <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                {link.label}
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
+            ))}
+          </nav>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="shrink-0 md:hidden"
               >
-                Dashboard
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Orders
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Products
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Customers
-              </Link>
-              <Link href="#" className="hover:text-foreground">
-                Settings
-              </Link>
-            </nav>
-          </SheetContent>
-        </Sheet>
-        <div className="-mt-10 flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUserIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <nav className="grid gap-6 text-lg font-medium">
+                <Link
+                  href={logoHref}
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  {logoIcon}
+                  <span className="sr-only">{logoText}</span>
+                </Link>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "text-muted-foreground hover:text-foreground",
+                      link.isCurrent ? "text-foreground" : "",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <div className="-mt-10 flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+            <form className="ml-auto flex-1 sm:flex-initial">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder={searchPlaceholder}
+                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                />
+              </div>
+            </form>
+            <RainbowButton className="text-primary-foreground">
+              Login
+            </RainbowButton>
+            <AnimatedButton>Animated Button</AnimatedButton>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
     </>

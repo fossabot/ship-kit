@@ -9,10 +9,9 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { stackServerApp } from "@/stack";
 import { TRPCReactProvider } from "@/trpc/react";
-import { StackProvider, StackTheme } from "@stackframe/stack";
 import HolyLoader from "holy-loader";
+import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
 
 const fontSansOld = Noto_Sans({
@@ -43,24 +42,23 @@ export default function RootLayout({
         )}
       >
         <HolyLoader showSpinner />
-        <StackProvider app={stackServerApp}>
-          <StackTheme>
-            <TRPCReactProvider>
-              <TooltipProvider>
-                {children}
 
-                <Suspense>
-                  <ErrorToast />
-                </Suspense>
+        <ThemeProvider attribute="class">
+          <TRPCReactProvider>
+            <TooltipProvider>
+              {children}
 
-                <Analytics />
+              <Suspense>
+                <ErrorToast />
+              </Suspense>
 
-                <Toaster />
-                <SonnerToaster />
-              </TooltipProvider>
-            </TRPCReactProvider>
-          </StackTheme>
-        </StackProvider>
+              <Analytics />
+
+              <Toaster />
+              <SonnerToaster />
+            </TooltipProvider>
+          </TRPCReactProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
