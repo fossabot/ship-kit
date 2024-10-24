@@ -3,10 +3,10 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import Particles from "@/components/ui/particles";
+import Meteors from "@/components/ui/meteors";
 import { cn } from "@/lib/utils";
 
-export function ParticlesHero({
+export function MeteorsHero({
   children,
   className,
 }: {
@@ -25,13 +25,7 @@ export function ParticlesHero({
       className={cn("relative w-full overflow-hidden bg-background", className)}
     >
       {children}
-      <Particles
-        className="absolute inset-0 [mask-image:linear-gradient(to_bottom_right,white,transparent)]"
-        quantity={100}
-        ease={80}
-        color={color}
-        refresh
-      />
+      <Meteors number={5} />
     </div>
   );
 }

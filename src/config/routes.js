@@ -35,6 +35,7 @@ export const createRoute = (path, params = {}) => ({ path, params });
 export const routes = {
   // Public routes
   home: "/",
+  docs: "/docs",
   tasks: "/tasks",
 
   // Authentication routes
@@ -80,8 +81,10 @@ export const routes = {
   },
 
   // External links
-  external: {
+  social: {
     github: "https://github.com/lacymorrow/ship-kit",
+    x: "https://x.com/intent/follow?screen_name=lacybuilds",
+    email: "mailto:l@lacy.is",
   },
 
   // TODO: Used to mark routes that are not yet implemented

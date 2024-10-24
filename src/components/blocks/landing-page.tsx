@@ -56,13 +56,9 @@ export function LandingPageComponent() {
           />
           <span className="text-xl font-bold">Ship Kit</span>
         </div>
-        {/* <nav className="hidden md:flex space-x-8">
-          <a href="#" className="hover:text-purple-400 transition-colors">Product</a>
-          <a href="#" className="hover:text-purple-400 transition-colors">Pricing</a>
-        </nav> */}
         <div className="flex space-x-2">
           <Link
-            href={routes.external.github}
+            href={routes.social.github}
             target="_blank"
             className={cn(
               buttonVariants({ variant: "link" }),

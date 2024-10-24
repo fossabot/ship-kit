@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
+import { useWindowScroll } from "@uidotdev/usehooks";
 import { ArrowRight, Box, Code, Zap } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -29,15 +31,17 @@ const BackgroundAnimation = () => {
 };
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false);
+  const [{ y }] = useWindowScroll();
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!active) {
+      setActive(y > 100);
+    }
+  }, [y]);
 
   return (
-    <section className="relative w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32 xl:py-48">
-      <BackgroundAnimation />
+    <section className="relative w-full bg-background py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container relative z-10 px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <div className="flex flex-col justify-center space-y-4">
@@ -69,29 +73,13 @@ export function HeroSection() {
           </div>
           <div className="flex items-center justify-center">
             <div
-              className={`relative h-[300px] w-[300px] ${mounted ? "duration-500 animate-in zoom-in-50" : ""}`}
+              className={`relative ${active ? "opacity-100 transition-opacity duration-1000 ease-in-out animate-in zoom-in-50" : "opacity-0"}`}
             >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-25 blur-2xl" />
-              <div className="relative flex h-full w-full items-center justify-center rounded-xl border bg-muted p-6 shadow-2xl">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="150"
-                  height="150"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M17 17h.01" />
-                  <path d="M7 7h.01" />
-                  <path d="M3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2Z" />
-                  <path d="m18 16-2-2" />
-                  <path d="m8 8-2-2" />
-                  <path d="m6 18 12-12" />
-                </svg>
-              </div>
+              <NeonGradientCard className="max-w-sm items-center justify-center text-center">
+                <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+                  Ship your app <span className="font-bold">today</span>.
+                </span>
+              </NeonGradientCard>
             </div>
           </div>
         </div>

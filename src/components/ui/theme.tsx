@@ -3,7 +3,7 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { ThemeProvider, useTheme } from "next-themes";
 
-import { Button } from "./button";
+import { Button, ButtonProps } from "./button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 
-function ThemeButton({ onClick }: { onClick?: () => void }) {
+function ThemeButton(props: ButtonProps) {
   return (
-    <Button variant="outline" size="icon" onClick={onClick}>
+    <Button variant="outline" size="icon" {...props}>
       <SunIcon className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <MoonIcon className="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
@@ -21,22 +21,23 @@ function ThemeButton({ onClick }: { onClick?: () => void }) {
   );
 }
 
-function ThemeToggle() {
+function ThemeToggle(props: ButtonProps) {
   const { theme, setTheme } = useTheme();
 
   return (
     <ThemeButton
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      {...props}
     />
   );
 }
-function ThemeChooser() {
+function ThemeChooser(props: ButtonProps) {
   const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <ThemeButton />
+        <ThemeButton {...props} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>

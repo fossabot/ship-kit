@@ -12,6 +12,7 @@ import AnimatedButton from "@/components/buttons/animated-button/animated-button
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ThemeToggle } from "@/components/ui/theme";
 import styles from "@/styles/header.module.css";
+import { useMemo } from "react";
 
 // Define types for our props
 type NavLink = {
@@ -38,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   userMenuItems,
 }) => {
   const [{ x, y }, scrollTo] = useWindowScroll();
-  const isOpaque = y && y > 100;
+  const isOpaque = useMemo(() => y && y > 100, [y]);
 
   return (
     <>
@@ -48,11 +49,12 @@ export const Header: React.FC<HeaderProps> = ({
           styles.header,
           styles.container,
           isOpaque && styles.opaque,
-          isOpaque && "-top-[12px]",
+          isOpaque &&
+            "-top-[12px] [--background:#fafafc80] dark:[--background:#1c1c22B0]",
         )}
       >
         <div className="h-[12px] w-full"></div>
-        <div className="container">
+        <div className="container flex items-center justify-between gap-md">
           <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
             <Link
               href={logoHref}
@@ -109,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="-mt-10 flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -124,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
               Login
             </RainbowButton>
             <AnimatedButton>Animated Button</AnimatedButton>
-            <ThemeToggle />
+            <ThemeToggle variant="ghost" />
           </div>
         </div>
       </header>

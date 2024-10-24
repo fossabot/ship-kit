@@ -31,9 +31,9 @@
 }
 
 .opaque {
-  background: rgba(250, 250, 252, 0.5);
-  -webkit-backdrop-filter: saturate(180%) blur(5px);
-  backdrop-filter: saturate(180%) blur(5px);
+  background: var(--background);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   perspective: 1000;
