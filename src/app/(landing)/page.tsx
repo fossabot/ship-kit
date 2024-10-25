@@ -107,7 +107,7 @@ export default function Home() {
         <ParticlesHero>
           <div  className="min-h-screen flex flex-col justify-center items-center">
           <div className="relative mx-auto flex min-h-64 max-w-[80rem] flex-col items-center justify-center gap-4 px-6 text-center md:px-8">
-            <BlurFade delay={1} duration={0.5} inView>
+            <BlurFade delay={1} duration={1} inView>
               
             <Link href="/">
               <AnimatedGradientText className="bg-blue">
@@ -128,7 +128,7 @@ export default function Home() {
               <h1 className="text-balance bg-gradient-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl">Launch your app at light speed.</h1>
             </BlurFade>
 
-            <BlurFade delay={1} duration={0.5} inView>
+            <BlurFade delay={1} duration={1} inView>
 
 
             <p className="animate-fade-in mb-12 translate-y-[-1rem] text-balance text-lg tracking-tight text-gray-400 [--animation-delay:400ms] md:text-xl">
@@ -140,11 +140,12 @@ export default function Home() {
           </div>
 
           <div className="mt-4 flex items-center justify-center gap-lg">
+            <BlurFade delay={2.5} duration={1} inView>
 
             <RainbowButton className="flex items-center gap-2">
               <BoxesIcon className="size-5" /> Get ShipKit
             </RainbowButton>
-            
+            </BlurFade>
           </div>
           </div>
           <Meteors number={4} />
