@@ -3,8 +3,6 @@ import type { NextAuthConfig } from "next-auth";
 import Discord from "next-auth/providers/discord";
 import GitHub from "next-auth/providers/github";
 
-export default { providers: [GitHub] } satisfies NextAuthConfig;
-
 const providers: NextAuthConfig["providers"] = [Discord, GitHub];
 
 export const providerMap = providers.map((provider) => {

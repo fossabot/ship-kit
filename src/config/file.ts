@@ -1,6 +1,5 @@
 /**
  * File upload configuration
- * ! This file is used in next.config.js, therefore it must be a .js file
  */
 
 export const BYTES_IN_A_MEGABYTE = 1024 * 1024;
@@ -38,4 +37,7 @@ const FILE_TYPES_DOCUMENTS = [
   "text/html",
 ];
 
-export const ALLOWED_FILE_TYPES = [...FILE_TYPES_IMAGES, ...FILE_TYPES_DOCUMENTS];
+export const ALLOWED_FILE_TYPES = [
+  ...FILE_TYPES_IMAGES,
+  ...FILE_TYPES_DOCUMENTS,
+];

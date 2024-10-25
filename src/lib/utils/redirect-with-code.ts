@@ -1,4 +1,4 @@
-import { SEARCH_PARAM_KEYS } from "@/constants/search-param-keys";
+import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 import { logger } from "@/lib/logger";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";

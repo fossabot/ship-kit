@@ -5,12 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useWindowScroll } from "@uidotdev/usehooks";
-import { Menu, Search } from "lucide-react";
+import { BoxesIcon, Menu, Search } from "lucide-react";
 import Link from "next/link";
 
 import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ThemeToggle } from "@/components/ui/theme";
+import { routes } from "@/config/routes";
 import styles from "@/styles/header.module.css";
 import { useMemo } from "react";
 
@@ -23,18 +24,18 @@ type NavLink = {
 
 type HeaderProps = {
   navLinks: NavLink[];
-  logoHref: string;
-  logoIcon: React.ReactNode;
-  logoText: string;
+  logoHref?: string;
+  logoIcon?: React.ReactNode;
+  logoText?: string;
   searchPlaceholder: string;
   userMenuItems: { label: string; action: () => void }[];
 };
 
 export const Header: React.FC<HeaderProps> = ({
   navLinks,
-  logoHref,
-  logoIcon,
-  logoText,
+  logoHref = routes.home,
+  logoIcon = <BoxesIcon />,
+  logoText = "Ship Kit",
   searchPlaceholder,
   userMenuItems,
 }) => {
@@ -58,9 +59,10 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
             <Link
               href={logoHref}
-              className="flex items-center gap-2 text-lg font-semibold md:text-base"
+              className="grow flex items-center gap-2 text-lg font-semibold md:text-base"
             >
               {logoIcon}
+              <span className="block">{logoText}</span>
               <span className="sr-only">{logoText}</span>
             </Link>
             {navLinks.map((link) => (
@@ -111,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

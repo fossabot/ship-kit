@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useIsClient } from "@uidotdev/usehooks";
 import React, { useEffect, useRef, useState } from "react";
 
 interface MousePosition {
@@ -75,7 +76,8 @@ const Particles: React.FC<ParticlesProps> = ({
   const mousePosition = MousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-  const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const isClient = useIsClient();
+  const dpr = isClient ? window.devicePixelRatio : 1;
 
   useEffect(() => {
     if (canvasRef.current) {

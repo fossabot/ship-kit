@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SEARCH_PARAM_KEYS } from "@/constants/search-param-keys";
+import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 
 import { logger } from "@/lib/logger";
 import { getSchemaDefaults } from "@/lib/utils/get-schema-defaults";

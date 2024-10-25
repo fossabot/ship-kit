@@ -48,7 +48,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   return (
     <div
-      className={`${styles.buttonWrapper} relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md text-black [--background:#fafafc] dark:text-white dark:[--background:#111827]`}
+      className={`${styles.buttonWrapper} relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md text-white [--background:#fafafc] dark:text-black dark:[--background:#111827]`}
     >
       <div
         className={`${styles.animatedBackground} absolute z-[-2] m-auto h-[200px] w-[200px] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[0_0] bg-no-repeat`}

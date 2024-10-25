@@ -8,7 +8,6 @@ import {
   InboxIcon,
   LayersIcon,
   MapIcon,
-  Package2,
   RefreshCwIcon,
 } from "lucide-react";
 
@@ -69,9 +68,6 @@ export default function MainLayout({
       <div className="flex min-h-screen flex-col">
         <Header
           navLinks={navLinks}
-          logoHref="#"
-          logoIcon={<Package2 className="h-6 w-6" />}
-          logoText="Ship Kit"
           searchPlaceholder="Search documentation..."
           userMenuItems={userMenuItems}
         />

@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
-import { useWindowScroll } from "@uidotdev/usehooks";
+import { HeroGraphic } from "@/components/blocks/hero-graphic";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Box, Code, Zap } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 const BackgroundAnimation = () => {
   return (
@@ -31,15 +30,6 @@ const BackgroundAnimation = () => {
 };
 
 export function HeroSection() {
-  const [{ y }] = useWindowScroll();
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    if (!active) {
-      setActive(y > 100);
-    }
-  }, [y]);
-
   return (
     <section className="relative w-full bg-background py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container relative z-10 px-4 md:px-6">
@@ -57,31 +47,28 @@ export function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Link href="/get-started">
-                <Button size="lg">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+              <Link
+                href="/get-started"
+                className={buttonVariants({ size: "lg" })}
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link href="/docs">
-                <Button variant="outline" size="lg">
-                  View Docs
-                  <Code className="ml-2 h-4 w-4" />
-                </Button>
+              <Link
+                href="/docs"
+                className={buttonVariants({ variant: "outline", size: "lg" })}
+              >
+                View Docs
+                <Code className="ml-2 h-4 w-4" />
               </Link>
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div
-              className={`relative ${active ? "opacity-100 transition-opacity duration-1000 ease-in-out animate-in zoom-in-50" : "opacity-0"}`}
-            >
-              <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                  Ship your app <span className="font-bold">today</span>.
-                </span>
-              </NeonGradientCard>
-            </div>
+          <div className="relative flex h-[400px] max-w-3xl flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+            <HeroGraphic />
+            <BorderBeam size={250} duration={12} delay={9} />
           </div>
+        </div>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex items-center space-x-3 rounded-lg bg-muted p-4">

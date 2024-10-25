@@ -1,5 +1,5 @@
 import { routes } from "@/config/routes";
-import { STATUS_CODES } from "@/constants/status-codes";
+import { STATUS_CODES } from "@/config/status-codes";
 import { logger } from "@/lib/logger";
 import { redirectWithCode } from "@/lib/utils/redirect-with-code";
 import { authOptions } from "@/server/auth.config";

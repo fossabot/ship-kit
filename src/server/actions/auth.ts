@@ -1,7 +1,7 @@
 "use server";
 import { routes } from "@/config/routes";
-import { SEARCH_PARAM_KEYS } from "@/constants/search-param-keys";
-import { STATUS_CODES } from "@/constants/status-codes";
+import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
+import { STATUS_CODES } from "@/config/status-codes";
 import { signInActionSchema } from "@/schemas/auth";
 import { signIn, signOut } from "@/server/auth";
 import "server-only";

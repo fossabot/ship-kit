@@ -13,7 +13,6 @@ import { cn } from "@/lib/utils";
 import { useWindowScroll } from "@uidotdev/usehooks";
 import { HomeIcon, PencilIcon } from "lucide-react";
 import Link from "next/link";
-import { useMemo } from "react";
 
 const DATA = {
   navbar: [
@@ -24,7 +23,7 @@ const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: routes.social.github,
+        url: routes.external.github,
         icon: Icons.github,
       },
       // LinkedIn: {
@@ -34,27 +33,32 @@ const DATA = {
       // },
       X: {
         name: "X",
-        url: routes.social.x,
+        url: routes.external.x,
         icon: Icons.x,
       },
       email: {
         name: "Email",
-        url: routes.social.email,
+        url: routes.external.email,
         icon: Icons.email,
       },
     },
   },
 };
+
+const LinkOrIcon = ({ href, ...props }: { href?: string } & React.ComponentPropsWithoutRef<"a">) => {
+  return href ? <Link href={href} {...props} /> : <a {...props} />;
+};
+
 export const SocialDock = ({ className }: { className?: string }) => {
   const [{ x, y }, scrollTo] = useWindowScroll();
-  const isVisible = useMemo(() => y && y > 100, [y]);
+  const isVisible = y && y > 100;
 
   return (
     <>
       <Dock
         direction="middle"
         className={cn(
-          "opacity-0 transition-opacity delay-100 duration-500",
+          "opacity-0 transition-opacity delay-100 duration-500 bg-black/15",
           isVisible && "opacity-100",
           className,
         )}
@@ -63,7 +67,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
           <DockIcon key={item.label}>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link
+                <LinkOrIcon
                   href={item.href}
                   aria-label={item.label}
                   className={cn(
@@ -72,7 +76,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
                   )}
                 >
                   <item.icon className="size-4" />
-                </Link>
+                </LinkOrIcon>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{item.label}</p>
@@ -85,7 +89,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
           <DockIcon key={name}>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link
+                <LinkOrIcon
                   href={social.url}
                   aria-label={social.name}
                   className={cn(
@@ -94,7 +98,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
                   )}
                 >
                   <social.icon className="size-4" />
-                </Link>
+                </LinkOrIcon>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{name}</p>
@@ -106,7 +110,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
         <DockIcon>
           <Tooltip>
             <TooltipTrigger>
-              <ThemeToggle className="rounded-full" />
+              <ThemeToggle className="rounded-full size-12" />
             </TooltipTrigger>
             <TooltipContent>
               <p>Theme</p>

@@ -58,7 +58,7 @@ export function LandingPageComponent() {
         </div>
         <div className="flex space-x-2">
           <Link
-            href={routes.social.github}
+            href={routes.external.github}
             target="_blank"
             className={cn(
               buttonVariants({ variant: "link" }),

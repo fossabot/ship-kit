@@ -1,3 +1,4 @@
+import { NeonCTA } from "@/app/(landing)/_components/neon-cta";
 import { buttonVariants } from "@/components/ui/button";
 import RetroGrid from "@/components/ui/retro-grid";
 import SparklesText from "@/components/ui/sparkles-text";
@@ -94,7 +95,13 @@ export const Footer: React.FC<FooterProps> = async ({
 
   return (
     <footer className={cn(footerStyles({ variant }), className)} {...rest}>
-      <div className="container flex min-h-80 flex-col items-center justify-center py-2xl">
+      <div className="container flex min-h-80 flex-col items-center gap-2xl py-2xl">
+
+      <Link href={routes.buy} className="my-40">
+        <NeonCTA />
+      </Link>
+        <div className="flex justify-between gap-2xl">
+        <div>
         <SparklesText
           duration={2}
           sparklesCount={6}
@@ -102,11 +109,18 @@ export const Footer: React.FC<FooterProps> = async ({
           className="mb-12"
           colors={{ first: "#ff69b4", second: "#FA00FF" }}
         />
-        <div className="flex w-full flex-wrap gap-2xl lg:gap-20">
+      <div className="">
+        Sign up to be notified of new features and updates.
+      </div>
+        </div>
+        <div className="flex flex-wrap gap-2xl lg:gap-20">
           {groupElements}
         </div>
-      </div>
 
+        </div>
+
+
+      </div>
       <RetroGrid
         className={cn("[mask-image:linear-gradient(to_top,white,transparent)]")}
       />
