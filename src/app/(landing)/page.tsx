@@ -3,7 +3,6 @@
 import { ParticlesHero } from "@/app/(landing)/_components/particles-hero";
 import { HeroSection } from "@/components/blocks/hero-section";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
-import { FadeHeading } from "@/components/ui/fade-text";
 import { MagicCard } from "@/components/ui/magic-card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -14,6 +13,8 @@ import { SocialDock } from "@/app/(landing)/_components/social-dock";
 import { SocialMarquee } from "@/app/(landing)/_components/social-marquee";
 import { FAQ } from "@/app/(landing)/faq";
 import { PricingSection } from "@/components/blocks/pricing-section";
+import { Masonry } from "@/components/primitives/masonry";
+import BlurFade from "@/components/ui/blur-fade";
 import { buttonVariants } from "@/components/ui/button";
 import DotPattern from "@/components/ui/dot-pattern";
 import Meteors from "@/components/ui/meteors";
@@ -25,7 +26,7 @@ import { routes } from "@/config/routes";
 import {
   BoxesIcon,
   ChevronRightIcon,
-  Code,
+  Code2Icon,
   CodeIcon,
   DatabaseIcon,
   KeyIcon,
@@ -104,7 +105,10 @@ export default function Home() {
     <>
       <div className="flex flex-col gap-20">
         <ParticlesHero>
-          <div className="relative mx-auto mt-32 flex min-h-64 max-w-[80rem] flex-col items-center justify-center space-y-4 px-6 text-center md:px-8">
+          <div  className="min-h-screen flex flex-col justify-center items-center">
+          <div className="relative mx-auto flex min-h-64 max-w-[80rem] flex-col items-center justify-center gap-4 px-6 text-center md:px-8">
+            <BlurFade delay={1} duration={0.5} inView>
+              
             <Link href="/">
               <AnimatedGradientText className="bg-blue">
                 🚀 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
@@ -117,22 +121,22 @@ export default function Home() {
                 </span>
                 <ChevronRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
               </AnimatedGradientText>
+              
             </Link>
+            </BlurFade>
+            <BlurFade delay={0.5} duration={0.5} inView>
+              <h1 className="text-balance bg-gradient-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl">Launch your app at light speed.</h1>
+            </BlurFade>
 
-            <FadeHeading
-              className="block text-balance bg-gradient-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl"
-              direction="down"
-              framerProps={{
-                show: { transition: { delay: 0.4 } },
-              }}
-              text="Launch your app at light speed."
-            />
+            <BlurFade delay={1} duration={0.5} inView>
+
 
             <p className="animate-fade-in mb-12 translate-y-[-1rem] text-balance text-lg tracking-tight text-gray-400 [--animation-delay:400ms] md:text-xl">
               Ship Kit is a batteries-included Next.js starter kit for building
               apps fast.
               <br className="hidden md:block" />
             </p>
+            </BlurFade>
           </div>
 
           <div className="mt-4 flex items-center justify-center gap-lg">
@@ -141,6 +145,7 @@ export default function Home() {
               <BoxesIcon className="size-5" /> Get ShipKit
             </RainbowButton>
             
+          </div>
           </div>
           <Meteors number={4} />
         </ParticlesHero>
@@ -183,6 +188,8 @@ export default function Home() {
           <SocialMarquee />
         </Section>
 
+        <Masonry />
+
         <Section>
         {/* todo */}
           <SectionHeader>$99 for the first 500 users (389 left)</SectionHeader>
@@ -221,6 +228,7 @@ export default function Home() {
             }
           `}</style>
           Tabs: designers, developers, founders
+          
         </Section>
 
         <Section className="relative gap-40 py-2xl">
@@ -257,7 +265,7 @@ export default function Home() {
               <BoxesIcon className="size-4" /> Get ShipKit
             </Link>
           <Link href={routes.docs} className={buttonVariants({ variant: "outline", size: "lg" })}>
-              <Code className="size-4" /> Documentation
+              <Code2Icon className="size-4" /> Documentation
             </Link>
           </div>
           <span className="text-sm text-gray-500">Not ready to buy? 

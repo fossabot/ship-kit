@@ -57,7 +57,10 @@ export function FAQ() {
             <li>Testing with: Vitest, Jest, React Testing Library</li>
             <li>Github Actions for CI/CD</li>
 
-            <li>Configuration for VSCode and Cursor</li>
+            <li>AI-powered workflows</li>
+            <li>Rules for Cursor.sh</li>
+            <li>Configuration for VSCode and Cursor.sh</li>
+            <li>CLI tools for common tasks</li>
           </ul>
         </AccordionContent>
       </AccordionItem>

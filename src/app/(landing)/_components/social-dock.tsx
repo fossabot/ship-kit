@@ -11,13 +11,13 @@ import {
 import { routes } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useWindowScroll } from "@uidotdev/usehooks";
-import { HomeIcon, PencilIcon } from "lucide-react";
+import { Code2Icon, HomeIcon } from "lucide-react";
 import Link from "next/link";
 
 const DATA = {
   navbar: [
     { href: routes.home, icon: HomeIcon, label: "Home" },
-    { href: routes.docs, icon: PencilIcon, label: "Docs" },
+    { href: routes.docs, icon: Code2Icon, label: "Docs" },
   ],
   contact: {
     social: {
@@ -58,7 +58,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
       <Dock
         direction="middle"
         className={cn(
-          "opacity-0 transition-opacity delay-100 duration-500 bg-black/15",
+          "opacity-0 transition-opacity delay-100 duration-500 bg-white/15 dark:bg-black/15 ",
           isVisible && "opacity-100",
           className,
         )}

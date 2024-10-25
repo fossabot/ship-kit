@@ -9,6 +9,7 @@ interface AnimatedButtonProps
   extends ButtonHTMLAttributes<ButtonProps | LinkProps> {
   children: React.ReactNode;
   href?: string;
+  color?: string;
 }
 
 /**
@@ -21,16 +22,18 @@ interface AnimatedButtonProps
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   children,
   className,
+  href,
+  color = "#818cf8",
   ...props
 }) => {
-  const Element = props?.href ? (
+  const Element = href ? (
     <Link
       className={cn(
         buttonVariants({ variant: "outline" }),
-        "border border-transparent bg-transparent transition-all ease-in-out hover:border-[#818cf8]",
+        `border border-transparent bg-transparent transition-all ease-in-out hover:border-[${color}] text-inherit`,
         className,
       )}
-      href={props.href}
+      href={href}
     >
       {children}
     </Link>
@@ -38,7 +41,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     <Button
       // {...props}
       className={cn(
-        "border border-transparent bg-transparent px-md transition-all duration-1000 ease-in-out hover:border-[#818cf8]",
+        `border border-transparent bg-transparent px-md transition-all duration-1000 ease-in-out hover:border-[${color}] text-inherit`,
         className,
       )}
     >
@@ -48,11 +51,19 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   return (
     <div
-      className={`${styles.buttonWrapper} relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md text-white [--background:#fafafc] dark:text-black dark:[--background:#111827]`}
+      className={cn(
+        styles.buttonWrapper,
+        `relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md [--background:#fafafc] text-black/95 dark:text-white/95 dark:[--background:#111827]`,
+        className,
+      )}
     >
       <div
-        className={`${styles.animatedBackground} absolute z-[-2] m-auto h-[200px] w-[200px] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[0_0] bg-no-repeat`}
-      ></div>
+        className={cn(
+          styles.animatedBackground,
+          "absolute z-[-2] m-auto h-[200px] w-[200px] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[0_0] bg-no-repeat",
+          className,
+        )}
+      />
       {Element}
     </div>
   );

@@ -70,6 +70,7 @@ export const routes: Routes = {
     email: "mailto:me@lacymorrow.com",
     github: "https://github.com/lacymorrow/ship-kit",
     x: "https://x.com/intent/follow?screen_name=lacybuilds",
+    x_follow: "https://x.com/intent/follow?screen_name=lacybuilds",
   },
 
   todo: "/",

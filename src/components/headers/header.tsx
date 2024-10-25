@@ -9,13 +9,12 @@ import { BoxesIcon, Menu, Search } from "lucide-react";
 import Link from "next/link";
 
 import AnimatedButton from "@/components/buttons/animated-button/animated-button";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import { Icons } from "@/components/images/icons";
 import { ThemeToggle } from "@/components/ui/theme";
 import { routes } from "@/config/routes";
 import styles from "@/styles/header.module.css";
 import { useMemo } from "react";
 
-// Define types for our props
 type NavLink = {
   href: string;
   label: string;
@@ -23,21 +22,35 @@ type NavLink = {
 };
 
 type HeaderProps = {
-  navLinks: NavLink[];
+  navLinks?: NavLink[];
   logoHref?: string;
   logoIcon?: React.ReactNode;
   logoText?: string;
-  searchPlaceholder: string;
-  userMenuItems: { label: string; action: () => void }[];
+  searchPlaceholder?: string;
+  userMenuItems?: { label: string; action: () => void }[];
 };
 
+const defaultNavLinks = [{ href: routes.app.dashboard, label: "Dashboard" }];
+
+const defaultUserMenuItems = [
+  {
+    label: "Settings",
+  },
+  {
+    label: "Support",
+  },
+  {
+    label: "Logout",
+  },
+];
+
 export const Header: React.FC<HeaderProps> = ({
-  navLinks,
   logoHref = routes.home,
   logoIcon = <BoxesIcon />,
-  logoText = "Ship Kit",
-  searchPlaceholder,
-  userMenuItems,
+  logoText = "ShipKit",
+  navLinks = defaultNavLinks,
+  userMenuItems = defaultUserMenuItems,
+  searchPlaceholder = "Search documentation...",
 }) => {
   const [{ x, y }, scrollTo] = useWindowScroll();
   const isOpaque = useMemo(() => y && y > 100, [y]);
@@ -124,13 +137,14 @@ export const Header: React.FC<HeaderProps> = ({
                 />
               </div>
             </form>
-            <RainbowButton className="text-primary-foreground">
-              Login
-            </RainbowButton>
             <AnimatedButton>Animated Button</AnimatedButton>
+            <Link href={routes.external.x_follow}>
+              <Icons.x className="size-4" />
+            </Link>
             <ThemeToggle variant="ghost" />
           </div>
         </div>
+        <div className="-m-[88px]"></div>
       </header>
     </>
   );
