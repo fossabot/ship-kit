@@ -1,3 +1,4 @@
+import { wedgesTW } from "@lemonsqueezy/wedges";
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import { fontFamily } from "tailwindcss/defaultTheme";
@@ -9,6 +10,9 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+
+    // Lemonsqueezy Wedges @see https://www.lemonsqueezy.com/wedges
+    "node_modules/@lemonsqueezy/wedges/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -233,7 +237,7 @@ const config = {
   		}
   	}
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [tailwindcssAnimate, wedgesTW()],
 } satisfies Config;
 
 export default config;

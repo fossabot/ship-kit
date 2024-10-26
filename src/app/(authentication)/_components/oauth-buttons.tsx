@@ -6,7 +6,7 @@ import { providerMap } from "@/server/auth.config";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { AuthError } from "next-auth";
 
-export const OAuthButtons = () => {
+export function OAuthButtons() {
   return (
     <div className="flex flex-col gap-2">
       {Object.values(providerMap).map((provider) => {
@@ -22,10 +22,10 @@ export const OAuthButtons = () => {
         return (
           <form
             key={provider.id}
-            action={() => {
+            action={async () => {
               "use server";
               try {
-                void signIn(provider.id, { redirectTo: routes.home });
+                await signIn(provider.id, { redirectTo: routes.home });
               } catch (error) {
                 if (error instanceof AuthError) {
                   return redirectWithCode(routes.auth.signIn, {
