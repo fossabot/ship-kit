@@ -2,7 +2,7 @@
   "parserOptions": {
     "project": true
   },
-  "plugins": ["@typescript-eslint", "drizzle", "prettier"],
+
   "extends": [
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",

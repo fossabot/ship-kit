@@ -5,6 +5,7 @@ import { Noto_Serif_Display as FontSerif } from "next/font/google";
 
 import { Analytics } from "@/components/primitives/analytics";
 import { ErrorToast } from "@/components/primitives/error-toast";
+import { WebVitals } from "@/components/primitives/web-vitals";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen antialiased",
@@ -38,22 +39,24 @@ export default function RootLayout({
       >
         <HolyLoader showSpinner />
 
-        <ThemeProvider attribute="class">
-          <TRPCReactProvider>
-            <TooltipProvider>
+        <TRPCReactProvider>
+          <ThemeProvider attribute="class">
+            <TooltipProvider defaultOpenDelay={100}>
               {children}
 
+              {/* Metrics */}
+              <Analytics />
+              <WebVitals />
+
+              {/* Toasts */}
+              <Toaster />
+              <SonnerToaster />
               <Suspense>
                 <ErrorToast />
               </Suspense>
-
-              <Analytics />
-
-              <Toaster />
-              <SonnerToaster />
             </TooltipProvider>
-          </TRPCReactProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

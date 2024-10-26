@@ -36,14 +36,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "!src/components/blocks/**/*.ts",
-    "!src/components/blocks/**/*.tsx",
-    "!src/components/ui/**/*.ts",
-    "!src/components/ui/**/*.tsx",
-    "!src/lib/hooks/**/*.tsx",
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
+    "src/types/next-auth.d.ts"
   ],
   "exclude": ["node_modules"]
 }

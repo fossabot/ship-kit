@@ -1,4 +1,5 @@
 import { routes } from "@/config/routes";
+import { verifyUser } from "@/server/auth";
 import type { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Discord from "next-auth/providers/discord";
@@ -14,6 +15,13 @@ const providers: NextAuthConfig["providers"] = [
       password: { label: "Password", type: "password" },
     },
     async authorize(credentials) {
+      if (
+        typeof credentials.email !== "string" ||
+        typeof credentials.password !== "string"
+      ) {
+        return null;
+      }
+
       // Implement your logic to verify the user's credentials
       const user = await verifyUser(credentials.email, credentials.password);
       if (user) {

@@ -1,10 +1,10 @@
 "use client";
 
-import { HeroGraphic } from "@/components/blocks/hero-graphic";
-import { BorderBeam } from "@/components/ui/border-beam";
-import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Box, Code, Zap } from "lucide-react";
 import Link from "next/link";
+import { BorderBeam } from "../ui/border-beam";
+import { buttonVariants } from "../ui/button";
+import { HeroGraphic } from "./hero-graphic";
 
 const BackgroundAnimation = () => {
   return (

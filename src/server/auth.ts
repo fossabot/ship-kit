@@ -12,6 +12,7 @@ import {
 } from "@/server/db/schema";
 import { type UserRole } from "@/types/user";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { eq } from "drizzle-orm";
 import NextAuth from "next-auth";
 
 /**
@@ -57,7 +58,7 @@ interface AuthProps {
  */
 const authWithOptions = async (props?: AuthProps) => {
   const session = await nextAuthAuth();
-  const { errorCode, redirect, nextUrl, _role } = props ?? {};
+  const { errorCode, redirect, nextUrl } = props ?? {};
   const protect =
     props?.protect ?? props?.redirectTo !== undefined ?? redirect ?? false;
   const redirectTo = props?.redirectTo ?? routes.auth.signOutIn;
@@ -78,7 +79,7 @@ const authWithOptions = async (props?: AuthProps) => {
     return handleRedirect(errorCode ?? STATUS_CODES.AUTH.code);
   }
 
-  // // TODO: RBAC
+  // TODO: RBAC
   // if (role && session?.user?.role !== role) {
   //   return handleRedirect(errorCode ?? STATUS_CODES.AUTH_ROLE.code); // TODO: We shouldn't sign them out
   // }
@@ -113,9 +114,21 @@ export { authWithOptions as auth, handlers, signIn, signOut, update };
 // } from "./config";
 
 export async function verifyUser(email: string, password: string) {
-  const user = await db.select().from(users).where(users.email.eq(email)).first();
-  if (user && user.password === hashPassword(password)) {
-    return user;
+  const user = await db
+    .select({
+      id: users.id,
+      name: users.name,
+      email: users.email,
+      emailVerified: users.emailVerified,
+      image: users.image,
+      password: users.password, // Ensure the password field is included
+    })
+    .from(users)
+    .where(eq(users.email, email))
+    .execute();
+
+  if (user[0] && user[0].password === hashPassword(password)) {
+    return user[0];
   }
   return null;
 }

@@ -25,7 +25,7 @@ export const SignUpForm = () => {
 
   function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values);
-    // await createUserAction({
+    // return void createUserAction({
     //   email: values.email,
     //   password: values.password,
     // })
@@ -39,7 +39,10 @@ export const SignUpForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={() => void form.handleSubmit(onSubmit)}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="email"

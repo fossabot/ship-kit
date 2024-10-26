@@ -32,7 +32,6 @@ export function OAuthButtons() {
                     code: error.type,
                   });
                 }
-                throw error;
               }
             }}
           >
@@ -49,4 +48,4 @@ export function OAuthButtons() {
       })}
     </div>
   );
-};
+}
