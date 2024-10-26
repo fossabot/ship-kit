@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingIndicator } from "@/components/primitives/loading-indicator";
 import {
   Table,
   TableBody,
@@ -32,7 +33,7 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "level",
     header: "Level",
     cell: ({ row }) => {
-      const level = row.getValue("level");
+      const level = row.getValue("level") as LogLevel;
       return (
         <div className="flex items-center">
           <LogIcon level={level} />
@@ -49,7 +50,7 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => {
-      const timestamp = row.getValue("timestamp");
+      const timestamp = row.getValue("timestamp") as string;
       return new Date(timestamp).toLocaleString();
     },
   },
