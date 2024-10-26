@@ -114,7 +114,8 @@ export const SocialDock = ({ className }: { className?: string }) => {
         <Separator orientation="vertical" className="h-full py-2" />
         <DockIcon>
           <Tooltip>
-            <TooltipTrigger asChild>
+            {/* TODO: asChild */}
+            <TooltipTrigger>
               <ThemeToggle className="size-12 rounded-full" />
             </TooltipTrigger>
             <TooltipContent>

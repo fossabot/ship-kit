@@ -1,19 +1,19 @@
 "use client";
 
+import AnimatedButton from "@/components/buttons/animated-button/animated-button";
+import { Icons } from "@/components/images/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/ui/theme";
+import { routes } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useWindowScroll } from "@uidotdev/usehooks";
 import { BoxesIcon, Menu, Search } from "lucide-react";
 import Link from "next/link";
-
-import AnimatedButton from "@/components/buttons/animated-button/animated-button";
-import { Icons } from "@/components/images/icons";
-import { ThemeToggle } from "@/components/ui/theme";
-import { routes } from "@/config/routes";
-import styles from "@/styles/header.module.css";
 import { useMemo } from "react";
+
+import styles from "@/styles/header.module.css";
 
 interface NavLink {
   href: string;
@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
           styles.container,
           isOpaque && styles.opaque,
           isOpaque &&
-            "-top-[12px] [--background:#fafafc80] dark:[--background:#1c1c22B0]",
+            "-top-[12px] [--background:#fafafc30] dark:[--background:#1c1c2230]",
         )}
       >
         <div className="h-[12px] w-full"></div>
@@ -133,7 +133,6 @@ export const Header: React.FC<HeaderProps> = ({
             <ThemeToggle variant="ghost" />
           </div>
         </div>
-        <div className="-m-[88px]"></div>
       </header>
     </>
   );

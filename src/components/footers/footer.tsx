@@ -95,12 +95,12 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer className={cn(footerStyles({ variant }), className)} {...rest}>
-      <div className="container flex min-h-80 flex-col items-center gap-2xl py-2xl">
-        <Link href={routes.buy} className="my-40">
+      <div className="container flex min-h-80 w-full flex-col items-stretch gap-2xl py-2xl">
+        <Link href={routes.buy} className="mx-auto my-40">
           <NeonCTA />
         </Link>
         <div className="flex justify-between gap-2xl">
-          <div>
+          <div className="">
             <SparklesText
               duration={2}
               sparklesCount={6}

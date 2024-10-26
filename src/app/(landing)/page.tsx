@@ -1,5 +1,4 @@
 import { ParticlesHero } from "@/app/(landing)/_components/particles-hero";
-import { HeroSection } from "@/components/blocks/hero-section";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -94,7 +93,16 @@ const SectionContent = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={cn("w-full", className)}>{children}</div>;
+}) => (
+  <div
+    className={cn(
+      "flex w-full flex-col items-center justify-center gap-4",
+      className,
+    )}
+  >
+    {children}
+  </div>
+);
 
 export default function Home() {
   return (
@@ -144,16 +152,11 @@ export default function Home() {
           <Meteors number={4} />
         </ParticlesHero>
 
-        <Section
-          className={cn(
-            "[mask-image:linear-gradient(to_bottom,white,transparent)]",
-          )}
-        >
-          <SectionTitle>Demo</SectionTitle>
-          <SectionHeader>Build apps and websites fast</SectionHeader>
+        <Section>
+          <SectionHeader>Build apps like these</SectionHeader>
           <ExamplesNav />
 
-          <div className="relative flex max-h-[400px] max-w-4xl flex-col overflow-hidden rounded-lg border bg-background md:shadow-xl">
+          <div className="relative flex max-h-[400px] max-w-4xl flex-col overflow-hidden rounded-lg border bg-background [mask-image:linear-gradient(to_bottom,white,transparent)] md:shadow-xl">
             <MusicPage />
             <BorderBeam size={250} duration={12} delay={9} />
           </div>
@@ -168,8 +171,6 @@ export default function Home() {
             </span>
           </ShinyButton>
         </Section>
-
-        <HeroSection />
 
         <Section>
           <SectionTitle>AI Workflows</SectionTitle>
@@ -213,7 +214,7 @@ export default function Home() {
         <Section>
           <SectionHeader>Stop procrastinating and get building.</SectionHeader>
           <SectionContent>
-            <div className="flex flex-row gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <Link
                 href={routes.buy}
                 className={buttonVariants({ size: "lg" })}
@@ -255,12 +256,14 @@ export default function Home() {
           <SectionCopy>
             ShipKit is built for developers by a developer.
           </SectionCopy>
-          <SectionContent className="mx-auto flex h-12 max-w-md gap-4">
-            <Icons.next />
-            <Icons.react />
-            <Icons.tailwind />
-            <Icons.shadcn />
-            <Icons.typescript />
+          <SectionContent>
+            <div className="mx-auto flex h-12 w-full max-w-md gap-4">
+              <Icons.next />
+              <Icons.react />
+              <Icons.tailwind />
+              <Icons.shadcn />
+              <Icons.typescript />
+            </div>
           </SectionContent>
         </Section>
 
