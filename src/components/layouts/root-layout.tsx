@@ -40,7 +40,7 @@ export default function RootLayout({
         <HolyLoader showSpinner />
 
         <TRPCReactProvider>
-          <ThemeProvider attribute="class">
+          <ThemeProvider attribute="class" defaultTheme="dark">
             <TooltipProvider defaultOpenDelay={100}>
               {children}
 
