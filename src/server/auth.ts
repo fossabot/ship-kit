@@ -111,3 +111,16 @@ export { authWithOptions as auth, handlers, signIn, signOut, update };
 //     validateToken,
 //     isSecureContext,
 // } from "./config";
+
+export async function verifyUser(email: string, password: string) {
+  const user = await db.select().from(users).where(users.email.eq(email)).first();
+  if (user && user.password === hashPassword(password)) {
+    return user;
+  }
+  return null;
+}
+
+function hashPassword(password: string) {
+  // Implement your password hashing logic here
+  return password; // Replace with actual hashing
+}

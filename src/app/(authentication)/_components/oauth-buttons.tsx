@@ -28,7 +28,7 @@ export function OAuthButtons() {
                 await signIn(provider.id, { redirectTo: routes.home });
               } catch (error) {
                 if (error instanceof AuthError) {
-                  return redirectWithCode(routes.auth.signIn, {
+                  redirectWithCode(routes.auth.signIn, {
                     code: error.type,
                   });
                 }

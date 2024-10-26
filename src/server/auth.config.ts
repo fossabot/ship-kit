@@ -1,9 +1,29 @@
 import { routes } from "@/config/routes";
 import type { NextAuthConfig } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import Discord from "next-auth/providers/discord";
 import GitHub from "next-auth/providers/github";
 
-const providers: NextAuthConfig["providers"] = [Discord, GitHub];
+const providers: NextAuthConfig["providers"] = [
+  Discord,
+  GitHub,
+  CredentialsProvider({
+    name: "Credentials",
+    credentials: {
+      email: { label: "Email", type: "email" },
+      password: { label: "Password", type: "password" },
+    },
+    async authorize(credentials) {
+      // Implement your logic to verify the user's credentials
+      const user = await verifyUser(credentials.email, credentials.password);
+      if (user) {
+        return user;
+      } else {
+        return null;
+      }
+    },
+  }),
+];
 
 export const providerMap = providers.map((provider) => {
   if (typeof provider === "function") {
