@@ -41,7 +41,7 @@ export default function RootLayout({
 
         <TRPCReactProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <TooltipProvider defaultOpenDelay={100}>
+            <TooltipProvider delayDuration={100}>
               {children}
 
               {/* Metrics */}
