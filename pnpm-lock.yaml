@@ -207,6 +207,9 @@ importers:
       jiti:
         specifier: ^2.3.3
         version: 2.3.3
+      jotai:
+        specifier: ^2.10.1
+        version: 2.10.1(react@19.0.0-rc-1631855f-20241023)(types-react@19.0.0-rc.1)
       lint-staged:
         specifier: ^15.2.10
         version: 15.2.10
@@ -4379,6 +4382,18 @@ packages:
 
   jose@5.9.6:
     resolution: {integrity: sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==}
+
+  jotai@2.10.1:
+    resolution: {integrity: sha512-4FycO+BOTl2auLyF2Chvi6KTDqdsdDDtpaL/WHQMs8f3KS1E3loiUShQzAzFA/sMU5cJ0hz/RT1xum9YbG/zaA==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': npm:types-react@19.0.0-rc.1
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-base64@3.7.7:
     resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
@@ -10492,6 +10507,11 @@ snapshots:
   jiti@2.3.3: {}
 
   jose@5.9.6: {}
+
+  jotai@2.10.1(react@19.0.0-rc-1631855f-20241023)(types-react@19.0.0-rc.1):
+    optionalDependencies:
+      '@types/react': types-react@19.0.0-rc.1
+      react: 19.0.0-rc-1631855f-20241023
 
   js-base64@3.7.7: {}
 
