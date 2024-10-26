@@ -3,7 +3,7 @@ import { SignInForm } from "@/app/(authentication)/sign-in/_components/sign-in-f
 import { Separator } from "@/components/ui/separator";
 import { providerMap } from "@/server/auth.config";
 
-export const SignInOptions = async () => {
+export const SignInOptions = () => {
   return (
     <main className="flex items-center justify-center py-lg">
       <div className="mx-auto grid w-[350px] gap-lg">

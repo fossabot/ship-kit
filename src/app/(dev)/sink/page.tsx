@@ -9,51 +9,8 @@ import { FadeHeading } from "@/components/ui/fade-text";
 import { MagicCard } from "@/components/ui/magic-card";
 import SparklesText from "@/components/ui/sparkles-text";
 import { cn } from "@/lib/utils";
-import {
-  ArrowRightIcon,
-  ChevronRightIcon,
-  ClockIcon,
-  GridIcon,
-  InboxIcon,
-  LayersIcon,
-  MapIcon,
-  Package2,
-  RefreshCwIcon,
-} from "lucide-react";
+import { ArrowRightIcon, ChevronRightIcon, Package2 } from "lucide-react";
 import { useTheme } from "next-themes";
-
-const features = [
-  {
-    icon: <LayersIcon />,
-    title: "Issues",
-    description: "Create new tasks and subtasks in seconds",
-  },
-  {
-    icon: <RefreshCwIcon />,
-    title: "Real-time Sync",
-    description: "Synchronized instantly across all users",
-  },
-  {
-    icon: <ClockIcon />,
-    title: "Cycles",
-    description: "Don't sprint - build momentum with Cycles",
-  },
-  {
-    icon: <GridIcon />,
-    title: "Projects",
-    description: "Define larger initiatives and features",
-  },
-  {
-    icon: <MapIcon />,
-    title: "Roadmap",
-    description: "Plan visually with live predictions",
-  },
-  {
-    icon: <InboxIcon />,
-    title: "Backlog",
-    description: "A place for new issues and ideas",
-  },
-];
 
 const navLinks = [
   { href: "#", label: "Dashboard" },

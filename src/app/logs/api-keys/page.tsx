@@ -78,7 +78,7 @@ const ApiKeysPage = () => {
       }
     };
 
-    fetchApiKeys();
+    void fetchApiKeys();
   }, [user]);
 
   const generateApiKey = async () => {
@@ -113,7 +113,7 @@ const ApiKeysPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="mb-4 text-2xl font-bold">API Keys</h1>
-      <Button onClick={generateApiKey} className="mb-4">
+      <Button onClick={() => void generateApiKey()} className="mb-4">
         Generate New API Key
       </Button>
       <DynamicDataTable

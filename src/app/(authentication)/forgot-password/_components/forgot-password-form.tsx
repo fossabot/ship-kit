@@ -43,7 +43,7 @@ export function ForgotPasswordForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={() => void form.handleSubmit(onSubmit)}
         className="flex flex-col gap-sm"
       >
         <FormField

@@ -1,7 +1,4 @@
-import {
-  Button,
-  buttonVariants
-} from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React, { type ButtonHTMLAttributes } from "react";
@@ -10,7 +7,7 @@ import styles from "./animated-button.module.css";
 // Extend the ButtonHTMLAttributes to include all possible button props
 interface AnimatedButtonProps
   // Todo: fix type
-  extends ButtonHTMLAttributes<HTMLButtonElement> { 
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   href?: string;
   color?: string;

@@ -23,7 +23,8 @@ export const SignUpForm = () => {
     defaultValues: getSchemaDefaults(signUpSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof signUpSchema>) {
+  function onSubmit(values: z.infer<typeof signUpSchema>) {
+    console.log(values);
     // await createUserAction({
     //   email: values.email,
     //   password: values.password,

@@ -72,7 +72,7 @@ interface Redirect {
   permanent: boolean;
 }
 
-export const redirects = async (): Promise<Redirect[]> => {
+export const redirects = (): Redirect[] => {
   return [
     ...createRedirects(["/join", "/signup"], routes.auth.signUp),
     ...createRedirects(["/login", "/log-in", "/signin"], routes.auth.signIn),

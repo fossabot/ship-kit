@@ -30,7 +30,9 @@ interface HeaderProps {
   userMenuItems?: { label: string; action: () => void }[];
 }
 
-const defaultNavLinks = [{ href: routes.app.dashboard, label: "Dashboard", isCurrent: false }];
+const defaultNavLinks = [
+  { href: routes.app.dashboard, label: "Dashboard", isCurrent: false },
+];
 
 export const Header: React.FC<HeaderProps> = ({
   logoHref = routes.home,

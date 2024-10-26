@@ -41,7 +41,7 @@ If the question is not related to Jesus or cannot be reasonably answered based o
     });
 
     const response =
-      completion.choices[0]?.message?.content ||
+      completion.choices[0]?.message?.content ??
       "I'm sorry, I couldn't generate a response. Please try again.";
 
     return NextResponse.json({ response }, { status: 200 });

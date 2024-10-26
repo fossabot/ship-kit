@@ -6,9 +6,9 @@ export const SignUpWithGithub = () => {
   return (
     <>
       <form
-        action={async () => {
+        action={() => {
           "use server";
-          await signIn("github", { redirectTo: routes.home ?? "/" });
+          void signIn("github", { redirectTo: routes.home ?? "/" });
         }}
       >
         <Button type="submit" variant="outline" className="w-full">

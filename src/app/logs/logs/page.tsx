@@ -120,7 +120,7 @@ const LogsPage = () => {
       }
     };
 
-    fetchLogs();
+    void fetchLogs();
   }, [user]);
 
   if (isLoading) return <LoadingIndicator />;

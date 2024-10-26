@@ -53,7 +53,7 @@ const LinkOrIcon = ({
 };
 
 export const SocialDock = ({ className }: { className?: string }) => {
-  const [{ x, y }, scrollTo] = useWindowScroll();
+  const [{ y }] = useWindowScroll();
   const isVisible = y && y > 100;
 
   return (

@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/config/routes"; // Add this line
 import Link from "next/link";
 
-export default async function NotFoundPage() {
+export default function NotFoundPage() {
   return (
     <Boundary title="404: Not Found">
       <div className="flex gap-md">

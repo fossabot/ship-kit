@@ -50,9 +50,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    let { isTestKey, projectId } = await request.json().catch(() => {
+    const result = await request.json().catch(() => {
       return { isTestKey: false, projectId: undefined };
     });
+    const isTestKey = result.isTestKey;
+    let projectId = result.projectId;
 
     console.log(
       `POST request received. isTestKey: ${isTestKey}, projectId: ${projectId}`,

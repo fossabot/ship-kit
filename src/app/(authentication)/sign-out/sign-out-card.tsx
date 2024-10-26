@@ -48,7 +48,7 @@ export function SignOutCard() {
           </CardContent>
           <CardFooter>
             <Button
-              onClick={handleSignOut}
+              onClick={() => void handleSignOut()}
               className="w-full transform bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-600"
               disabled={isSigningOut}
             >

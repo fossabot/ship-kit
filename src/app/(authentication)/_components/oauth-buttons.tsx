@@ -22,10 +22,10 @@ export const OAuthButtons = () => {
         return (
           <form
             key={provider.id}
-            action={async () => {
+            action={() => {
               "use server";
               try {
-                await signIn(provider.id, { redirectTo: routes.home });
+                void signIn(provider.id, { redirectTo: routes.home });
               } catch (error) {
                 if (error instanceof AuthError) {
                   return redirectWithCode(routes.auth.signIn, {

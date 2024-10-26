@@ -53,7 +53,10 @@ export function WWJHDDemo() {
         What Would Jesus Have Done?
       </h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={() => void form.handleSubmit(onSubmit)}
+          className="space-y-6"
+        >
           <FormField
             control={form.control}
             name="question"

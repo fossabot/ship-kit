@@ -171,7 +171,7 @@ export const LiveLogs = () => {
 
       {isConnected && (
         <Button
-          onClick={handleSendTestLog}
+          onClick={() => void handleSendTestLog()}
           disabled={isSendingTestLog}
           className="mb-4"
         >
