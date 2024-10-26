@@ -1,10 +1,9 @@
-import { NetworkRequestLogger } from "@/app/(demo)/network/network-request-logger"
+import { NetworkRequestLogger } from "@/app/(demo)/network/network-request-logger";
 
 export default function Page() {
-  
   return (
-    <div className="min-h-screen bg-indigo-900 flex items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-indigo-900 p-4">
       <NetworkRequestLogger />
     </div>
-  )
+  );
 }

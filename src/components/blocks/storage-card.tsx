@@ -1,7 +1,7 @@
-import { Database } from "lucide-react"
+import { Database } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
 export function StorageCard() {
   return (
@@ -12,7 +12,9 @@ export function StorageCard() {
         </div>
         <div className="grid flex-1 gap-1">
           <p className="font-medium">Need more insights?</p>
-          <p className="text-muted-foreground">Get metrics, projects, and teams when you upgrade.</p>
+          <p className="text-muted-foreground">
+            Get metrics, projects, and teams when you upgrade.
+          </p>
           <Progress
             value={79.2}
             className="mt-1"
@@ -21,5 +23,5 @@ export function StorageCard() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

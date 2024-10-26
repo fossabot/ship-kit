@@ -14,7 +14,11 @@ export default function GlobalError({
   return (
     <html>
       <body>
-        <Boundary title="Something went wrong!" actionText="Try again" onAction={resetAction}>
+        <Boundary
+          title="Something went wrong!"
+          actionText="Try again"
+          onAction={resetAction}
+        >
           <div className="text-xs">
             <pre>{error.message}</pre>
           </div>

@@ -8,7 +8,7 @@ import { and, desc, eq, inArray } from "drizzle-orm";
  * @param limit - The maximum number of logs to retrieve.
  * @returns A list of logs.
  */
-export async function getUserLogs(userId: string, limit: number = 100) {
+export async function getUserLogs(userId: string, limit = 100) {
   const userProjectIds = await db
     .select({ projectId: projectMembers.projectId })
     .from(projectMembers)
@@ -43,7 +43,7 @@ export async function getUserLogs(userId: string, limit: number = 100) {
  * @param limit - The maximum number of logs to retrieve.
  * @returns A list of logs.
  */
-export async function getApiKeyLogs(apiKeyId: string, limit: number = 100) {
+export async function getApiKeyLogs(apiKeyId: string, limit = 100) {
   return db.query.logs.findMany({
     where: eq(logs.apiKeyId, apiKeyId),
     orderBy: [desc(logs.timestamp)],

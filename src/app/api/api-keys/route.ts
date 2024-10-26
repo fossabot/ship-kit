@@ -1,3 +1,4 @@
+import { stackServerApp } from "@/lib/stack";
 import { db } from "@/server/db";
 import { apiKeys, projectMembers, projects } from "@/server/db/schema";
 import { createApiKey } from "@/server/services/api-keys/api-keys";
@@ -5,7 +6,6 @@ import {
   ensureUserExists,
   getUserProjects,
 } from "@/server/services/user/user-service";
-import { stackServerApp } from "@/stack";
 import { eq, inArray } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         );
       }
 
-      let userProjects = await getUserProjects(dbUser.id);
+      const userProjects = await getUserProjects(dbUser.id);
       console.log(`User projects:`, userProjects);
 
       if (userProjects.length === 0) {

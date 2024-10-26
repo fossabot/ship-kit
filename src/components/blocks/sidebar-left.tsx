@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   AudioWaveform,
@@ -12,20 +12,20 @@ import {
   Settings2,
   Sparkles,
   Trash2,
-} from "lucide-react"
-import * as React from "react"
+} from "lucide-react";
+import * as React from "react";
 
-import { NavFavorites } from "@/components/blocks/nav-favorites"
-import { NavMain } from "@/components/blocks/nav-main"
-import { NavSecondary } from "@/components/blocks/nav-secondary"
-import { NavWorkspaces } from "@/components/blocks/nav-workspaces"
-import { TeamSwitcher } from "@/components/blocks/team-switcher"
+import { NavFavorites } from "@/components/blocks/nav-favorites";
+import { NavMain } from "@/components/blocks/nav-main";
+import { NavSecondary } from "@/components/blocks/nav-secondary";
+import { NavWorkspaces } from "@/components/blocks/nav-workspaces";
+import { TeamSwitcher } from "@/components/blocks/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
@@ -256,7 +256,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function SidebarLeft({
   ...props
@@ -274,5 +274,5 @@ export function SidebarLeft({
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

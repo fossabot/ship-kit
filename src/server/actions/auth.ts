@@ -2,7 +2,9 @@
 import { routes } from "@/config/routes";
 import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 import { STATUS_CODES } from "@/config/status-codes";
-import { signInActionSchema } from "@/schemas/auth";
+import { validatedAction } from "@/lib/utils/middleware";
+import { forgotPasswordSchema, signInActionSchema } from "@/schemas/auth";
+import { userApplySchema } from "@/schemas/user";
 import { signIn, signOut } from "@/server/auth";
 import "server-only";
 import { createServerAction } from "zsa";
@@ -29,32 +31,32 @@ export const signInAction = createServerAction()
   });
 
 // Todo: Implement forgot password
-// export const forgotPasswordAction = createServerAction()
-//   .input(forgotPasswordSchema)
-//   .handler(async ({ input }) => {
-//     return await forgotPassword(input);
-//   });
+export const forgotPasswordAction = createServerAction()
+  .input(forgotPasswordSchema)
+  .handler(async ({ input }) => {
+    // return await forgotPassword(input);
+  });
 
-// export const signUpAction = validatedAction(
-//   userApplySchema,
-//   async (data: any, formData: FormData) => {
-//     console.log(formData);
-//     console.log(formData.get("address_object"));
-//     const email = formData.get("email") as string;
-//     const acceptTerms = formData.get("acceptTerms") === "on";
+export const signUpAction = validatedAction(
+  userApplySchema,
+  async (data: any, formData: FormData) => {
+    console.log(formData);
+    console.log(formData.get("address_object"));
+    const email = formData.get("email") as string;
+    const acceptTerms = formData.get("acceptTerms") === "on";
 
-//     // Parse the location JSON back into an object
-//     const addressJson = formData.get("address_object") as string;
-//     const address = JSON.parse(addressJson);
+    // Parse the location JSON back into an object
+    const addressJson = formData.get("address_object") as string;
+    const address = JSON.parse(addressJson);
 
-//     const payload = {
-//       email,
-//       address,
-//       acceptTerms,
-//     };
+    const payload = {
+      email,
+      address,
+      acceptTerms,
+    };
 
-//     await new Promise((resolve) => setTimeout(resolve, 1000));
-
-//     // const response = await createVendorAction(payload);
-//   },
-// );
+    return await Promise.resolve(() => {
+      console.log(payload);
+    });
+  },
+);

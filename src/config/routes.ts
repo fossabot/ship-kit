@@ -1,26 +1,16 @@
-import { Route } from "next";
+import { type Route } from "next";
 
-type RouteObject = {
+interface RouteObject {
   path: string;
   params?: Record<string, any>;
-};
-
-type RouteValueBase = Route | RouteObject;
-
-interface RoutesInterface {
-  [key: string]: RouteValueBase | RoutesInterface;
 }
-
-type RouteValue = RouteValueBase | RoutesInterface;
-
-type Routes = Record<string, RouteValue>;
 
 export const createRoute = (
   path: string,
   params: Record<string, any> = {},
 ): RouteObject => ({ path, params });
 
-export const routes: Routes = {
+export const routes = {
   home: "/",
   buy: "/buy",
   docs: "/docs",
@@ -47,11 +37,12 @@ export const routes: Routes = {
   },
 
   api: {
+    apiKeys: "/api/api-keys",
+    apiKey: createRoute("/api/api-keys/:key", { key: null }),
+
     logs: "/api/logs",
     live: "/api/live-logs",
     sse: "/api/sse-logs",
-    apiKeys: "/api/api-keys",
-    apiKey: createRoute("/api/api-keys/:key", { key: null }),
     sendTestLog: "/api/send-test-log",
   },
 
@@ -63,8 +54,7 @@ export const routes: Routes = {
     network: "/demo/network",
   },
 
-    external: {
-
+  external: {
     website: "https://lacymorrow.com",
     // Social
     email: "mailto:me@lacymorrow.com",
@@ -76,19 +66,19 @@ export const routes: Routes = {
   todo: "/",
 } as const;
 
-type Redirect = {
+interface Redirect {
   source: string;
   destination: string;
   permanent: boolean;
-};
+}
 
 export const redirects = async (): Promise<Redirect[]> => {
   return [
-    ...createRedirects(["/join", "/signup"], routes?.auth?.signUp),
-    ...createRedirects(["/login", "/log-in", "/signin"], routes?.auth?.signIn),
+    ...createRedirects(["/join", "/signup"], routes.auth.signUp),
+    ...createRedirects(["/login", "/log-in", "/signin"], routes.auth.signIn),
     ...createRedirects(
       ["/logout", "/log-out", "/signout"],
-      routes?.auth?.signOut,
+      routes.auth.signOut,
     ),
   ];
 };

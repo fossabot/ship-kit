@@ -113,6 +113,9 @@ importers:
       '@trpc/server':
         specifier: ^11.0.0-rc.446
         version: 11.0.0-rc.593
+      '@types/react-dom':
+        specifier: npm:types-react-dom@19.0.0-alpha.3
+        version: types-react-dom@19.0.0-alpha.3
       '@uidotdev/usehooks':
         specifier: ^2.4.1
         version: 2.4.1(react-dom@19.0.0-rc-1631855f-20241023(react@19.0.0-rc-1631855f-20241023))(react@19.0.0-rc-1631855f-20241023)
@@ -270,9 +273,6 @@ importers:
       '@types/react':
         specifier: npm:types-react@19.0.0-alpha.3
         version: types-react@19.0.0-alpha.3
-      '@types/react-dom':
-        specifier: npm:types-react-dom@19.0.0-alpha.3
-        version: types-react-dom@19.0.0-alpha.3
       '@types/ws':
         specifier: ^8.5.12
         version: 8.5.12

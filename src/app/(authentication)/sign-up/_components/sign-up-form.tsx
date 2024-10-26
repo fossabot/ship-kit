@@ -1,6 +1,6 @@
 "use client";
 
-import { signUpSchema } from "@/lib/schemas/auth";
+import { signUpSchema } from "@/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
@@ -15,9 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createUserAction } from "@/lib/actions/users";
 import { getSchemaDefaults } from "@/lib/utils/get-schema-defaults";
-import { toast } from "sonner";
 
 export const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -26,16 +24,16 @@ export const SignUpForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
-    await createUserAction({
-      email: values.email,
-      password: values.password,
-    })
-      .then((_response) => {
-        toast.success("Account created successfully.");
-      })
-      .catch((error) => {
-        toast.error(String(error));
-      });
+    // await createUserAction({
+    //   email: values.email,
+    //   password: values.password,
+    // })
+    //   .then((_response) => {
+    //     toast.success("Account created successfully.");
+    //   })
+    //   .catch((error) => {
+    //     toast.error(String(error));
+    //   });
   }
 
   return (

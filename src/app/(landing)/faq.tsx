@@ -24,7 +24,7 @@ export function FAQ() {
           <ul>
             <li>Next.js v15 (with App Router and Turbopack)</li>
             <li>React v19</li>
-            
+
             <li>NextAuth v5</li>
             <li>Stack Auth</li>
             <li>Clerk Auth</li>
@@ -45,13 +45,20 @@ export function FAQ() {
 
             <li>Sendgrid</li>
             <li>Resend</li>
+            <li>Pre-made Email Templates</li>
 
             <li>Shadcn/ui (+CLI)</li>
             <li>Magic UI (animated components)</li>
             <li>Dark mode</li>
 
-            <li>Full Server Action support (works with JavaScript disabled!)</li>
-            <li>Type-safe everything: API routes, forms, server actions, etc.</li>
+            <li>Web Workers Example</li>
+
+            <li>
+              Full Server Action support (works with JavaScript disabled!)
+            </li>
+            <li>
+              Type-safe everything: API routes, forms, server actions, etc.
+            </li>
             <li>React Hook Form + Server Actions + Zod Schemas</li>
             <li>Aggressive TS, Prettier, and Eslint rules</li>
             <li>Testing with: Vitest, Jest, React Testing Library</li>
@@ -107,29 +114,29 @@ export function FAQ() {
           </ul>
         </AccordionContent>
       </AccordionItem>
-                  <AccordionItem value="what-is-shipkit-not">
+      <AccordionItem value="what-is-shipkit-not">
         <AccordionTrigger>What is ShipKit not?</AccordionTrigger>
         <AccordionContent>
-        ShipKit is not a framework. It's a set of tools and libraries that you can use to build your product.
+          ShipKit is not a framework. It's a set of tools and libraries that you
+          can use to build your product.
         </AccordionContent>
       </AccordionItem>
-                    <AccordionItem value="who-am-i">
-          <AccordionTrigger>Who am I?</AccordionTrigger>
-        <AccordionContent>
-        </AccordionContent>
+      <AccordionItem value="who-am-i">
+        <AccordionTrigger>Who am I?</AccordionTrigger>
+        <AccordionContent></AccordionContent>
       </AccordionItem>
-            <AccordionItem value="who-are-you-and-why-should-i-care">
+      <AccordionItem value="who-are-you-and-why-should-i-care">
         <AccordionTrigger>Who are you and why should I care?</AccordionTrigger>
         <AccordionContent>
-          , a lifelong web developer and entrepreneur with a passion for clean, performant, and maintainable code.
-          I <em>love</em> to code, and I yearn for the{" "}
-          <em>perfect</em> developer experience.
+          , a lifelong web developer and entrepreneur with a passion for clean,
+          performant, and maintainable code. I <em>love</em> to code, and I
+          yearn for the <em>perfect</em> developer experience.
           <br />
-          <br />
-          I couldn't find anything that met my standards for production-ready, so I built my own.
+          <br />I couldn't find anything that met my standards for
+          production-ready, so I built my own.
         </AccordionContent>
       </AccordionItem>
-                  <AccordionItem value="who-are-you-and-why-should-i-care">
+      <AccordionItem value="who-are-you-and-why-should-i-care">
         <AccordionTrigger>But why should I care?</AccordionTrigger>
         <AccordionContent>
           More time for you to focus on what makes your product unique.
@@ -142,11 +149,9 @@ export function FAQ() {
           </ul>
         </AccordionContent>
       </AccordionItem>
-                  <AccordionItem value="but-why">
+      <AccordionItem value="but-why">
         <AccordionTrigger>But why?</AccordionTrigger>
-        <AccordionContent>
-          Chicken thigh.
-        </AccordionContent>
+        <AccordionContent>Chicken thigh.</AccordionContent>
       </AccordionItem>
     </Accordion>
   );

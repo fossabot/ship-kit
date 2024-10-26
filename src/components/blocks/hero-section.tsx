@@ -64,11 +64,11 @@ export function HeroSection() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-          <div className="relative flex h-[400px] max-w-3xl flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-            <HeroGraphic />
-            <BorderBeam size={250} duration={12} delay={9} />
+            <div className="relative flex h-[400px] max-w-3xl flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+              <HeroGraphic />
+              <BorderBeam size={250} duration={12} delay={9} />
+            </div>
           </div>
-        </div>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex items-center space-x-3 rounded-lg bg-muted p-4">

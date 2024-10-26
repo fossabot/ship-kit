@@ -8,7 +8,10 @@ export default async function NotFoundPage() {
   return (
     <Boundary title="404: Not Found">
       <div className="flex gap-md">
-        <Link href={routes.home} className={buttonVariants({ variant: "outline" })}>
+        <Link
+          href={routes.home}
+          className={buttonVariants({ variant: "outline" })}
+        >
           Go home
         </Link>
         <p>

@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { signOutAction } from "@/lib/actions/auth";
+import { signOutAction } from "@/server/actions/auth";
 import { motion } from "framer-motion";
 import { HandIcon, LogOutIcon } from "lucide-react";
 import { useState } from "react";
@@ -37,7 +37,9 @@ export function SignOutCard() {
         <div className="w-1/2">
           <CardHeader>
             <CardTitle className="text-center text-2xl">Farewell!</CardTitle>
-            <CardDescription className="text-center">Ready to sign out?</CardDescription>
+            <CardDescription className="text-center">
+              Ready to sign out?
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-center text-sm text-muted-foreground">

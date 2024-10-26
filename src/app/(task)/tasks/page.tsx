@@ -1,7 +1,7 @@
 "use client";
 
 import { LatestPost } from "@/app/_components/post";
-import { UserGreeting } from "@/app/_components/UserGreeting";
+
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/config/routes";
 import { logger } from "@/lib/logger";
@@ -18,7 +18,6 @@ const HomePage = () => {
     <>
       <div className="flex min-h-screen flex-col items-center justify-center">
         <h1 className="mb-4 text-3xl font-bold">Welcome to Task Manager</h1>
-        <UserGreeting />
         <LatestPost />
         <p className="mb-4">Please sign in to manage your tasks</p>
         {user ? (

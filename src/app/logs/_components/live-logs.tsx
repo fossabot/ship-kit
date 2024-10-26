@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { routes } from "@/config/routes";
-import logger from "@/utils/logger";
-import { ColumnDef } from "@tanstack/react-table";
+import { logger } from "@/lib/logger";
+import { type ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
 interface Log {

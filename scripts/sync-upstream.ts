@@ -1,21 +1,25 @@
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
 
 // Configuration
 const UPSTREAM_REMOTE = 'upstream';
 const UPSTREAM_BRANCH = 'main'; // or 'master', depending on your upstream's default branch
 const CURRENT_BRANCH = 'main'; // or the branch you want to update
 
-function runCommand(command) {
+function runCommand(command: string): string {
   try {
     return execSync(command, { encoding: 'utf8', stdio: 'pipe' });
   } catch (error) {
-    console.error(`Error executing command: ${command}`);
-    console.error(error.stderr);
+    if (error instanceof Error) {
+      console.error(`Error executing command: ${command}`);
+      console.error((error as { stderr?: string }).stderr || error.message);
+    } else {
+      console.error(`Unknown error occurred while executing command: ${command}`);
+    }
     process.exit(1);
   }
 }
 
-function syncUpstream() {
+function syncUpstream(): void {
   console.log('Syncing from upstream...');
 
   // Ensure we have the upstream remote

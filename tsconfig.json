@@ -13,6 +13,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
+    "strictNullChecks": true,
 
     /* Bundled projects */
     "lib": ["dom", "dom.iterable", "ES2022"],
@@ -35,9 +36,14 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "!src/components/blocks/**/*.ts",
+    "!src/components/blocks/**/*.tsx",
+    "!src/components/ui/**/*.ts",
+    "!src/components/ui/**/*.tsx",
+    "!src/lib/hooks/**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
   ],
   "exclude": ["node_modules"]
 }

@@ -3,7 +3,7 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { ThemeProvider, useTheme } from "next-themes";
 
-import { Button, ButtonProps } from "./button";
+import { Button, type ButtonProps } from "./button";
 import {
   DropdownMenu,
   DropdownMenuContent,

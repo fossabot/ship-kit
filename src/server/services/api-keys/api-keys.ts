@@ -1,7 +1,7 @@
 import { db } from "@/server/db";
 import { apiKeys } from "@/server/db/schema";
-import { btoa } from "base64-js";
-import { crypto } from "crypto";
+import { fromByteArray } from "base64-js";
+import crypto from "crypto";
 import { eq } from "drizzle-orm";
 
 /**
@@ -45,5 +45,5 @@ export async function createApiKey(projectId: string, expiresAt?: Date) {
 function generateApiKey(): string {
   const array = new Uint8Array(32);
   crypto.getRandomValues(array);
-  return btoa(String.fromCharCode(...array));
+  return fromByteArray(array);
 }

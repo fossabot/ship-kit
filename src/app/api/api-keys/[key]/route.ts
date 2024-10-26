@@ -1,14 +1,17 @@
-import { db } from '@/server/db';
-import { apiKeys } from '@/server/db/schema';
-import { eq } from 'drizzle-orm';
-import { NextResponse } from 'next/server';
+import { db } from "@/server/db";
+import { apiKeys } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
-export async function GET(request: Request, props: { params: Promise<{ key: string }> }) {
+export async function GET(
+  request: Request,
+  props: { params: Promise<{ key: string }> },
+) {
   const params = await props.params;
   const apiKey = params.key;
 
   if (!apiKey) {
-    return NextResponse.json({ error: 'API key is required' }, { status: 400 });
+    return NextResponse.json({ error: "API key is required" }, { status: 400 });
   }
 
   try {
@@ -20,7 +23,10 @@ export async function GET(request: Request, props: { params: Promise<{ key: stri
 
     return NextResponse.json({ isValid });
   } catch (error) {
-    console.error('Error checking API key:', error);
-    return NextResponse.json({ error: 'Failed to check API key' }, { status: 500 });
+    console.error("Error checking API key:", error);
+    return NextResponse.json(
+      { error: "Failed to check API key" },
+      { status: 500 },
+    );
   }
 }

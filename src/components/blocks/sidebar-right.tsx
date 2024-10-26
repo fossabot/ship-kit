@@ -1,9 +1,9 @@
-import { Plus } from "lucide-react"
-import * as React from "react"
+import { Plus } from "lucide-react";
+import * as React from "react";
 
-import { Calendars } from "@/components/blocks/calendars"
-import { DatePicker } from "@/components/blocks/date-picker"
-import { NavUser } from "@/components/blocks/nav-user"
+import { Calendars } from "@/components/blocks/calendars";
+import { DatePicker } from "@/components/blocks/date-picker";
+import { NavUser } from "@/components/blocks/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -12,8 +12,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator
-} from "@/components/ui/sidebar"
+  SidebarSeparator,
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
@@ -36,7 +36,7 @@ const data = {
       items: ["Travel", "Reminders", "Deadlines"],
     },
   ],
-}
+};
 
 export function SidebarRight({
   ...props
@@ -44,7 +44,7 @@ export function SidebarRight({
   return (
     <Sidebar
       collapsible="none"
-      className="sticky hidden lg:flex top-0 h-svh border-l"
+      className="sticky top-0 hidden h-svh border-l lg:flex"
       {...props}
     >
       <SidebarHeader className="h-16 border-b border-sidebar-border">
@@ -66,5 +66,5 @@ export function SidebarRight({
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

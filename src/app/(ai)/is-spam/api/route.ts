@@ -10,31 +10,52 @@
  */
 
 import { isSpam } from "@/server/services/is-spam/is-spam";
-import { createSafeRoute } from "next-safe-route";
+import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+
+const schema = z.object({
+  content: z.string(),
+  sender: z.string().optional(),
+});
 
 /**
  * Handles both GET and POST requests to determine if an email is spam or a phishing attempt.
  * Accepts content either in the request body or search params.
  */
+async function handler(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const method = req.method;
 
-const querySchema = z.object({
-  content: z.string(),
-  sender: z.string().optional(),
-});
+    let data: z.infer<typeof schema>;
 
-const bodySchema = z.object({
-  content: z.string(),
-  sender: z.string().optional(),
-});
+    if (method === "GET") {
+      data = schema.parse({
+        content: searchParams.get("content"),
+        sender: searchParams.get("sender"),
+      });
+    } else if (method === "POST") {
+      const body = await req.json();
+      data = schema.parse(body);
+    } else {
+      return NextResponse.json(
+        { error: "Method not allowed" },
+        { status: 405 },
+      );
+    }
 
-const handler = async (request: Request, context: any) => {
-  const content = context?.query?.content ?? context?.body?.content;
-  const sender = context?.query?.sender ?? context?.body?.sender;
+    const result = await isSpam(data);
+    return NextResponse.json(result);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: error.errors }, { status: 400 });
+    }
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
+}
 
-  const result = await isSpam({ content, sender });
-  return Response.json(result, { status: 200 });
-};
-
-export const GET = createSafeRoute().query(querySchema).handler(handler);
-export const POST = createSafeRoute().body(bodySchema).handler(handler);
+export const GET = handler;
+export const POST = handler;

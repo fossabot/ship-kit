@@ -14,11 +14,18 @@ interface AccordionListProps {
   accordionProps?: any; // TODO: fix type
 }
 
-export const AccordionList: React.FC<AccordionListProps> = ({ items, accordionProps }) => {
+export const AccordionList: React.FC<AccordionListProps> = ({
+  items,
+  accordionProps,
+}) => {
   return (
     <Accordion type="single" collapsible {...accordionProps}>
       {items.map((item, index) => (
-        <AccordionItem key={index} value={`item-${index + 1}`} className="my-md border p-sm">
+        <AccordionItem
+          key={index}
+          value={`item-${index + 1}`}
+          className="my-md border p-sm"
+        >
           <AccordionTrigger>{item.title}</AccordionTrigger>
           <AccordionContent>
             <div className="px-sm">

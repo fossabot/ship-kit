@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
 import { GeistSans as fontSans } from "geist/font/sans";
-import { Noto_Serif_Display as FontSerif, Noto_Sans } from "next/font/google";
+import { Noto_Serif_Display as FontSerif } from "next/font/google";
 
 import { Analytics } from "@/components/primitives/analytics";
 import { ErrorToast } from "@/components/primitives/error-toast";
@@ -13,11 +13,6 @@ import { TRPCReactProvider } from "@/trpc/react";
 import HolyLoader from "holy-loader";
 import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
-
-const fontSansOld = Noto_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 const fontSerif = FontSerif({
   weight: ["400", "500", "600", "700"],

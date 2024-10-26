@@ -3,11 +3,11 @@
 
 // This is a Route Handler, not a Next.js page, because signOut needs to be called by a server action or Route Handler
 import { routes } from "@/config/routes";
-import { STATUS_CODES } from "@/lib/constants/status-codes";
-import logger from "@/lib/services/logger";
+import { STATUS_CODES } from "@/config/status-codes";
+import { logger } from "@/lib/logger";
 import { routeRedirectWithCode } from "@/lib/utils/redirect-with-code";
 import { signOut } from "@/server/auth";
-import { createSafeRoute } from "next-safe-route";
+import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const querySchema = z.object({
@@ -15,21 +15,29 @@ const querySchema = z.object({
     .enum(
       Object.keys(STATUS_CODES) as [
         keyof typeof STATUS_CODES,
-        ...Array<keyof typeof STATUS_CODES>,
+        ...(keyof typeof STATUS_CODES)[],
       ],
     )
     .optional(),
 });
 
-const handler = async (request: Request, context: any) => {
-  const code = context?.query?.code ?? STATUS_CODES.AUTH_REFRESH.code;
+export const GET = async (request: NextRequest): Promise<NextResponse> => {
+  const { searchParams } = new URL(request.url);
+  const result = querySchema.safeParse({ code: searchParams.get("code") });
+
+  if (!result.success) {
+    return NextResponse.json(
+      { error: "Invalid query parameters" },
+      { status: 400 },
+    );
+  }
+
+  const { code = STATUS_CODES.AUTH_REFRESH.code } = result.data;
 
   logger.info(`sign-out-in/route.ts - Signing out with code: ${code}`);
-  await signOut({ redirect: false }).catch((error) => {
-    logger.error(`sign-out-in/route.ts - Sign out error: ${error}`);
+  await signOut({ redirect: false }).catch((error: Error) => {
+    logger.error(`sign-out-in/route.ts - Sign out error: ${error.message}`);
   });
 
   return routeRedirectWithCode(routes.auth.signIn, { code, request });
 };
-
-export const GET = createSafeRoute().query(querySchema).handler(handler);

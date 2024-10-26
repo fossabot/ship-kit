@@ -1,14 +1,14 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useMemo } from "react";
 
-type FadeTextProps = {
+interface FadeTextProps {
   className?: string;
   direction?: "up" | "down" | "left" | "right";
   framerProps?: Variants;
   text: string;
-};
+}
 
 export function FadeText({
   direction = "up",
@@ -27,9 +27,10 @@ export function FadeText({
   const axis = direction === "up" || direction === "down" ? "y" : "x";
 
   const FADE_ANIMATION_VARIANTS = useMemo(() => {
-    const { hidden, show, ...rest } = framerProps as {
-      [name: string]: { [name: string]: number; opacity: number };
-    };
+    const { hidden, show, ...rest } = framerProps as Record<
+      string,
+      { [name: string]: number; opacity: number }
+    >;
 
     return {
       ...rest,
@@ -74,9 +75,10 @@ export function FadeHeading({
   const axis = direction === "up" || direction === "down" ? "y" : "x";
 
   const FADE_ANIMATION_VARIANTS = useMemo(() => {
-    const { hidden, show, ...rest } = framerProps as {
-      [name: string]: { [name: string]: number; opacity: number };
-    };
+    const { hidden, show, ...rest } = framerProps as Record<
+      string,
+      { [name: string]: number; opacity: number }
+    >;
 
     return {
       ...rest,

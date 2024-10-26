@@ -3,10 +3,10 @@ import { logger } from "@/lib/logger";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
-type RedirectWithCodeOptions = {
+interface RedirectWithCodeOptions {
   code?: string;
   nextUrl?: string;
-};
+}
 
 export const redirectWithCode = (
   url: string,

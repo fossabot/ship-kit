@@ -48,8 +48,8 @@ export function WWJHDDemo() {
   }
 
   return (
-    <div className="w-full max-w-2xl p-8 bg-white rounded-lg shadow-xl">
-      <h1 className="text-3xl font-bold text-center mb-6 text-sky-700">
+    <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-xl">
+      <h1 className="mb-6 text-center text-3xl font-bold text-sky-700">
         What Would Jesus Have Done?
       </h1>
       <Form {...form}>
@@ -62,7 +62,7 @@ export function WWJHDDemo() {
                 <FormControl>
                   <Textarea
                     placeholder="Enter your question here..."
-                    className="min-h-[100px] text-lg p-4 border-2 border-sky-200 focus:border-sky-500 rounded-lg resize-none"
+                    className="min-h-[100px] resize-none rounded-lg border-2 border-sky-200 p-4 text-lg focus:border-sky-500"
                     {...field}
                   />
                 </FormControl>
@@ -71,7 +71,7 @@ export function WWJHDDemo() {
           />
           <Button
             type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 rounded-lg transition-colors"
+            className="w-full rounded-lg bg-sky-600 py-3 font-bold text-white transition-colors hover:bg-sky-700"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -87,15 +87,15 @@ export function WWJHDDemo() {
       </Form>
       {isLoading && (
         <div className="mt-6 text-center">
-          <p className="text-lg font-semibold text-sky-600 animate-pulse">
+          <p className="animate-pulse text-lg font-semibold text-sky-600">
             "{form.getValues().question}"
           </p>
         </div>
       )}
       {response && (
-        <div className="mt-6 p-4 bg-sky-50 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2 text-sky-800">Response:</h2>
-          <p className="text-gray-700 whitespace-pre-wrap">{response}</p>
+        <div className="mt-6 rounded-lg bg-sky-50 p-4">
+          <h2 className="mb-2 text-xl font-semibold text-sky-800">Response:</h2>
+          <p className="whitespace-pre-wrap text-gray-700">{response}</p>
         </div>
       )}
     </div>

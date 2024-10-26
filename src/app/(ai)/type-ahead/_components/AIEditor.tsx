@@ -1,39 +1,39 @@
 "use client";
 
-import { debounce } from 'lodash-es';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { debounce } from "lodash-es";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const AIEditor = () => {
-  const [inputText, setInputText] = useState('');
-  const [suggestion, setSuggestion] = useState('');
+  const [inputText, setInputText] = useState("");
+  const [suggestion, setSuggestion] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const fetchSuggestion = useCallback(
     debounce(async (text: string) => {
-      if (text.trim() === '') {
-        setSuggestion('');
+      if (text.trim() === "") {
+        setSuggestion("");
         return;
       }
 
       try {
-        const response = await fetch('/type-ahead/api/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const response = await fetch("/type-ahead/api/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text }),
         });
 
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
 
         const data = await response.json();
         setSuggestion(data.suggestion);
       } catch (error) {
-        console.error('Error fetching suggestion:', error);
+        console.error("Error fetching suggestion:", error);
         // Optionally, handle error state here
       }
     }, 500),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -41,10 +41,10 @@ const AIEditor = () => {
   }, [inputText, fetchSuggestion]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Tab' && suggestion) {
+    if (e.key === "Tab" && suggestion) {
       e.preventDefault();
       setInputText(inputText + suggestion);
-      setSuggestion('');
+      setSuggestion("");
     }
   };
 
@@ -55,12 +55,10 @@ const AIEditor = () => {
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="w-full h-64 p-4 text-base box-border relative bg-transparent text-black resize-none z-10"
-        style={{ caretColor: 'black' }}
+        className="relative z-10 box-border h-64 w-full resize-none bg-transparent p-4 text-base text-black"
+        style={{ caretColor: "black" }}
       />
-      <div
-        className="pointer-events-none absolute top-4 left-4 right-4 bottom-4 p-4 text-base whitespace-pre-wrap break-words text-gray-400 opacity-60 z-0"
-      >
+      <div className="pointer-events-none absolute bottom-4 left-4 right-4 top-4 z-0 whitespace-pre-wrap break-words p-4 text-base text-gray-400 opacity-60">
         {inputText}
         <span>{suggestion}</span>
       </div>

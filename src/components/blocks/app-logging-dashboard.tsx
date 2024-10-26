@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Table,
@@ -7,24 +7,24 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
-  ColumnDef,
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { AnimatePresence, motion } from 'framer-motion'
-import { AlertCircle, CheckCircle, Info } from 'lucide-react'
-import { useEffect, useState } from 'react'
+} from "@tanstack/react-table";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertCircle, CheckCircle, Info } from "lucide-react";
+import { useEffect, useState } from "react";
 
-type LogLevel = 'info' | 'warning' | 'error' | 'success'
+type LogLevel = "info" | "warning" | "error" | "success";
 
 interface Log {
-  id: number
-  message: string
-  timestamp: string
-  level: LogLevel
+  id: number;
+  message: string;
+  timestamp: string;
+  level: LogLevel;
 }
 
 const columns: ColumnDef<Log>[] = [
@@ -32,13 +32,13 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "level",
     header: "Level",
     cell: ({ row }) => {
-      const level = row.getValue("level") as LogLevel
+      const level = row.getValue("level");
       return (
         <div className="flex items-center">
           <LogIcon level={level} />
           <span className="ml-2 capitalize">{level}</span>
         </div>
-      )
+      );
     },
   },
   {
@@ -49,38 +49,40 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "timestamp",
     header: "Timestamp",
     cell: ({ row }) => {
-      const timestamp = row.getValue("timestamp") as string
-      return new Date(timestamp).toLocaleString()
+      const timestamp = row.getValue("timestamp");
+      return new Date(timestamp).toLocaleString();
     },
   },
-]
+];
 
 const LogIcon = ({ level }: { level: LogLevel }) => {
   switch (level) {
-    case 'info':
-      return <Info className="w-5 h-5 text-blue-300" />
-    case 'warning':
-      return <AlertCircle className="w-5 h-5 text-yellow-300" />
-    case 'error':
-      return <AlertCircle className="w-5 h-5 text-red-300" />
-    case 'success':
-      return <CheckCircle className="w-5 h-5 text-green-300" />
+    case "info":
+      return <Info className="h-5 w-5 text-blue-300" />;
+    case "warning":
+      return <AlertCircle className="h-5 w-5 text-yellow-300" />;
+    case "error":
+      return <AlertCircle className="h-5 w-5 text-red-300" />;
+    case "success":
+      return <CheckCircle className="h-5 w-5 text-green-300" />;
   }
-}
+};
 
 interface AppLoggingDashboardComponentProps {
   apiKey: string | null;
 }
 
-export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComponentProps) {
-  const [logs, setLogs] = useState<Log[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+export function AppLoggingDashboardComponent({
+  apiKey,
+}: AppLoggingDashboardComponentProps) {
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const table = useReactTable({
     data: logs,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   useEffect(() => {
     if (!apiKey) return;
@@ -95,7 +97,7 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
     };
 
     eventSource.onerror = (error) => {
-      console.error('SSE error:', error);
+      console.error("SSE error:", error);
       eventSource.close();
       setIsLoading(false);
     };
@@ -106,18 +108,18 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
   }, [apiKey]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">App Logging Dashboard</h1>
-      <div className="mb-4 flex justify-between items-center">
-        <div className="text-sm text-gray-500">
-          Total Logs: {logs.length}
-        </div>
+    <div className="mx-auto mt-10 w-full max-w-6xl rounded-lg bg-white p-6 shadow-xl">
+      <h1 className="mb-6 text-3xl font-bold text-gray-800">
+        App Logging Dashboard
+      </h1>
+      <div className="mb-4 flex items-center justify-between">
+        <div className="text-sm text-gray-500">Total Logs: {logs.length}</div>
       </div>
-      <div className="bg-gray-50 rounded-lg p-4 relative min-h-[500px]">
+      <div className="relative min-h-[500px] rounded-lg bg-gray-50 p-4">
         {isLoading ? (
           <LoadingIndicator />
         ) : (
-          <div className="border rounded-md">
+          <div className="rounded-md border">
             <Table>
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -126,7 +128,7 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
                       <TableHead key={header.id}>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </TableHead>
                     ))}
@@ -147,7 +149,7 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
                         <TableCell key={cell.id}>
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext()
+                            cell.getContext(),
                           )}
                         </TableCell>
                       ))}
@@ -160,5 +162,5 @@ export function AppLoggingDashboardComponent({ apiKey }: AppLoggingDashboardComp
         )}
       </div>
     </div>
-  )
+  );
 }

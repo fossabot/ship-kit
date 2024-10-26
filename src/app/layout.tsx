@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { Viewport, type Metadata } from "next";
+import { type Viewport, type Metadata } from "next";
 
 import RootLayout from "@/components/layouts/root-layout";
 import { siteConfig } from "@/config/site";

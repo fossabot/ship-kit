@@ -1,12 +1,16 @@
-import { Button, ButtonProps, buttonVariants } from "@/components/ui/button";
+import {
+  Button,
+  buttonVariants
+} from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link, { LinkProps } from "next/link";
-import React, { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import React, { type ButtonHTMLAttributes } from "react";
 import styles from "./animated-button.module.css";
 
 // Extend the ButtonHTMLAttributes to include all possible button props
 interface AnimatedButtonProps
-  extends ButtonHTMLAttributes<ButtonProps | LinkProps> {
+  // Todo: fix type
+  extends ButtonHTMLAttributes<HTMLButtonElement> { 
   children: React.ReactNode;
   href?: string;
   color?: string;
@@ -39,7 +43,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     </Link>
   ) : (
     <Button
-      // {...props}
+      {...props}
       className={cn(
         `border border-transparent bg-transparent px-md transition-all duration-1000 ease-in-out hover:border-[${color}] text-inherit`,
         className,
@@ -53,7 +57,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     <div
       className={cn(
         styles.buttonWrapper,
-        `relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md [--background:#fafafc] text-black/95 dark:text-white/95 dark:[--background:#111827]`,
+        `relative z-0 flex min-h-9 items-center justify-center overflow-hidden rounded-md text-black/95 [--background:#fafafc] dark:text-white/95 dark:[--background:#111827]`,
         className,
       )}
     >

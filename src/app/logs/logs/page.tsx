@@ -5,7 +5,7 @@ import { LoadingIndicator } from "@/components/primitives/loading-indicator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { routes } from "@/config/routes";
 import { useUser } from "@stackframe/stack";
-import { ColumnDef } from "@tanstack/react-table";
+import { type ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
 interface Log {

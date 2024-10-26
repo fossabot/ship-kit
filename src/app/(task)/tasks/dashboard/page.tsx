@@ -2,7 +2,7 @@
 
 import { AppSidebar } from "@/components/blocks/app-sidebar";
 import TaskList from "@/components/blocks/task-list";
-import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { UserButton, useUser } from "@stackframe/stack";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ const DashboardPage = () => {
   if (!user) return null; // Prevent rendering while redirecting
 
   return (
-    <SidebarLayout defaultOpen={true}>
+    <>
       <AppSidebar />
       <main className="flex flex-1 flex-col p-4 transition-all duration-300 ease-in-out">
         <div className="mb-4 flex items-center justify-between">
@@ -34,7 +34,7 @@ const DashboardPage = () => {
         </div>
         <SidebarTrigger />
       </main>
-    </SidebarLayout>
+    </>
   );
 };
 

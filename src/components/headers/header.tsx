@@ -15,44 +15,31 @@ import { routes } from "@/config/routes";
 import styles from "@/styles/header.module.css";
 import { useMemo } from "react";
 
-type NavLink = {
+interface NavLink {
   href: string;
   label: string;
   isCurrent?: boolean;
-};
+}
 
-type HeaderProps = {
+interface HeaderProps {
   navLinks?: NavLink[];
   logoHref?: string;
   logoIcon?: React.ReactNode;
   logoText?: string;
   searchPlaceholder?: string;
   userMenuItems?: { label: string; action: () => void }[];
-};
+}
 
-const defaultNavLinks = [{ href: routes.app.dashboard, label: "Dashboard" }];
-
-const defaultUserMenuItems = [
-  {
-    label: "Settings",
-  },
-  {
-    label: "Support",
-  },
-  {
-    label: "Logout",
-  },
-];
+const defaultNavLinks = [{ href: routes.app.dashboard, label: "Dashboard", isCurrent: false }];
 
 export const Header: React.FC<HeaderProps> = ({
   logoHref = routes.home,
   logoIcon = <BoxesIcon />,
   logoText = "ShipKit",
   navLinks = defaultNavLinks,
-  userMenuItems = defaultUserMenuItems,
   searchPlaceholder = "Search documentation...",
 }) => {
-  const [{ x, y }, scrollTo] = useWindowScroll();
+  const [{ y }] = useWindowScroll();
   const isOpaque = useMemo(() => y && y > 100, [y]);
 
   return (
@@ -72,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
             <Link
               href={logoHref}
-              className="grow flex items-center gap-2 text-lg font-semibold md:text-base"
+              className="flex grow items-center gap-2 text-lg font-semibold md:text-base"
             >
               {logoIcon}
               <span className="block">{logoText}</span>

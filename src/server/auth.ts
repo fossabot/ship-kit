@@ -10,7 +10,7 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
-import { UserRole } from "@/types/user";
+import { type UserRole } from "@/types/user";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
 
@@ -42,14 +42,14 @@ const {
   },
 });
 
-type AuthProps = {
+interface AuthProps {
   errorCode?: string;
   nextUrl?: string;
   protect?: boolean;
   redirect?: boolean;
   redirectTo?: string;
   role?: UserRole;
-};
+}
 
 /**
  * Enhanced authentication function with redirect functionality
@@ -57,7 +57,7 @@ type AuthProps = {
  */
 const authWithOptions = async (props?: AuthProps) => {
   const session = await nextAuthAuth();
-  const { errorCode, redirect, role, nextUrl } = props ?? {};
+  const { errorCode, redirect, nextUrl, _role } = props ?? {};
   const protect =
     props?.protect ?? props?.redirectTo !== undefined ?? redirect ?? false;
   const redirectTo = props?.redirectTo ?? routes.auth.signOutIn;

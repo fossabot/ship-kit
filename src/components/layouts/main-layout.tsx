@@ -9,8 +9,7 @@ export default function MainLayout({
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <Header
-        />
+        <Header />
         <main className="grid grow">{children}</main>
         <Footer />
       </div>

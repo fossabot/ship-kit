@@ -45,7 +45,10 @@ const DATA = {
   },
 };
 
-const LinkOrIcon = ({ href, ...props }: { href?: string } & React.ComponentPropsWithoutRef<"a">) => {
+const LinkOrIcon = ({
+  href,
+  ...props
+}: { href?: string } & React.ComponentPropsWithoutRef<"a">) => {
   return href ? <Link href={href} {...props} /> : <a {...props} />;
 };
 
@@ -58,7 +61,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
       <Dock
         direction="middle"
         className={cn(
-          "opacity-0 transition-opacity delay-100 duration-500 bg-white/15 dark:bg-black/15 ",
+          "bg-white/15 opacity-0 transition-opacity delay-100 duration-500 dark:bg-black/15",
           isVisible && "opacity-100",
           className,
         )}
@@ -110,7 +113,7 @@ export const SocialDock = ({ className }: { className?: string }) => {
         <DockIcon>
           <Tooltip>
             <TooltipTrigger>
-              <ThemeToggle className="rounded-full size-12" />
+              <ThemeToggle className="size-12 rounded-full" />
             </TooltipTrigger>
             <TooltipContent>
               <p>Theme</p>

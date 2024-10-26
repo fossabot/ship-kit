@@ -1,36 +1,40 @@
-"use client"
+"use client";
 
-import { AnimatePresence, motion } from "framer-motion"
-import { Settings, Wifi, WifiOff } from "lucide-react"
-import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion";
+import { Settings, Wifi, WifiOff } from "lucide-react";
+import { useEffect, useState } from "react";
 
-type LogLevel = "info" | "warning" | "error" | "success"
+type LogLevel = "info" | "warning" | "error" | "success";
 
 interface NetworkRequest {
-  id: string
-  name: string
-  status: "pending" | "success" | "error"
-  type: string
-  size: string
-  time: number
-  level: LogLevel
+  id: string;
+  name: string;
+  status: "pending" | "success" | "error";
+  type: string;
+  size: string;
+  time: number;
+  level: LogLevel;
 }
 
 const formatBytes = (bytes: number): string => {
-  if (bytes === 0) return "0 Bytes"
-  const k = 1024
-  const sizes = ["Bytes", "KB", "MB", "GB"]
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-}
+  if (bytes === 0) return "0 Bytes";
+  const k = 1024;
+  const sizes = ["Bytes", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+};
 
-const StatusIndicator = ({ status }: { status: "pending" | "success" | "error" }) => {
-  const baseClasses = "h-2 w-2 rounded-full"
+const StatusIndicator = ({
+  status,
+}: {
+  status: "pending" | "success" | "error";
+}) => {
+  const baseClasses = "h-2 w-2 rounded-full";
   const statusClasses = {
     pending: "bg-blue-400",
     success: "bg-green-400",
-    error: "bg-red-400"
-  }
+    error: "bg-red-400",
+  };
 
   return (
     <motion.div
@@ -38,61 +42,63 @@ const StatusIndicator = ({ status }: { status: "pending" | "success" | "error" }
       animate={status === "pending" ? { scale: [1, 1.2, 1] } : {}}
       transition={{ duration: 1, repeat: Infinity }}
     />
-  )
-}
+  );
+};
 
 export function NetworkLog() {
-  const [requests, setRequests] = useState<NetworkRequest[]>([])
-  const [isOnline, setIsOnline] = useState(true)
+  const [requests, setRequests] = useState<NetworkRequest[]>([]);
+  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
-    const updateOnlineStatus = () => setIsOnline(navigator.onLine)
-    window.addEventListener('online', updateOnlineStatus)
-    window.addEventListener('offline', updateOnlineStatus)
+    const updateOnlineStatus = () => setIsOnline(navigator.onLine);
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
 
-    if ('PerformanceObserver' in window) {
+    if ("PerformanceObserver" in window) {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
-          if (entry.entryType === 'resource') {
+          if (entry.entryType === "resource") {
             const request: NetworkRequest = {
               id: Math.random().toString(36).substr(2, 9),
               name: entry.name,
-              status: entry.duration > 0 ? 'success' : 'error',
+              status: entry.duration > 0 ? "success" : "error",
               type: (entry as PerformanceResourceTiming).initiatorType,
-              size: formatBytes((entry as PerformanceResourceTiming).transferSize),
+              size: formatBytes(
+                (entry as PerformanceResourceTiming).transferSize,
+              ),
               time: Math.round(entry.duration),
-              level: entry.duration > 1000 ? 'warning' : 'info'
-            }
-            setRequests((prev) => [request, ...prev.slice(0, 9)])
+              level: entry.duration > 1000 ? "warning" : "info",
+            };
+            setRequests((prev) => [request, ...prev.slice(0, 9)]);
           }
-        })
-      })
+        });
+      });
 
-      observer.observe({ entryTypes: ['resource'] })
+      observer.observe({ entryTypes: ["resource"] });
 
       return () => {
-        observer.disconnect()
-        window.removeEventListener('online', updateOnlineStatus)
-        window.removeEventListener('offline', updateOnlineStatus)
-      }
+        observer.disconnect();
+        window.removeEventListener("online", updateOnlineStatus);
+        window.removeEventListener("offline", updateOnlineStatus);
+      };
     } else {
-      console.warn('PerformanceObserver is not supported in this browser')
+      console.warn("PerformanceObserver is not supported in this browser");
     }
-  }, [])
+  }, []);
 
   return (
-    <div className="max-w-4xl mx-auto bg-[#1a0f2e] rounded-lg shadow-2xl overflow-hidden">
-      <div className="p-4 border-b border-gray-700 flex justify-between items-center">
+    <div className="mx-auto max-w-4xl overflow-hidden rounded-lg bg-[#1a0f2e] shadow-2xl">
+      <div className="flex items-center justify-between border-b border-gray-700 p-4">
         <div className="flex items-center space-x-2 text-gray-400">
           <h2 className="">Network Activity</h2>
         </div>
         <div className="flex items-center space-x-4">
           {isOnline ? (
-            <Wifi className="text-green-400 w-5 h-5" />
+            <Wifi className="h-5 w-5 text-green-400" />
           ) : (
-            <WifiOff className="text-red-400 w-5 h-5" />
+            <WifiOff className="h-5 w-5 text-red-400" />
           )}
-          <Settings className="text-gray-400 w-5 h-5" />
+          <Settings className="h-5 w-5 text-gray-400" />
         </div>
       </div>
       <div className="p-4">
@@ -105,11 +111,13 @@ export function NetworkLog() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-gray-800 bg-opacity-50 rounded-lg p-3 text-sm text-gray-300 flex items-center justify-between"
+                className="flex items-center justify-between rounded-lg bg-gray-800 bg-opacity-50 p-3 text-sm text-gray-300"
               >
                 <div className="flex items-center space-x-3">
                   <StatusIndicator status={request.status} />
-                  <span className="font-medium truncate max-w-[150px]">{request.name}</span>
+                  <span className="max-w-[150px] truncate font-medium">
+                    {request.name}
+                  </span>
                 </div>
                 <div className="flex space-x-4 text-xs text-gray-400">
                   <span>{request.type}</span>
@@ -122,5 +130,5 @@ export function NetworkLog() {
         </div>
       </div>
     </div>
-  )
+  );
 }

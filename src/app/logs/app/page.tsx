@@ -1,6 +1,6 @@
 "use client";
 
-import { LiveLogs } from "@/app/(saas)/_components/live-logs";
+import { LiveLogs } from "@/app/logs/_components/live-logs";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { routes } from "@/config/routes";
 import { UserButton, useUser } from "@stackframe/stack";

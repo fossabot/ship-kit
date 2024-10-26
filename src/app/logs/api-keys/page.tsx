@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { routes } from "@/config/routes";
 import { useUser } from "@stackframe/stack";
-import { ColumnDef } from "@tanstack/react-table";
+import { type ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
 interface ApiKey {

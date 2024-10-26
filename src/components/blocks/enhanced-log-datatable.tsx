@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { LoadingIndicator } from "@/components/primitives/loading-indicator"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { LoadingIndicator } from "@/components/primitives/loading-indicator";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -11,8 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -20,31 +20,37 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { motion } from "framer-motion"
-import { AlertCircle, ArrowUpDown, CheckCircle, Info, MoreHorizontal } from "lucide-react"
-import { useEffect, useState } from "react"
+} from "@tanstack/react-table";
+import { motion } from "framer-motion";
+import {
+  AlertCircle,
+  ArrowUpDown,
+  CheckCircle,
+  Info,
+  MoreHorizontal,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 
-type LogLevel = "info" | "warning" | "error" | "success"
+type LogLevel = "info" | "warning" | "error" | "success";
 
 interface Log {
-  id: number
-  timestamp: Date
-  level: LogLevel
-  prefix: string
-  message: string
+  id: number;
+  timestamp: Date;
+  level: LogLevel;
+  prefix: string;
+  message: string;
 }
 
 const columns: ColumnDef<Log>[] = [
@@ -78,24 +84,24 @@ const columns: ColumnDef<Log>[] = [
           Timestamp
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const timestamp = row.getValue("timestamp") as Date
-      return timestamp.toLocaleString()
+      const timestamp = row.getValue("timestamp");
+      return timestamp.toLocaleString();
     },
   },
   {
     accessorKey: "level",
     header: "Level",
     cell: ({ row }) => {
-      const level = row.getValue("level") as LogLevel
+      const level = row.getValue("level");
       return (
         <div className="flex items-center">
           <LogIcon level={level} />
           <span className="ml-2 capitalize">{level}</span>
         </div>
-      )
+      );
     },
   },
   {
@@ -109,7 +115,7 @@ const columns: ColumnDef<Log>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const log = row.original
+      const log = row.original;
 
       return (
         <DropdownMenu>
@@ -131,20 +137,20 @@ const columns: ColumnDef<Log>[] = [
             <DropdownMenuItem>Delete log</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 const getRandomLogLevel = (): LogLevel => {
-  const levels: LogLevel[] = ["info", "warning", "error", "success"]
-  return levels[Math.floor(Math.random() * levels.length)]
-}
+  const levels: LogLevel[] = ["info", "warning", "error", "success"];
+  return levels[Math.floor(Math.random() * levels.length)];
+};
 
 const getRandomPrefix = (): string => {
-  const prefixes = ["APP", "DB", "API", "AUTH", "CACHE", "QUEUE"]
-  return prefixes[Math.floor(Math.random() * prefixes.length)]
-}
+  const prefixes = ["APP", "DB", "API", "AUTH", "CACHE", "QUEUE"];
+  return prefixes[Math.floor(Math.random() * prefixes.length)];
+};
 
 const getRandomLogMessage = (level: LogLevel): string => {
   const messages = {
@@ -172,30 +178,30 @@ const getRandomLogMessage = (level: LogLevel): string => {
       "Email sent successfully",
       "Task completed ahead of schedule",
     ],
-  }
-  return messages[level][Math.floor(Math.random() * messages[level].length)]
-}
+  };
+  return messages[level][Math.floor(Math.random() * messages[level].length)];
+};
 
 const LogIcon = ({ level }: { level: LogLevel }) => {
   switch (level) {
     case "info":
-      return <Info className="w-4 h-4 text-blue-400" />
+      return <Info className="h-4 w-4 text-blue-400" />;
     case "warning":
-      return <AlertCircle className="w-4 h-4 text-amber-400" />
+      return <AlertCircle className="h-4 w-4 text-amber-400" />;
     case "error":
-      return <AlertCircle className="w-4 h-4 text-rose-400" />
+      return <AlertCircle className="h-4 w-4 text-rose-400" />;
     case "success":
-      return <CheckCircle className="w-4 h-4 text-emerald-400" />
+      return <CheckCircle className="h-4 w-4 text-emerald-400" />;
   }
-}
+};
 
 export function EnhancedLogDatatable() {
-  const [logs, setLogs] = useState<Log[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = useState({})
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data: logs,
@@ -214,40 +220,44 @@ export function EnhancedLogDatatable() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
-      addLog()
-      addLog()
-      addLog()
-    }, 1500)
-  }, [])
+      setIsLoading(false);
+      addLog();
+      addLog();
+      addLog();
+    }, 1500);
+  }, []);
 
   const addLog = () => {
-    const level = getRandomLogLevel()
+    const level = getRandomLogLevel();
     const newLog: Log = {
       id: Date.now(),
       timestamp: new Date(),
       level: level,
       prefix: getRandomPrefix(),
       message: getRandomLogMessage(level),
-    }
-    setLogs((prevLogs) => [...prevLogs, newLog])
-  }
+    };
+    setLogs((prevLogs) => [...prevLogs, newLog]);
+  };
 
   const handleDeleteSelected = () => {
-    const selectedIds = Object.keys(rowSelection).map(Number)
-    setLogs((prevLogs) => prevLogs.filter((log) => !selectedIds.includes(log.id)))
-    setRowSelection({})
-  }
+    const selectedIds = Object.keys(rowSelection).map(Number);
+    setLogs((prevLogs) =>
+      prevLogs.filter((log) => !selectedIds.includes(log.id)),
+    );
+    setRowSelection({});
+  };
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Enhanced Log DataTable</h1>
-      <div className="mb-4 flex justify-between items-center">
+    <div className="mx-auto mt-10 w-full max-w-6xl rounded-lg bg-white p-6 shadow-xl">
+      <h1 className="mb-6 text-3xl font-bold text-gray-800">
+        Enhanced Log DataTable
+      </h1>
+      <div className="mb-4 flex items-center justify-between">
         <div className="space-x-2">
           <Button onClick={addLog} size="sm">
             Add Log
@@ -263,7 +273,7 @@ export function EnhancedLogDatatable() {
         </div>
         <div className="text-sm text-gray-500">Total Logs: {logs.length}</div>
       </div>
-      <div className="bg-gray-50 rounded-lg p-4 relative min-h-[500px]">
+      <div className="relative min-h-[500px] rounded-lg bg-gray-50 p-4">
         {isLoading ? (
           <LoadingIndicator />
         ) : (
@@ -271,7 +281,9 @@ export function EnhancedLogDatatable() {
             <div className="flex items-center py-4">
               <Input
                 placeholder="Filter messages..."
-                value={(table.getColumn("message")?.getFilterValue() as string) ?? ""}
+                value={
+                  (table.getColumn("message")?.getFilterValue() as string) ?? ""
+                }
                 onChange={(event) =>
                   table.getColumn("message")?.setFilterValue(event.target.value)
                 }
@@ -299,7 +311,7 @@ export function EnhancedLogDatatable() {
                         >
                           {column.id}
                         </DropdownMenuCheckboxItem>
-                      )
+                      );
                     })}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -316,10 +328,10 @@ export function EnhancedLogDatatable() {
                               ? null
                               : flexRender(
                                   header.column.columnDef.header,
-                                  header.getContext()
+                                  header.getContext(),
                                 )}
                           </TableHead>
-                        )
+                        );
                       })}
                     </TableRow>
                   ))}
@@ -336,17 +348,17 @@ export function EnhancedLogDatatable() {
                           row.original.level === "error"
                             ? "bg-rose-50"
                             : row.original.level === "warning"
-                            ? "bg-amber-50"
-                            : row.original.level === "success"
-                            ? "bg-emerald-50"
-                            : "bg-white"
+                              ? "bg-amber-50"
+                              : row.original.level === "success"
+                                ? "bg-emerald-50"
+                                : "bg-white"
                         }
                       >
                         {row.getVisibleCells().map((cell) => (
                           <TableCell key={cell.id}>
                             {flexRender(
                               cell.column.columnDef.cell,
-                              cell.getContext()
+                              cell.getContext(),
                             )}
                           </TableCell>
                         ))}
@@ -393,5 +405,5 @@ export function EnhancedLogDatatable() {
         )}
       </div>
     </div>
-  )
+  );
 }

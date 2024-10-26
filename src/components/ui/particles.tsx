@@ -119,7 +119,7 @@ const Particles: React.FC<ParticlesProps> = ({
     }
   };
 
-  type Circle = {
+  interface Circle {
     x: number;
     y: number;
     translateX: number;
@@ -130,7 +130,7 @@ const Particles: React.FC<ParticlesProps> = ({
     dx: number;
     dy: number;
     magnetism: number;
-  };
+  }
 
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {

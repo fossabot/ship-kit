@@ -40,11 +40,16 @@ If the question is not related to Jesus or cannot be reasonably answered based o
       max_tokens: 300,
     });
 
-    const response = completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again.";
+    const response =
+      completion.choices[0]?.message?.content ||
+      "I'm sorry, I couldn't generate a response. Please try again.";
 
     return NextResponse.json({ response }, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
-    return NextResponse.json({ error: "An error occurred while processing your request." }, { status: 500 });
+    return NextResponse.json(
+      { error: "An error occurred while processing your request." },
+      { status: 500 },
+    );
   }
 }

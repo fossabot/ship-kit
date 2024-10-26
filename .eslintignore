@@ -2,3 +2,8 @@ node_modules
 .next
 build
 dist
+
+# These folders are auto-generated and not type-checked
+src/components/blocks
+src/components/ui
+src/lib/hooks
