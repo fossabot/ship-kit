@@ -107,7 +107,7 @@ const SectionContent = ({
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-20 overflow-hidden">
         <ParticlesHero>
           <div className="flex min-h-screen flex-col items-center justify-center">
             <div className="relative mx-auto flex min-h-64 max-w-[80rem] flex-col items-center justify-center gap-4 px-6 text-center md:px-8">
@@ -156,7 +156,7 @@ export default function Home() {
           <SectionHeader>Build apps like these</SectionHeader>
           <ExamplesNav />
 
-          <div className="relative flex max-h-[400px] max-w-4xl flex-col overflow-hidden rounded-lg border bg-background [mask-image:linear-gradient(to_bottom,white,transparent)] md:shadow-xl">
+          <div className="relative flex max-h-[400px] max-w-full flex-col overflow-hidden rounded-lg border bg-background [mask-image:linear-gradient(to_bottom,white,transparent)] md:shadow-xl lg:max-w-4xl">
             <MusicPage />
             <BorderBeam size={250} duration={12} delay={9} />
           </div>
@@ -202,7 +202,7 @@ export default function Home() {
           <SectionHeader>
             Trusted by more than <NumberTicker value={150} /> developers
           </SectionHeader>
-          <SectionContent>
+          <SectionContent className="">
             <SocialMarquee />
           </SectionContent>
         </Section>

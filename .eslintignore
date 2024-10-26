@@ -7,3 +7,5 @@ dist
 src/components/blocks
 src/components/ui
 src/lib
+
+src/app/\(demo\)/**/*

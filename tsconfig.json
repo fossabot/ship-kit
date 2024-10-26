@@ -43,7 +43,6 @@
   ],
   "exclude": ["node_modules"],
   "references": [
-    { "path": "./src/components/blocks" },
     { "path": "./src/app/(demo)" }
   ]
 }

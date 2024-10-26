@@ -1,4 +1,4 @@
-import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import { formatDistanceToNow } from "date-fns/formatDistanceToNow"
 import { ComponentProps } from "react"
 
 import { Mail } from "@/app/(demo)/examples/mail/data"

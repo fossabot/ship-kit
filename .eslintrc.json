@@ -1,6 +1,9 @@
 {
   "parserOptions": {
-    "project": true
+    "project": [
+      "./tsconfig.json",
+      "./src/app/(demo)/tsconfig.json"
+    ]
   },
 
   "extends": [

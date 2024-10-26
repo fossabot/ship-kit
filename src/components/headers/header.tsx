@@ -129,19 +129,20 @@ export const Header: React.FC<HeaderProps> = ({
               <Link
                 href={routes.external.github}
                 className={cn(
-                  buttonVariants({ size: "icon" }),
-                  "px-3 hover:bg-muted",
+                  buttonVariants({ variant: "ghost", size: "icon" }),
                 )}
               >
                 <Icons.github className="size-4" />
               </Link>
               <Link
                 href={routes.external.x_follow}
-                className={cn(buttonVariants({ variant: "ghost" }), "px-3")}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                )}
               >
                 <Icons.x className="size-4" />
               </Link>
-              <ThemeToggle variant="icon" className="px-2 hover:bg-muted" />
+              <ThemeToggle variant="ghost" size="icon" />
             </div>
           </div>
         </div>

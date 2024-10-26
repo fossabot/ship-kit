@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,10 +9,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import Link from "next/link";
+
+interface Tier {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+  disabled?: boolean;
+  href?: string;
+}
 
 export function PricingSection() {
-  const tiers = [
+  const tiers: Tier[] = [
     {
       name: "Bones",
       price: "$29",
@@ -25,6 +38,7 @@ export function PricingSection() {
         "48-hour response time",
       ],
       cta: "Get ShipKit Bones",
+      href: "/signup?plan=bones",
     },
     {
       name: "Muscles",
@@ -39,6 +53,8 @@ export function PricingSection() {
       ],
       cta: "Get ShipKit Muscles",
       highlighted: true,
+      href: "/signup?plan=muscles",
+      disabled: true,
     },
     {
       name: "Brains",
@@ -52,7 +68,8 @@ export function PricingSection() {
         "Custom integrations",
         "On-premise options",
       ],
-      cta: "Get the entire ShipKit",
+      cta: "Coming Soon",
+      disabled: true,
     },
   ];
 
@@ -69,7 +86,9 @@ export function PricingSection() {
           {tiers.map((tier) => (
             <Card
               key={tier.name}
-              className={`flex flex-col ${tier.highlighted ? "scale-105 border-primary shadow-lg" : ""}`}
+              className={cn("flex flex-col", {
+                "scale-105 border-primary shadow-lg": tier.highlighted,
+              })}
             >
               <CardHeader>
                 <CardTitle className="text-2xl">{tier.name}</CardTitle>
@@ -94,11 +113,30 @@ export function PricingSection() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button
-                  className={`w-full ${tier.highlighted ? "bg-primary hover:bg-primary/90" : ""}`}
-                >
-                  {tier.cta}
-                </Button>
+                {tier.href ? (
+                  <Link
+                    href={tier.href}
+                    className={cn(
+                      buttonVariants({ variant: tier.highlighted ? "default" : "outline" }),
+                      "w-full",
+                      { "bg-primary hover:bg-primary/90": tier.highlighted }
+                    )}
+                    aria-disabled={tier.disabled}
+                    tabIndex={tier.disabled ? -1 : undefined}
+                  >
+                    {tier.cta}
+                  </Link>
+                ) : (
+                  <Button
+                    variant={tier.highlighted ? "default" : "outline"}
+                    className={cn("w-full", {
+                      "bg-primary hover:bg-primary/90": tier.highlighted,
+                    })}
+                    disabled={tier.disabled}
+                  >
+                    {tier.cta}
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           ))}
