@@ -1,18 +1,17 @@
 "use client";
 
-import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { Icons } from "@/components/images/icons";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ui/theme";
 import { routes } from "@/config/routes";
 import { cn } from "@/lib/utils";
 import { useWindowScroll } from "@uidotdev/usehooks";
-import { BoxesIcon, Menu, Search } from "lucide-react";
+import { BoxesIcon, Menu } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 
+import { CommandMenu } from "@/components/ui/command-menu";
 import styles from "@/styles/header.module.css";
 
 interface NavLink {
@@ -116,17 +115,13 @@ export const Header: React.FC<HeaderProps> = ({
             </SheetContent>
           </Sheet>
           <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-            <form className="ml-auto flex-1 sm:flex-initial">
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder={searchPlaceholder}
-                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                />
-              </div>
-            </form>
-            <AnimatedButton>Animated Button</AnimatedButton>
+            <CommandMenu />
+            <Button variant="outline" size="sm">
+              Dashbboard
+            </Button>
+            <Link href={routes.external.github}>
+              <Icons.github className="size-4" />
+            </Link>
             <Link href={routes.external.x_follow}>
               <Icons.x className="size-4" />
             </Link>

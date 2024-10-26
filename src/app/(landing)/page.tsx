@@ -11,13 +11,13 @@ import { SocialDock } from "@/app/(landing)/_components/social-dock";
 import { SocialMarquee } from "@/app/(landing)/_components/social-marquee";
 import { FAQ } from "@/app/(landing)/faq";
 import { PricingSection } from "@/components/blocks/pricing-section";
+import AnimatedButton from "@/components/buttons/animated-button/animated-button";
 import { Icons } from "@/components/images/icons";
 import ExampleMasonry from "@/components/primitives/masonry";
 import BlurFade from "@/components/ui/blur-fade";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { buttonVariants } from "@/components/ui/button";
 import Meteors from "@/components/ui/meteors";
-import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import NumberTicker from "@/components/ui/number-ticker";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import ShinyButton from "@/components/ui/shiny-button";
@@ -227,6 +227,7 @@ export default function Home() {
               >
                 <Code2Icon className="size-4" /> Documentation
               </Link>
+              <AnimatedButton>Dashboard</AnimatedButton>
             </div>
             <span className="text-sm text-gray-500">
               Not ready to buy?
@@ -241,12 +242,15 @@ export default function Home() {
         </Section>
 
         <Section>
+          <SectionHeader>Made with you in mind</SectionHeader>
+          <SectionCopy>
+            ShipKit isn't just for Developers.
+            <br />
+            We include tools for Marketers, Designers, and Founders. Export
+            Figma directly into React components, drag-and-drop code using
+            Builder, and manage your documentation with Markdown.
+          </SectionCopy>
           <SectionContent>
-            <NeonGradientCard className="size-auto max-w-sm items-center justify-center text-center">
-              <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                Get <span className="underline">ShipKit</span>
-              </span>
-            </NeonGradientCard>
             <FeaturesGrid />
           </SectionContent>
         </Section>
