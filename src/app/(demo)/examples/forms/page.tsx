@@ -1,4 +1,4 @@
-import { ProfileForm } from "@/app/(app)/examples/forms/profile-form"
+import { ProfileForm } from "@/app/(demo)/examples/forms/profile-form"
 import { Separator } from "@/components/ui/separator"
 
 export default function SettingsProfilePage() {

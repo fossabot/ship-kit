@@ -13,7 +13,7 @@ import {
   Trash2,
 } from "lucide-react";
 
-import { type Mail } from "@/app/(app)/examples/mail/data";
+import { type Mail } from "@/app/(demo)/examples/mail/data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";

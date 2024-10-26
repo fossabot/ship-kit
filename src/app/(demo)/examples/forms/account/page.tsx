@@ -1,4 +1,4 @@
-import { AccountForm } from "@/app/(app)/examples/forms/account/account-form"
+import { AccountForm } from "@/app/(demo)/examples/forms/account/account-form"
 import { Separator } from "@/components/ui/separator"
 
 export default function SettingsAccountPage() {
