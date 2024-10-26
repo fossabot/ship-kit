@@ -41,8 +41,5 @@
     ".next/types/**/*.ts",
     "src/types/next-auth.d.ts"
   ],
-  "exclude": ["node_modules"],
-  "references": [
-    { "path": "./src/app/(demo)" }
-  ]
+  "exclude": ["node_modules"]
 }
