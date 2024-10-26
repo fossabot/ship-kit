@@ -1,4 +1,5 @@
 import { wedgesTW } from "@lemonsqueezy/wedges";
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import { fontFamily } from "tailwindcss/defaultTheme";
@@ -83,7 +84,9 @@ const config = {
   				accent: 'hsl(var(--sidebar-accent))',
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
+  				ring: 'hsl(var(--sidebar-ring))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))'
   			},
   			'color-1': 'hsl(var(--color-1))',
   			'color-2': 'hsl(var(--color-2))',
@@ -212,7 +215,7 @@ const config = {
   			meteor: 'meteor 5s linear infinite',
   			'background-position-spin': 'background-position-spin 3000ms infinite alternate',
   			marquee: 'marquee var(--duration) infinite linear',
-  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
   		},
   		spacing: {
   			'2xs': '0.25rem',
@@ -237,7 +240,7 @@ const config = {
   		}
   	}
   },
-  plugins: [tailwindcssAnimate, wedgesTW()],
+  plugins: [typography, tailwindcssAnimate, wedgesTW()],
 } satisfies Config;
 
 export default config;

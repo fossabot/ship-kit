@@ -1,3 +1,5 @@
+"use client";
+
 import { Icons } from "@/components/images/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";

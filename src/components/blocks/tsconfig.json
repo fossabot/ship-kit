@@ -1,21 +1,28 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "noImplicitAny": false,
+    "composite": true,
     "strict": false,
+    "noImplicitAny": false,
     "strictNullChecks": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": false,
-    "noUnusedLocals": false,
-    "noImplicitThis": false,
-    "noImplicitReturns": false,
     "strictFunctionTypes": false,
+    "strictBindCallApply": false,
     "strictPropertyInitialization": false,
+    "noImplicitThis": false,
     "useUnknownInCatchVariables": false,
-    "noUncheckedIndexedAccess": false
+    "alwaysStrict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noEmit": false
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx"
   ]
 }

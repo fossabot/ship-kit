@@ -87,7 +87,7 @@ const columns: ColumnDef<Log>[] = [
       );
     },
     cell: ({ row }) => {
-      const timestamp = row.getValue("timestamp");
+      const timestamp = row.getValue("timestamp") as Date;
       return timestamp.toLocaleString();
     },
   },
@@ -95,7 +95,7 @@ const columns: ColumnDef<Log>[] = [
     accessorKey: "level",
     header: "Level",
     cell: ({ row }) => {
-      const level = row.getValue("level");
+      const level = row.getValue("level") as LogLevel;
       return (
         <div className="flex items-center">
           <LogIcon level={level} />
@@ -144,12 +144,12 @@ const columns: ColumnDef<Log>[] = [
 
 const getRandomLogLevel = (): LogLevel => {
   const levels: LogLevel[] = ["info", "warning", "error", "success"];
-  return levels[Math.floor(Math.random() * levels.length)];
+  return levels[Math.floor(Math.random() * levels.length)] as LogLevel;
 };
 
 const getRandomPrefix = (): string => {
   const prefixes = ["APP", "DB", "API", "AUTH", "CACHE", "QUEUE"];
-  return prefixes[Math.floor(Math.random() * prefixes.length)];
+  return prefixes[Math.floor(Math.random() * prefixes.length)] as string;
 };
 
 const getRandomLogMessage = (level: LogLevel): string => {
@@ -179,7 +179,7 @@ const getRandomLogMessage = (level: LogLevel): string => {
       "Task completed ahead of schedule",
     ],
   };
-  return messages[level][Math.floor(Math.random() * messages[level].length)];
+  return messages[level][Math.floor(Math.random() * messages[level].length)] as string;
 };
 
 const LogIcon = ({ level }: { level: LogLevel }) => {

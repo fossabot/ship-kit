@@ -25,6 +25,9 @@ const config = {
   images: {
     remotePatterns: [
       { hostname: "picsum.photos" }, // @dev: for testing
+      { hostname: "avatar.vercel.sh" }, // @dev: for testing
+      { hostname: "github.com" }, // @dev: for testing
+      { hostname: "images.unsplash.com" }, // @dev: for testing
     ],
   },
 
@@ -63,7 +66,6 @@ const config = {
    * Experimental configuration
    */
   experimental: {
-    
     serverActions: {
       bodySizeLimit: FILE_UPLOAD_MAX_SIZE,
     },

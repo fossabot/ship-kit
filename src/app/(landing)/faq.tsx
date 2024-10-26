@@ -65,6 +65,7 @@ export function FAQ() {
             <li>Github Actions for CI/CD</li>
 
             <li>AI-powered workflows</li>
+            <li>No-code workflow using Reweb.so</li>
             <li>Rules for Cursor.sh</li>
             <li>Configuration for VSCode and Cursor.sh</li>
             <li>CLI tools for common tasks</li>
