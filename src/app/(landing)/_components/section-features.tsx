@@ -3,17 +3,17 @@ import { MagicCard } from "@/components/ui/magic-card";
 
 import DotPattern from "@/components/ui/dot-pattern";
 import {
-    PageHeader,
-    PageHeaderDescription,
-    PageHeaderHeading,
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
 } from "@/components/ui/page-header";
 import {
-    CodeIcon,
-    DatabaseIcon,
-    KeyIcon,
-    MailIcon,
-    ServerIcon,
-    ShieldCheckIcon,
+  CodeIcon,
+  DatabaseIcon,
+  KeyIcon,
+  MailIcon,
+  ServerIcon,
+  ShieldCheckIcon,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 

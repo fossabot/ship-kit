@@ -1,8 +1,7 @@
 {
   "parserOptions": {
     "project": [
-      "./tsconfig.json",
-      "./src/app/(demo)/tsconfig.json"
+      "./tsconfig.json"
     ]
   },
 
