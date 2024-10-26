@@ -129,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({
               <Link
                 href={routes.external.github}
                 className={cn(
-                  buttonVariants({ variant: "icon" }),
+                  buttonVariants({ size: "icon" }),
                   "px-3 hover:bg-muted",
                 )}
               >
