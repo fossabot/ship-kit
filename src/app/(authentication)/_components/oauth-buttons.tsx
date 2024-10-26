@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { routes } from "@/config/routes";
-import { redirectWithCode } from "@/lib/utils/redirect-with-code";
-import { signIn } from "@/server/auth";
+import { signInWithOAuthAction } from "@/server/actions/auth";
 import { providerMap } from "@/server/auth.config";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { AuthError } from "next-auth";
 
 export function OAuthButtons() {
   return (
@@ -22,18 +19,9 @@ export function OAuthButtons() {
         return (
           <form
             key={provider.id}
-            action={async () => {
-              "use server";
-              try {
-                await signIn(provider.id, { redirectTo: routes.home });
-              } catch (error) {
-                if (error instanceof AuthError) {
-                  redirectWithCode(routes.auth.signIn, {
-                    code: error.type,
-                  });
-                }
-              }
-            }}
+            action={() =>
+              void signInWithOAuthAction({ providerId: provider.id })
+            }
           >
             <Button
               variant={"outline"}

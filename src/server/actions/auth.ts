@@ -9,11 +9,15 @@ import { signIn, signOut } from "@/server/auth";
 import "server-only";
 import { createServerAction } from "zsa";
 
-// Todo: redirect back to the page the user was on before signing out
-export const signOutAction = async (options?: any) => {
-  const response = await signOut({
-    redirectTo: `${routes.home}?${SEARCH_PARAM_KEYS.statusCode}=${STATUS_CODES.LOGOUT.code}`,
-    redirect: true,
+export const signInWithOAuthAction = async ({
+  providerId,
+  options,
+}: {
+  providerId: string;
+  options?: any;
+}) => {
+  const response = await signIn(providerId, {
+    redirectTo: options?.redirectTo ?? routes.home,
     ...options,
   });
   return response;
@@ -29,6 +33,16 @@ export const signInAction = createServerAction()
       password: input.password,
     });
   });
+
+// Todo: redirect back to the page the user was on before signing out
+export const signOutAction = async (options?: any) => {
+  const response = await signOut({
+    redirectTo: `${routes.home}?${SEARCH_PARAM_KEYS.statusCode}=${STATUS_CODES.LOGOUT.code}`,
+    redirect: true,
+    ...options,
+  });
+  return response;
+};
 
 // Todo: Implement forgot password
 export const forgotPasswordAction = createServerAction()
