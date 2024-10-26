@@ -1,7 +1,7 @@
 "use client";
 
 import { Icons } from "@/components/images/icons";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ui/theme";
 import { routes } from "@/config/routes";
@@ -30,7 +30,9 @@ interface HeaderProps {
 }
 
 const defaultNavLinks = [
-  { href: routes.app.dashboard, label: "Dashboard", isCurrent: false },
+  { href: routes.app.dashboard, label: "Features", isCurrent: false },
+  { href: routes.app.dashboard, label: "Pricing", isCurrent: false },
+  { href: routes.app.dashboard, label: "Docs", isCurrent: false },
 ];
 
 export const Header: React.FC<HeaderProps> = ({
@@ -60,24 +62,28 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="hidden flex-col gap-md md:flex md:flex-row md:items-center">
             <Link
               href={logoHref}
-              className="flex grow items-center gap-2 text-lg font-semibold md:text-base"
+              className="flex grow items-center gap-2 text-lg font-semibold md:mr-6 md:text-base"
             >
               {logoIcon}
               <span className="block">{logoText}</span>
               <span className="sr-only">{logoText}</span>
             </Link>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "transition-colors hover:text-foreground",
-                  link.isCurrent ? "text-foreground" : "text-muted-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <div className="flex items-center justify-between gap-md">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "transition-colors hover:text-foreground",
+                    link.isCurrent
+                      ? "text-foreground"
+                      : "text-muted-foreground",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </nav>
           <Sheet>
             <SheetTrigger asChild>
@@ -114,18 +120,29 @@ export const Header: React.FC<HeaderProps> = ({
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <div className="flex items-center gap-2 md:ml-auto lg:gap-4">
             <CommandMenu />
             <Button variant="outline" size="sm">
               Dashbboard
             </Button>
-            <Link href={routes.external.github}>
-              <Icons.github className="size-4" />
-            </Link>
-            <Link href={routes.external.x_follow}>
-              <Icons.x className="size-4" />
-            </Link>
-            <ThemeToggle variant="ghost" />
+            <div className="flex items-center">
+              <Link
+                href={routes.external.github}
+                className={cn(
+                  buttonVariants({ variant: "icon" }),
+                  "px-3 hover:bg-muted",
+                )}
+              >
+                <Icons.github className="size-4" />
+              </Link>
+              <Link
+                href={routes.external.x_follow}
+                className={cn(buttonVariants({ variant: "ghost" }), "px-3")}
+              >
+                <Icons.x className="size-4" />
+              </Link>
+              <ThemeToggle variant="icon" className="px-2 hover:bg-muted" />
+            </div>
           </div>
         </div>
       </header>

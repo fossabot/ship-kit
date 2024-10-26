@@ -22,7 +22,7 @@ import NumberTicker from "@/components/ui/number-ticker";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import ShinyButton from "@/components/ui/shiny-button";
 import { routes } from "@/config/routes";
-import { BoxesIcon, ChevronRightIcon, Code2Icon } from "lucide-react";
+import { BoxesIcon, ChevronRightIcon } from "lucide-react";
 
 const Section = ({
   children,
@@ -214,21 +214,7 @@ export default function Home() {
         <Section>
           <SectionHeader>Stop procrastinating and get building.</SectionHeader>
           <SectionContent>
-            <div className="grid grid-cols-2 gap-4">
-              <Link
-                href={routes.buy}
-                className={buttonVariants({ size: "lg" })}
-              >
-                <BoxesIcon className="size-4" /> Get ShipKit
-              </Link>
-              <Link
-                href={routes.docs}
-                className={buttonVariants({ variant: "outline", size: "lg" })}
-              >
-                <Code2Icon className="size-4" /> Documentation
-              </Link>
-              <AnimatedButton>Dashboard</AnimatedButton>
-            </div>
+            <AnimatedButton size="lg">Get Started</AnimatedButton>
             <span className="text-sm text-gray-500">
               Not ready to buy?
               <Link
