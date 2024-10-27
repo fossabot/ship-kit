@@ -5,7 +5,7 @@ import { type ColorFormat } from "@/lib/colors";
 import { useMounted } from "@/hooks/use-mounted";
 
 interface Config {
-  format: ColorFormat;
+  format: any;
 }
 
 const colorsAtom = atomWithStorage<Config>("colors", {

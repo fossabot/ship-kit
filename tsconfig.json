@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "allowJs": true,
+      "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -9,37 +8,15 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "target": "ES2022",
-
-    /* Strictness */
-    "strict": true,
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-
-    /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
-    "incremental": true,
-
-    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/public/*": ["./public/*"],
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    ".eslintrc.json",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
-    ".next/types/**/*.ts",
-    "src/types/next-auth.d.ts"
-  ],
-  "exclude": ["node_modules"]
+    "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.disabled.json" }
+  ]
 }

@@ -3,6 +3,10 @@ export const STATUS_CODES = {
     code: "AUTH",
     message: "Please sign in and try again.",
   },
+  AUTH_ERROR: {
+    code: "AUTH_ERROR",
+    message: "An error occurred while authenticating, please try again.",
+  },
   AUTH_REFRESH: {
     code: "AUTH_REFRESH",
     message: "Your session has expired. Please sign in again.",

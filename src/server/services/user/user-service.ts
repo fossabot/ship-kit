@@ -6,7 +6,6 @@ import {
   teams,
   users,
 } from "@/server/db/schema";
-import type { User } from "@auth/core/types";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 

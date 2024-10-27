@@ -75,7 +75,7 @@ export function PricingPageComponent() {
                 max={5000000}
                 step={100000}
                 value={[logEntries]}
-                onValueChange={(value) => setLogEntries(value[0])}
+                onValueChange={(value) => value[0] && setLogEntries(value[0])}
               />
               <div>{logEntries.toLocaleString()} log entries / mo</div>
               <div className="text-sm text-gray-400">

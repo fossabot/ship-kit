@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "strict": false,
@@ -19,9 +19,22 @@
     "noUncheckedIndexedAccess": false,
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
-    "noEmit": false
+        /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": ["./public/*"],
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
+    ".eslintrc.json",
+    "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx" ]
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+    ".next/types/**/*.ts",
+    "src/types/next-auth.d.ts",
+  ],
+  "exclude": ["node_modules"]
 }
