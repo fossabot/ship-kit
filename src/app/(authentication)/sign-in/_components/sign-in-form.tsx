@@ -16,43 +16,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 
-import { logger } from "@/lib/logger";
 import { getSchemaDefaults } from "@/lib/utils/get-schema-defaults";
-import { signInAction } from "@/server/actions/auth"; // Ensure this is a client-safe action
-import { useSearchParams } from "next/navigation";
-import { toast } from "sonner";
 import { type z } from "zod";
 
 export const SignInForm = () => {
-  const searchParams = useSearchParams();
-  const redirectTo = searchParams.get(SEARCH_PARAM_KEYS.nextUrl) ?? routes.home;
+  // const searchParams = useSearchParams();
+  // const redirectTo = searchParams.get(SEARCH_PARAM_KEYS.nextUrl) ?? routes.home;
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: getSchemaDefaults(signInSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof signInSchema>) {
-    try {
-      await signInAction({
-        email: values.email,
-        password: values.password,
-        redirectTo,
-      });
-    } catch (error) {
-      logger.error(error);
-      const errorMessage =
-        error instanceof Error ? error.message : String(error); // TODO: Handle this better
-      toast.error(errorMessage);
-    }
-  }
+  // function onSubmit(values: z.infer<typeof signInSchema>) {
+  //   try {
+  //   } catch (error) {
+  //     logger.error(error);
+  //     const errorMessage =
+  //       error instanceof Error ? error.message : String(error); // TODO: Handle this better
+  //     toast.error(errorMessage);
+  //   }
+  // }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)} // Ensure this is correctly called
+        // onSubmit={() => form.handleSubmit(onSubmit)} // Ensure this is correctly called
         className="space-y-8"
       >
         <FormField

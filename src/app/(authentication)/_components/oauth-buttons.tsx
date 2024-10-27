@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { signInWithOAuthAction } from "@/server/actions/auth";
 import { providerMap } from "@/server/auth.config";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
@@ -19,7 +18,9 @@ export function OAuthButtons() {
         return (
           <form
             key={provider.id}
-            action={signInWithOAuthAction({ providerId: provider.id })}
+            // action={() => {
+            //   void signInWithOAuthAction({ providerId: provider.id });
+            // }}
           >
             <Button
               variant={"outline"}
