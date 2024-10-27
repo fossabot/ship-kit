@@ -1,7 +1,9 @@
 "use server";
+
 import { routes } from "@/config/routes";
 import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 import { STATUS_CODES } from "@/config/status-codes";
+import { logger } from "@/lib/logger";
 import { validatedAction } from "@/lib/utils/middleware";
 import { forgotPasswordSchema, signInActionSchema } from "@/schemas/auth";
 import { userApplySchema } from "@/schemas/user";
@@ -16,32 +18,36 @@ export const signInWithOAuthAction = async ({
   providerId: string;
   options?: any;
 }) => {
-  const response = await signIn(providerId, {
+  await signIn(providerId, {
     redirectTo: options?.redirectTo ?? routes.home,
     ...options,
   });
-  return response;
+  return { success: STATUS_CODES.LOGIN.message };
 };
 
 export const signInAction = createServerAction()
   .input(signInActionSchema)
   .handler(async ({ input }) => {
-    return await signIn("credentials", {
+    const response = await signIn("credentials", {
       redirect: input.redirect ?? true,
       redirectTo: input.redirectTo ?? routes.home,
       email: input.email,
       password: input.password,
+    }).catch((error) => {
+      logger.error(error);
+      return { error: STATUS_CODES.UNKNOWN.message };
     });
+    return null;
   });
 
 // Todo: redirect back to the page the user was on before signing out
 export const signOutAction = async (options?: any) => {
-  const response = await signOut({
+  await signOut({
     redirectTo: `${routes.home}?${SEARCH_PARAM_KEYS.statusCode}=${STATUS_CODES.LOGOUT.code}`,
     redirect: true,
     ...options,
   });
-  return response;
+  return { success: STATUS_CODES.LOGOUT.message };
 };
 
 // Todo: Implement forgot password

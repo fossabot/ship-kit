@@ -101,7 +101,10 @@ export function LandingPageComponent() {
                       transition={{ duration: 0.3 }}
                     >
                       <div className="flex space-x-4">
-                        <Button variant="outline" onClick={createTestApiKey}>
+                        <Button
+                          variant="outline"
+                          onClick={() => void createTestApiKey()}
+                        >
                           Create Live API Key
                         </Button>
                         <Link

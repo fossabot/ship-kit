@@ -1,4 +1,4 @@
-import { UserGreeting } from "@/app/_components/UserGreeting";
+import { UserGreeting } from "@/app/(authentication)/(stack-auth)/stack-auth/UserGreeting";
 import { stackServerApp } from "@/lib/stack";
 
 export default async function DashboardPage() {

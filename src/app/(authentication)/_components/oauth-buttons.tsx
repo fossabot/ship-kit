@@ -19,9 +19,7 @@ export function OAuthButtons() {
         return (
           <form
             key={provider.id}
-            action={() =>
-              void signInWithOAuthAction({ providerId: provider.id })
-            }
+            action={signInWithOAuthAction({ providerId: provider.id })}
           >
             <Button
               variant={"outline"}

@@ -20,7 +20,7 @@ import { SEARCH_PARAM_KEYS } from "@/config/search-param-keys";
 
 import { logger } from "@/lib/logger";
 import { getSchemaDefaults } from "@/lib/utils/get-schema-defaults";
-import { signInAction } from "@/server/actions/auth";
+import { signInAction } from "@/server/actions/auth"; // Ensure this is a client-safe action
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { type z } from "zod";
@@ -52,7 +52,7 @@ export const SignInForm = () => {
   return (
     <Form {...form}>
       <form
-        onSubmit={() => void form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)} // Ensure this is correctly called
         className="space-y-8"
       >
         <FormField
