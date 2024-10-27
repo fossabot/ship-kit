@@ -53,8 +53,12 @@ export const users = createTable("user", {
     withTimezone: true,
   }).default(sql`CURRENT_TIMESTAMP`),
   image: varchar("image", { length: 255 }),
-  password: varchar("password", { length: 255 }).notNull(), // Add the password field
+  password: varchar("password", { length: 255 }), // Remove .notNull()
 });
+
+// Add this type export for better type safety
+export type NewUser = typeof users.$inferInsert;
+export type User = typeof users.$inferSelect;
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
@@ -259,4 +263,11 @@ export const logs = createTable("log", {
 
 export const logRelations = relations(logs, ({ one }) => ({
   apiKey: one(apiKeys, { fields: [logs.apiKeyId], references: [apiKeys.id] }),
+}));
+
+export const apiKeysRelations = relations(apiKeys, ({ one }) => ({
+  project: one(projects, {
+    fields: [apiKeys.projectId],
+    references: [projects.id],
+  }),
 }));

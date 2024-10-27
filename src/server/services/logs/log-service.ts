@@ -12,14 +12,16 @@ export async function getUserLogs(userId: string, limit = 100) {
   const userProjectIds = await db
     .select({ projectId: projectMembers.projectId })
     .from(projectMembers)
-    .where(eq(projectMembers.userId, userId));
+    .where(eq(projectMembers.userId, userId))
+    .execute(); // Ensure to call execute to get the result
 
   const projectIds = userProjectIds.map((up) => up.projectId);
 
   const apiKeyIds = await db
     .select({ id: apiKeys.id })
     .from(apiKeys)
-    .where(inArray(apiKeys.projectId, projectIds));
+    .where(inArray(apiKeys.projectId, projectIds))
+    .execute(); // Ensure to call execute to get the result
 
   const keyIds = apiKeyIds.map((ak) => ak.id);
 
@@ -106,7 +108,7 @@ export async function userHasAccessToApiKey(
     },
   });
 
-  if (!apiKeyRecord || !apiKeyRecord.project) {
+  if (!apiKeyRecord?.project) {
     return false;
   }
 

@@ -5,16 +5,27 @@ import {
   teamMembers,
   teams,
   users,
+  type NewUser,
 } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
+
+/**
+ * Represents a user from an authentication provider
+ */
+interface AuthUser {
+  id: string;
+  email: string;
+  name?: string | null;
+  image?: string | null;
+}
 
 /**
  * Ensures a user exists in the database, creating them if necessary.
  * @param authUser - The authenticated user object.
  * @returns The database user object.
  */
-export async function ensureUserExists(authUser: User) {
+export async function ensureUserExists(authUser: AuthUser) {
   let dbUser = await db.query.users.findFirst({
     where: eq(users.id, authUser.id),
   });
@@ -24,10 +35,12 @@ export async function ensureUserExists(authUser: User) {
       throw new Error("User does not have a primary email");
     }
 
-    const newUser = {
-      ...authUser,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+    const newUser: NewUser = {
+      id: authUser.id,
+      email: authUser.email,
+      name: authUser.name ?? null,
+      image: authUser.image ?? null,
+      // password is optional now
     };
 
     [dbUser] = await db.insert(users).values(newUser).returning();

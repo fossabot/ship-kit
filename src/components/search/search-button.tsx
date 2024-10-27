@@ -24,7 +24,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
-
+import { type MainNavItem } from "@/types/nav";
 export function SearchButton({ ...props }: DialogProps) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
@@ -79,12 +79,12 @@ export function SearchButton({ ...props }: DialogProps) {
           <CommandGroup heading="Links">
             {docsConfig.mainNav
               .filter((navitem) => !navitem.external)
-              .map((navItem) => (
+              .map((navItem: MainNavItem) => (
                 <CommandItem
                   key={navItem.href}
                   value={navItem.title}
                   onSelect={() => {
-                    runCommand(() => router.push(navItem.href as string));
+                    runCommand(() => router.push(navItem.href!));
                   }}
                 >
                   <FileIcon className="mr-2 h-4 w-4" />
@@ -99,7 +99,7 @@ export function SearchButton({ ...props }: DialogProps) {
                   key={navItem.href}
                   value={navItem.title}
                   onSelect={() => {
-                    runCommand(() => router.push(navItem.href as string));
+                    runCommand(() => router.push(navItem.href!));
                   }}
                 >
                   <div className="mr-2 flex h-4 w-4 items-center justify-center">

@@ -1,4 +1,4 @@
-import DatePickerWithRange from "@/app/(demo)/examples/cards/components/date-picker-with-range";
+import DatePickerWithRange from "@/app/(demo)/examples/cards/components/date-picker-with-range"; 
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 

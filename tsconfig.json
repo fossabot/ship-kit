@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-      "allowJs": true,
+    /* Dev */
+    "sourceMap": true,
+
+    /* Base Options: */
+    "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -8,15 +12,38 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "target": "ES2022",
+    
+
+    /* Strictness */
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* Bundled projects */
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
+    "incremental": true,
+
+    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/public/*": ["./public/*"],
       "@/*": ["./src/*"]
     }
   },
-    "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.disabled.json" }
-  ]
+  "include": [
+    ".eslintrc.json",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+    ".next/types/**/*.ts",
+    "src/types/next-auth.d.ts",
+  ],
+  "exclude": ["node_modules", "src/app/(demo)/**/*.ts", "src/app/(demo)/**/*.tsx", "src/components/blocks/**/*.ts", "src/components/blocks/**/*.tsx", "src/components/ui/**/*.ts", "src/components/ui/**/*.tsx"]
 }

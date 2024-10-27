@@ -16,8 +16,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "start": "next start",
-    "sync-upstream": "node scripts/sync-upstream.js",
-    "clean": "node --experimental-strip-types ./scripts/clean-gremlins.ts",
+    "sync-upstream": "node --experimental-strip-types ./scripts/sync-upstream.ts",
+    "clean": "node --experimental-strip-types ./scripts/clean.ts",
     "typecheck": "tsc"
   },
   "dependencies": {
