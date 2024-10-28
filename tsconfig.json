@@ -45,5 +45,5 @@
     ".next/types/**/*.ts",
     "src/types/next-auth.d.ts",
   ],
-  "exclude": ["node_modules", "src/app/(demo)/**/*.ts", "src/app/(demo)/**/*.tsx", "src/components/blocks/**/*.ts", "src/components/blocks/**/*.tsx", "src/components/ui/**/*.ts", "src/components/ui/**/*.tsx"]
+  "exclude": ["node_modules", "src/app/(app)/(demo)/**/*.ts", "src/app/(app)/(demo)/**/*.tsx", "src/components/blocks/**/*.ts", "src/components/blocks/**/*.tsx", "src/components/ui/**/*.ts", "src/components/ui/**/*.tsx"]
 }
