@@ -95,7 +95,7 @@
     "lucide-react": "^0.453.0",
     "nanoid": "^5.0.7",
     "next": "15.0.1",
-    "next-auth": "5.0.0-beta.26",
+    "next-auth": "5.0.0-beta.25",
     "next-safe-route": "^0.0.20",
     "next-themes": "^0.3.0",
     "openai": "^4.68.4",
@@ -118,7 +118,10 @@
     "ws": "^8.18.0",
     "zod": "^3.23.8",
     "zsa": "^0.6.0",
-    "zsa-react": "^0.2.3"
+    "zsa-react": "^0.2.3",
+    "@builder.io/dev-tools": "latest",
+    "@builder.io/react": "latest",
+    "@builder.io/sdk": "latest"
   },
   "devDependencies": {
     "@builder.io/partytown": "^0.10.2",
