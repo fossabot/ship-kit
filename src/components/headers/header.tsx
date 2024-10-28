@@ -30,9 +30,9 @@ interface HeaderProps {
 }
 
 const defaultNavLinks = [
-  { href: routes.app.dashboard, label: "Features", isCurrent: false },
-  { href: routes.app.dashboard, label: "Pricing", isCurrent: false },
-  { href: routes.app.dashboard, label: "Docs", isCurrent: false },
+  { href: "#features", label: "Features", isCurrent: false },
+  { href: "#pricing", label: "Pricing", isCurrent: false },
+  { href: routes.docs, label: "Docs", isCurrent: false },
 ];
 
 export const Header: React.FC<HeaderProps> = ({

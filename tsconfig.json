@@ -2,7 +2,6 @@
   "compilerOptions": {
     /* Dev */
     "sourceMap": true,
-
     /* Base Options: */
     "allowJs": true,
     "checkJs": true,
@@ -12,27 +11,38 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "target": "ES2022",
-    
-
     /* Strictness */
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-
     /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2022"
+    ],
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "incremental": true,
-
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/public/*": ["./public/*"],
-      "@/*": ["./src/*"]
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@payload-config": [
+        "./src/payload.config.ts"
+      ]
     }
   },
   "include": [
@@ -43,7 +53,15 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "src/types/next-auth.d.ts",
+    "src/types/next-auth.d.ts"
   ],
-  "exclude": ["node_modules", "src/app/(app)/(demo)/**/*.ts", "src/app/(app)/(demo)/**/*.tsx", "src/components/blocks/**/*.ts", "src/components/blocks/**/*.tsx", "src/components/ui/**/*.ts", "src/components/ui/**/*.tsx"]
+  "exclude": [
+    "node_modules",
+    "src/app/(app)/(demo)/**/*.ts",
+    "src/app/(app)/(demo)/**/*.tsx",
+    "src/components/blocks/**/*.ts",
+    "src/components/blocks/**/*.tsx",
+    "src/components/ui/**/*.ts",
+    "src/components/ui/**/*.tsx"
+  ]
 }
