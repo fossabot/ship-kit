@@ -33,18 +33,18 @@ const config = BuilderDevTools()({
    */
   eslint: {
     /*
-         !! WARNING !!
-         * This allows production builds to successfully complete even if
-         * your project has ESLint errors.
-         */
+             !! WARNING !!
+             * This allows production builds to successfully complete even if
+             * your project has ESLint errors.
+             */
     ignoreDuringBuilds: true,
   },
   typescript: {
     /*
-         !! WARNING !!
-         * Dangerously allow production builds to successfully complete even if
-         * your project has type errors.
-         */
+             !! WARNING !!
+             * Dangerously allow production builds to successfully complete even if
+             * your project has type errors.
+             */
     ignoreBuildErrors: true,
   },
   /*
