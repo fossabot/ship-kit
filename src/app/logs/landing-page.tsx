@@ -6,14 +6,12 @@ import AnimatedButton from "@/components/buttons/animated-button/animated-button
 import { Button, buttonVariants } from "@/components/ui/button";
 import { routes } from "@/config/routes";
 import { cn } from "@/lib/utils";
-import { useStackApp, useUser } from "@stackframe/stack";
 import { AnimatePresence, motion } from "framer-motion";
+import { type User } from "next-auth";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export function LandingPageComponent() {
-  const user = useUser();
-  const stackApp = useStackApp();
+export function LandingPageComponent({ user }: { user?: User }) {
   const [scrollY, setScrollY] = useState(0);
   const [testApiKey, setTestApiKey] = useState<string | null>(null);
 
@@ -72,7 +70,7 @@ export function LandingPageComponent() {
               Dashboard
             </AnimatedButton>
           ) : (
-            <AnimatedButton href={stackApp.urls.signUp}>Sign up</AnimatedButton>
+            <AnimatedButton href={routes.auth.signUp}>Sign up</AnimatedButton>
           )}
         </div>
       </header>
@@ -109,7 +107,9 @@ export function LandingPageComponent() {
                         </Button>
                         <Link
                           className={buttonVariants()}
-                          href={user ? "/app" : stackApp.urls.signIn}
+                          href={
+                            user ? routes.app.dashboard : routes.auth.signIn
+                          }
                         >
                           Dashboard
                         </Link>

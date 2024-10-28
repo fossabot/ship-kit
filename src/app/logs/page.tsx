@@ -1,9 +1,12 @@
 import { LandingPageComponent } from "@/app/logs/landing-page";
+import { auth } from "@/server/auth";
 
-const LandingPage = () => {
+const LandingPage = async () => {
+  const session = await auth();
+  const user = session?.user;
   return (
     <>
-      <LandingPageComponent />
+      <LandingPageComponent user={user} />
     </>
   );
 };
