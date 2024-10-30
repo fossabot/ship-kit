@@ -1,6 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flacymorrow%2Fship-kit.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flacymorrow%2Fship-kit?ref=badge_shield)
+
 
 First, run the development server:
 
@@ -57,3 +59,7 @@ npx shadcn-ui@latest add
 ```
 
 ### [MagicUI](https://magicui.design/)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flacymorrow%2Fship-kit.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flacymorrow%2Fship-kit?ref=badge_large)
