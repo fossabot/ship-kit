@@ -24,6 +24,13 @@ import ShinyButton from "@/components/ui/shiny-button";
 import { routes } from "@/config/routes";
 import { BoxesIcon, ChevronRightIcon } from "lucide-react";
 
+const headings = [
+  "Launch your app at light speed.",
+  "Stop Futzing and Launch",
+  "Stop Building and launch",
+  "The fastest way to launch your app",
+];
+
 const Section = ({
   children,
   className,

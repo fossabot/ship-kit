@@ -12,18 +12,20 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "start": "next start",
     "sync-upstream": "node --experimental-strip-types ./scripts/sync-upstream.ts",
     "clean": "node --experimental-strip-types ./scripts/clean.ts",
     "typecheck": "tsc",
-
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.2",
+    "@builder.io/dev-tools": "^1.1.25",
+    "@builder.io/react": "^5.0.11",
+    "@builder.io/sdk": "^3.0.7",
     "@faker-js/faker": "^9.1.0",
     "@hookform/resolvers": "^3.9.0",
     "@lemonsqueezy/wedges": "^1.4.0",
@@ -88,6 +90,7 @@
     "lint-staged": "^15.2.10",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.7",
+    "next": "15.0.2",
     "next-auth": "5.0.0-beta.25",
     "next-safe-route": "^0.0.20",
     "next-themes": "^0.3.0",
@@ -109,8 +112,7 @@
     "zod": "^3.23.8",
     "zsa": "^0.6.0",
     "zsa-react": "^0.2.3",
-
-       "@payloadcms/live-preview-react": "beta",
+    "@payloadcms/live-preview-react": "beta",
     "@payloadcms/next": "beta",
     "@payloadcms/payload-cloud": "beta",
     "@payloadcms/plugin-form-builder": "beta",
@@ -132,7 +134,6 @@
     "jsonwebtoken": "9.0.2",
     "lexical": "0.18.0",
     "lucide-react": "^0.378.0",
-    "next": "15.0.1",
     "payload": "beta",
     "payload-admin-bar": "^1.0.6",
     "prism-react-renderer": "^2.3.1",
@@ -157,7 +158,6 @@
     "eslint-plugin-drizzle": "^0.2.3",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier-plugin-tailwindcss": "^0.6.8",
-
     "@next/eslint-plugin-next": "^13.1.6",
     "@payloadcms/eslint-config": "^1.1.1",
     "@tailwindcss/typography": "^0.5.13",
@@ -199,4 +199,3 @@
     ]
   }
 }
- 
