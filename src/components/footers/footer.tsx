@@ -1,4 +1,4 @@
-import { NeonCTA } from "@/app/(landing)/_components/neon-cta";
+import { NeonCTA } from "@/app/(app)/(landing)/_components/neon-cta";
 import { buttonVariants } from "@/components/ui/button";
 import RetroGrid from "@/components/ui/retro-grid";
 import SparklesText from "@/components/ui/sparkles-text";
